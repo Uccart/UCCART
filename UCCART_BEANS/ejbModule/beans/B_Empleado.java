@@ -67,7 +67,7 @@ public class B_Empleado  {
 
 
 	public boolean update(String id, String nombre, String ape1, String ape2, Date fecha, String telcasa, String telcel,
-			String direccion, String correo, float salario, String puesto) {
+			String direccion,String genero, String nacionalidad, String correo, float salario, String puesto) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		try{
@@ -81,6 +81,8 @@ public class B_Empleado  {
 			empleado.setEmpleadosTelefonoCasa(telcasa);
 			empleado.setEmpleadosTelefonoCel(telcel);
 			empleado.setEmpleadosDireccion(direccion);
+			empleado.setEmpleadosGenero(genero);
+			empleado.setEmpleadosNacionalidad(nacionalidad);
 			empleado.setEmpleadosCorreo(correo);
 			empleado.setEmpleadosSalario(salario);
 			empleado.setEmpleadosPuesto(puesto);
@@ -134,7 +136,7 @@ public class B_Empleado  {
 
 
 	public void setEmpleado(String id, String nombre, String ape1, String ape2, Date fecha, String telcasa, String telcel,
-			String direccion, String correo, float salario, String puesto) {
+			String direccion,String genero, String nacionalidad, String correo, float salario, String puesto) {
 		
 		empleado = em.merge(empleado);
 		empleado.setEmpleadosId(id);
@@ -145,6 +147,8 @@ public class B_Empleado  {
 		empleado.setEmpleadosTelefonoCasa(telcasa);
 		empleado.setEmpleadosTelefonoCel(telcel);
 		empleado.setEmpleadosDireccion(direccion);
+		empleado.setEmpleadosGenero(genero);
+		empleado.setEmpleadosNacionalidad(nacionalidad);
 		empleado.setEmpleadosCorreo(correo);
 		empleado.setEmpleadosSalario(salario);
 		empleado.setEmpleadosPuesto(puesto);
@@ -173,7 +177,7 @@ public class B_Empleado  {
 		List<Empleado> results = new ArrayList();
 		Query q; 
 		if(!"Sin filtro".equals(rango)){
-			q =em.createNativeQuery("select * from empleados where empleados_nombre similar to '["+rango+"]%'", Empleado.class);
+			q =em.createNativeQuery("select * from empleados where personas_nombre similar to '["+rango+"]%'", Empleado.class);
 		}else{
 			q =em.createNativeQuery("select * from empleados", Empleado.class);
 		}

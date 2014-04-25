@@ -72,7 +72,13 @@ public class LVEmpleados extends LVPanel implements ActionListener, ItemListener
 		empleados.addColumn("Segundo Apellido");
 		empleados.addColumn("Fecha De Nacimiento");
 		empleados.addColumn("Telefono");
-		
+		empleados.addColumn("Celular");
+		empleados.addColumn("Direccion");
+		empleados.addColumn("Genero");
+		empleados.addColumn("Nacionalidad");
+		empleados.addColumn("Correo");
+		empleados.addColumn("Salario");
+		empleados.addColumn("Puesto");
 
 		List<Empleado> listEmp = bempleado.selectAll();
 
@@ -81,7 +87,7 @@ public class LVEmpleados extends LVPanel implements ActionListener, ItemListener
 
 			for(int i=0;i<listEmp.size();i++){
 				String[] fila = {listEmp.get(i).getEmpleadoId().toString(), listEmp.get(i).getEmpleadoNombre(), listEmp.get(i).getEmpleadosApellido1(), listEmp.get(i).getEmpleadosApellido2(), dateFormat.format(listEmp.get(i).getEmpleadosFechaN()),  
-						listEmp.get(i).getEmpleadosTelefonoCasa(), listEmp.get(i).getEmpleadosTelefonoCel(), listEmp.get(i).getempleadosDireccion(), listEmp.get(i).getEmpleadosCorreo(),	String.valueOf(listEmp.get(i).getEmpleadosSalario()), listEmp.get(i).getEmpleadosPuesto()};
+						listEmp.get(i).getEmpleadosTelefonoCasa(), listEmp.get(i).getEmpleadosTelefonoCel(), listEmp.get(i).getEmpleadosDireccion(), listEmp.get(i).getEmpleadosGenero(), listEmp.get(i).getEmpleadosNacionalidad(), listEmp.get(i).getEmpleadosCorreo(),	String.valueOf(listEmp.get(i).getEmpleadosSalario()), listEmp.get(i).getEmpleadosPuesto()};
 				empleados.addRow(fila);
 			}
 		}
@@ -178,7 +184,7 @@ public class LVEmpleados extends LVPanel implements ActionListener, ItemListener
 								if(tableEmp.getSelectedRowCount() == 1){
 									if(bempleado.find((String)tableEmp.getValueAt(tableEmp.getSelectedRow(), 0))){
 										lvem = new LVEmpModificar((JFrame)lvem.getParent(), true, fo);
-										//lvem.init(bempleado);
+										lvem.init(bempleado);
 										lvem.setLocationRelativeTo(lvem.getParent());
 										lvem.setVisible(true);
 									}else{

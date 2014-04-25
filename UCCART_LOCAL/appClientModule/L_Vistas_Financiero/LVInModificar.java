@@ -30,7 +30,7 @@ public class LVInModificar extends JDialog implements ActionListener {
 		binventario = best;
 		JPanel panel = new JPanel();
 		JPanel panel2 = new JPanel();
-		panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo Articulo al Inventario"));
+		panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modificar Articulo del Inventario"));
 		
 		JLabel jLabelId = new JLabel("ID:");
 		jLabelId.setFont(fo);

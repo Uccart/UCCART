@@ -170,6 +170,8 @@ CREATE TABLE IF NOT EXISTS personas (
   personas_telefonocasa VARCHAR(45),
   personas_telefonocel VARCHAR(45),
   personas_direccion VARCHAR(130),
+  personas_genero VARCHAR(130),
+  personas_nacionalidad VARCHAR(130),
   personas_correo VARCHAR(45),
   PRIMARY KEY (personas_id)
   );

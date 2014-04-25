@@ -37,6 +37,8 @@ public class LVPlan extends LVPanel implements MouseListener, ActionListener, It
 	private int select;
 	private List<Materia> listnueva;
 	private List<Plan> listplan;
+	
+	
 	public LVPlan(){
 		super();
 		materias = new DefaultTableModel();
@@ -53,6 +55,7 @@ public class LVPlan extends LVPanel implements MouseListener, ActionListener, It
 		filterTextPlan = new JTextField(20);
 		select = 0;
 	}
+	
 	public void init(boolean ban){
 		setLayout(new BorderLayout());
 		bandera = ban;
@@ -188,6 +191,8 @@ public class LVPlan extends LVPanel implements MouseListener, ActionListener, It
 		this.add(new JScrollPane(tablePlan));
 
 	}
+	
+	
 	public boolean validarRepetidos(String buscar){
 		for(int i=0;i<listplan.size();i++){
 			if(listplan.get(i).getMateria().getMateriaId().equals(buscar))

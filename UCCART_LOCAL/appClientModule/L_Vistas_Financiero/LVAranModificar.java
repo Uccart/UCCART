@@ -164,7 +164,7 @@ public class LVAranModificar extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == jbModificar){
+		if(e.getSource() == this.jbModificar){
 			if(!("".equals(jtfid.getText())) && !("".equals(jtfdescripcion.getText())) && !("".equals(jcbtipo.getSelectedItem())) && !("".equals(jtfprecio.getText()))){
 				if(jtfid.getText() != " "){
 					barancel.setArancel(jtfid.getText(), jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()));

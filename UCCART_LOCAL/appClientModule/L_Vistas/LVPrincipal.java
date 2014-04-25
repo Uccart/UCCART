@@ -7,6 +7,7 @@ import L_Vistas_Academico.LVProfTabs;
 import L_Vistas_Academico.LVProfesor;
 import L_Vistas_Academico.LVRector;
 import L_Vistas_Financiero.LVContador;
+import L_Vistas_Financiero.LVCajero;
 import L_Vistas_Registro.LVRegistro;
 import L_Vistas_Usuario.LVTabs;
 import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
@@ -28,6 +29,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 	private LVTabs lvt;
 	private LVRector lvre;
 	private LVContador contador;
+	private LVCajero cajero;
 	//private JComboBox<String> tipo;
 	private JFrame log;
 	private JPanel jpencabezado;
@@ -50,6 +52,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 		lvr = new LVRegistro(this);
 		lvp = new LVProfTabs(this);
 		contador = new LVContador(this);
+		cajero = new LVCajero(this);
 		lva = new LVAcademico(this);
 		lvt = new LVTabs(this);
 		lvre = new LVRector(this);
@@ -142,6 +145,10 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
         break;
         case 7:{
         	setTitle("CAJA SECAU");
+        	cajero = new LVCajero(this);
+        	cajero.init(logging.getUsuario().getText(), JLusuario);
+        	lvfondo.add(cajero);
+			lvre.setVisible(true);
         	
         }
         break;
@@ -342,7 +349,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 			logging.getUsuario().requestFocus();
 			this.setTitle("SISTEM v1.0");
 			//contrasena.setText("");
-		}
+		} 
 		
 	}
 	@Override

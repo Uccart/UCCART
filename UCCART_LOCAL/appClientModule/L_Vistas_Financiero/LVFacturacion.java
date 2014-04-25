@@ -93,14 +93,14 @@ public class LVFacturacion extends LVPanel {
 	 private JPanel getPanelCliente(JFrame padre){
 	    	JPanel panelCliente = new JPanel();
 			panelCliente.setFont(fo.deriveFont((float)16));
-			panelCliente.setBorder(BorderFactory.createTitledBorder("Información del cliente"));
+			panelCliente.setBorder(BorderFactory.createTitledBorder("Información del Cliente"));
 			
 			Vector<String> clientes = getListaDeEstudiantes();
 	    	
 			JLabel etiquetaCliente = new JLabel("Cliente:");
-			JLabel etiquetaClienteId = new JLabel("identificación:");
-			JLabel etiquetaClienteNombre = new JLabel("nombre:");
-			JLabel etiquetaClienteTipo = new JLabel("tipo de cliente:");
+			JLabel etiquetaClienteId = new JLabel("Identificación:");
+			JLabel etiquetaClienteNombre = new JLabel("Nombre:");
+			JLabel etiquetaClienteTipo = new JLabel("Tipo De Cliente:");
 			
 			valorClienteId = new JLabel();
 			valorClienteNombre = new JLabel();
@@ -184,7 +184,7 @@ public class LVFacturacion extends LVPanel {
 	 private JPanel getPanelCuenta(JFrame padre){
 		 JPanel panelCuenta = new JPanel();
 		 panelCuenta.setFont(fo.deriveFont((float)16));
-		 panelCuenta.setBorder(BorderFactory.createTitledBorder("Cuentas por pagar"));
+		 panelCuenta.setBorder(BorderFactory.createTitledBorder("Cuentas por Cobrar"));
 		 
 		 JLabel contenido = new JLabel("contenido");
 		 

@@ -57,11 +57,11 @@ INSERT INTO nota (nota_codestudiante, nota_codcurso, nota_promedio, nota_condici
 ------ EMPIEZA NUEVA PARTE DE LA BASE------
 -------------------------------------------
 
-INSERT INTO empleados (personas_id, personas_nombre, personas_apellido1, personas_apellido2,  personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_correo, empleados_salario_bruto, empleados_puesto) VALUES
-(114100510, 'Daniel', 'Herrera', 'Villegas', '1989-11-20', '22408089', '88892122', 'Tibas', 'daniel@correo.com', 30000, 'computin' );
+INSERT INTO empleados (personas_id, personas_nombre, personas_apellido1, personas_apellido2,  personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_genero, personas_nacionalidad, personas_correo, empleados_salario_bruto, empleados_puesto) VALUES
+(114100510, 'Daniel', 'Herrera', 'Villegas', '1989-11-20', '22408089', '88892122', 'Tibas','masculino','Costa Rica', 'daniel@correo.com', 30000, 'computin' );
 
-INSERT INTO clientes (personas_id, personas_nombre, personas_apellido1, personas_apellido2, personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_correo, clientes_tipo) VALUES
-(1, 'Pedro', 'Arias', 'Mendez', '1989-11-20', '22408089', '88892122', 'Tibas', 'daniel@correo.com','estudiante' );
+INSERT INTO clientes (personas_id, personas_nombre, personas_apellido1, personas_apellido2, personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_genero, personas_nacionalidad, personas_correo, clientes_tipo) VALUES
+(1, 'Pedro', 'Arias', 'Mendez', '1989-11-20', '22408089', '88892122', 'Tibas', 'masculino','Costa Rica', 'daniel@correo.com','estudiante' );
 
 INSERT INTO aranceles (aranceles_id, aranceles_descripcion, aranceles_precio, aranceles_tipo) VALUES
 (1, 'Examen de Reposición', 15000, 'entrada'),

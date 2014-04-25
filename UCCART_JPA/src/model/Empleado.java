@@ -41,6 +41,12 @@ public class Empleado implements Serializable {
 	@Column(name="personas_direccion")
 	private String empleadosDireccion;
 	
+	@Column(name="personas_genero")
+	private String empleadosGenero;
+	
+	@Column(name="personas_nacionalidad")
+	private String empleadosNacionalidad;
+	
 	@Column(name="personas_correo")
 	private String empleadosCorreo;
 	
@@ -110,12 +116,29 @@ public class Empleado implements Serializable {
 		this.empleadosTelefonoCel = empleadosTelefonoCel;
 	}
 
-	public String getempleadosDireccion() {
+	public String getEmpleadosDireccion() {
 		return this.empleadosDireccion;
 	}
 
 	public void setEmpleadosDireccion(String empleadosDireccion) {
 		this.empleadosDireccion = empleadosDireccion;
+	}
+	
+	public String getEmpleadosGenero() {
+		return this.empleadosGenero;
+	}
+
+	public void setEmpleadosNacionalidad(String empleadosNacionalidad) {
+		this.empleadosNacionalidad = empleadosNacionalidad;
+	}
+	
+	public void setEmpleadosGenero(String empleadosGenero) {
+		this.empleadosGenero = empleadosGenero;
+	}
+	
+	
+	public String getEmpleadosNacionalidad() {
+		return this.empleadosNacionalidad;
 	}
 	
 	public String getEmpleadosCorreo() {
