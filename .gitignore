@@ -1,0 +1,68 @@
+
+*.project
+
+*.prefs
+
+*.class
+
+UCCART_BEANS/.classpath
+
+*.component
+
+*.MF
+
+UCCART_BEANSClient/.classpath
+
+*.bak
+
+UCCART/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+UCCART/.settings/org.eclipse.wst.common.project.facet.core (Copia en conflicto de Xavier Carrizo 2013-01-13).xml
+
+UCCART_BEANS/(Copia en conflicto de Xavier Carrizo 2013-01-13).classpath
+
+UCCART_BEANS/.settings/org.eclipse.wst.common.project.facet.core (Copia en conflicto de Xavier Carrizo 2013-01-13).xml
+
+UCCART_BEANS/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+UCCART_BEANS/Beans/META-INF/ejb-jar.xml
+
+UCCART_BEANS/Beans/META-INF/sun-ejb-jar.xml
+
+UCCART_BEANS/build/classes/META-INF/ejb-jar.xml
+
+UCCART_BEANS/build/classes/META-INF/sun-ejb-jar.xml
+
+UCCART_BEANS/ejbModule/META-INF/ejb-jar.xml
+
+UCCART_BEANS/ejbModule/META-INF/sun-ejb-jar.xml
+
+UCCART_BEANSClient/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+UCCART_JPA/.classpath
+
+*.public
+
+UCCART_JPA/.settings/org.eclipse.wst.common.project.facet.core.prefs.xml
+
+UCCART_JPA/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+UCCART_LOCAL/.classpath
+
+UCCART_LOCAL/.settings/org.eclipse.wst.common.project.facet.core (Copia en conflicto de Xavier Carrizo 2013-01-13).xml
+
+UCCART_LOCAL/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+UCCART_WEB/(Copia en conflicto de Xavier Carrizo 2013-01-13).classpath
+
+UCCART_WEB/.classpath
+
+UCCART_WEB/.settings/.jsdtscope
+
+UCCART_WEB/.settings/org.eclipse.wst.common.project.facet.core (Copia en conflicto de Xavier Carrizo 2013-01-13).xml
+
+UCCART_WEB/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+UCCART_WEB/.settings/org.eclipse.wst.jsdt.ui.superType.container
+
+UCCART_WEB/.settings/org.eclipse.wst.jsdt.ui.superType.name

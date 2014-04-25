@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="UCCART" transaction-type="RESOURCE_LOCAL">
+	    <class>model.Arancel</class>
+		<class>model.Beca</class>
+		<class>model.Carrera</class>
+		<class>model.Contrasena</class>
+		<class>model.Curso</class>
+		<class>model.Estudiante</class>
+		<class>model.Materia</class>
+		<class>model.Nota</class>
+		<class>model.NotaPK</class>
+		<class>model.Padron</class>
+		<class>model.Periodo</class>
+		<class>model.Plan</class>
+		<class>model.Profesor</class>
+		<class>model.Requisito</class>
+		<class>model.Titulo</class>
+		<class>model.Usuario</class>
+		<class>model.Inventario</class>
+		<class>model.Empleado</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Uccart_DB"/>
+			<property name="javax.persistence.jdbc.user" value="postgres"/>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="eclipselink.allow-zero-id" value="true"/>
+			<property name="javax.persistence.jdbc.password" value="postgres"/>
+		</properties>
+	</persistence-unit>
+</persistence>
