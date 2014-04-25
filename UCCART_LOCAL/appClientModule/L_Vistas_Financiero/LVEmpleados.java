@@ -65,7 +65,7 @@ public class LVEmpleados extends LVPanel implements ActionListener, ItemListener
 
 		panel2.add(new JLabel("  "));
 
-
+		// hola
 		empleados.addColumn("ID");
 		empleados.addColumn("Nombre");
 		empleados.addColumn("Primer Apellido");
