@@ -24,7 +24,7 @@ import model.Profesor;
 import beans.B_Profesor;
 
 @SuppressWarnings("all")
-public class LVFacturacion extends LVPanel {
+public class LVFacturacionSalida extends LVPanel {
 	
 	private JPanel panelCliente;
 	private JSuggestField identificacionCliente;
@@ -38,7 +38,7 @@ public class LVFacturacion extends LVPanel {
 	private JPanel panelDetalle;
 	private JTable tablaDetalle;
 	
-	public LVFacturacion(JFrame padre){
+	public LVFacturacionSalida(JFrame padre){
 		super();
 		panelCliente = getPanelCliente(padre);
 		panelCuentasPorCobrar = getPanelCuenta(padre);
@@ -95,7 +95,7 @@ public class LVFacturacion extends LVPanel {
 			panelCliente.setFont(fo.deriveFont((float)16));
 			panelCliente.setBorder(BorderFactory.createTitledBorder("Información del cliente"));
 			
-			Vector<String> clientes = getListaDeEstudiantes();
+			Vector<String> clientes = getListaDeProfesores();
 	    	
 			JLabel etiquetaCliente = new JLabel("Cliente:");
 			JLabel etiquetaClienteId = new JLabel("identificación:");
