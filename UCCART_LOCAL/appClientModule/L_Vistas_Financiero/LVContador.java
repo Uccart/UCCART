@@ -27,6 +27,7 @@ import L_Vistas_Financiero.LVEmpleados;
 @SuppressWarnings("all")
 public class LVContador extends JTabbedPane {
 	private LVAranceles lva;
+	private LVFacturacion facturacion; // Facturacion
 	private LVMatricula lvma;
 	private LVBeca lvb;
 	private LVPadron lvpa;
@@ -46,6 +47,7 @@ public class LVContador extends JTabbedPane {
 	public LVContador(JFrame padre){
 		super();
 		lva = new LVAranceles(padre);
+		facturacion = new LVFacturacion(padre);	// Facturacion
 		lvma = new LVMatricula(padre);
 		lvb = new LVBeca();
 		lvpa = new LVPadron(padre);
@@ -63,6 +65,7 @@ public class LVContador extends JTabbedPane {
 	}
 	public void init(String usuario,JLabel jlnu){
 		lva.init(false);
+		facturacion.init(false); // Facturacion
 		lvc.init(false);
 		lvi.init();
 		lvm.init(false);
@@ -92,7 +95,8 @@ public class LVContador extends JTabbedPane {
 		//this.addTab("Matrícula", null, lvma, "Matricular y desmatricular estudiantes");
 		//this.addTab("Padrón", null, lvpa, "Agregar estudiantes al padrón de carreras");
 		//this.addTab("Auditoría", null, null, "Registro de actividad del sistema SECAU");
-		this.addTab("RecibosEntrada", null, null, "Realizar un Recibo de Entrada");
+		this.addTab("Facturación", null, facturacion, "Realizar un Recibo de Entrada");
+	  //this.addTab("RecibosEntrada", null, null, "Realizar un Recibo de Entrada");
 		this.addTab("RecibosSalida", null, null, "Realizar un Recibo de Salida");
 		this.addTab("Empleados", null, lvemp, "Ingresa, modifica y busca Empleados");
 		this.addTab("Aranceles", null, lva, "Ingresa, modifica y busca Aranceles");
