@@ -60,7 +60,7 @@ public class LVCurso extends LVPanel implements MouseListener, ActionListener, I
 		
 		jcbperiodos = new JComboBox<String>();
 		jcbperiodos.setFont(fo);
-		jcbperiodos.setToolTipText("Per�odos activos");
+		jcbperiodos.setToolTipText("Periodos activos");
         listper = bperiodo.selectAll();
 		for(int i=0;i<listper.size();i++){
 	        String item = listper.get(i).getPerPeriodo();
@@ -206,7 +206,7 @@ public class LVCurso extends LVPanel implements MouseListener, ActionListener, I
 						if(bcurso.find((String)tableCur.getValueAt(tableCur.getSelectedRow(), 0))){
 							FileChooser fc = new FileChooser();
 							fc.ListaClase(bcurso);
-							JOptionPane.showMessageDialog(null, "Lista de clases generada con �xito en direcci�n", "INFO", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Lista de clases generada con exito en direccion", "INFO", JOptionPane.INFORMATION_MESSAGE);
 						}else{
 							JOptionPane.showMessageDialog(null, "Curso no existe, refresque el programa", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -220,7 +220,7 @@ public class LVCurso extends LVPanel implements MouseListener, ActionListener, I
 							if(bcurso.find((String)tableCur.getValueAt(tableCur.getSelectedRow(), 0))){
 								FileChooser fc = new FileChooser();
 								fc.ActaNotas(bcurso);
-								JOptionPane.showMessageDialog(null, "Documento con acta de notas generado con �xito en direcci�n", "INFO", JOptionPane.INFORMATION_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Documento con acta de notas generado con exito en direccion", "INFO", JOptionPane.INFORMATION_MESSAGE);
 							}else{
 								JOptionPane.showMessageDialog(null, "Curso no existe, refresque el programa", "Error", JOptionPane.ERROR_MESSAGE);
 							}

@@ -9,7 +9,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-
 import model.Carrera;
 import model.Curso;
 import model.Materia;
@@ -107,19 +106,20 @@ public class B_Materia  {
 
 
 	public boolean update(String id,String nombre,int lab, int creditos,String area) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
 		try{
-			em = emf.createEntityManager();
-			em.getTransaction().begin();
-
+	
+			materia = em.merge(materia);
 			materia.setMateriaArea(area);
 			materia.setMateriaCreditos(creditos);
 			materia.setMateriaLab(lab);
 			materia.setMateriaId(id);
 			materia.setMateriaNombre(nombre);
-			//materia.setRequisitos1(m.getRequisitos1());
-			//materia.setRequisitos2(m.getRequisitos2());
+			
 			em.getTransaction().commit();
-			em.close();	
+			em.refresh(materia);
+			em.close();
 			return true;
 		}catch(Exception e){
 
@@ -127,6 +127,8 @@ public class B_Materia  {
 			return false;
 		}
 	}
+	
+	
 	public void setMateria(String id,String nombre,int lab, int creditos,String area){
 		materia.setMateriaArea(area);
 		materia.setMateriaCreditos(creditos);

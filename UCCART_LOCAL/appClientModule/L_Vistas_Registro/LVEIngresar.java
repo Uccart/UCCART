@@ -133,6 +133,7 @@ public class LVEIngresar extends JDialog implements ActionListener {
             }
         });
 		jtffecnac.setFont(fo);
+		jtffecnac.setEditable(false);
 		
 		JLabel jLabel1 = new JLabel("ID:");
 		jLabel1.setFont(fo);
@@ -434,9 +435,9 @@ public class LVEIngresar extends JDialog implements ActionListener {
 					btitulo.setTitulo(Integer.parseInt(jtftomo.getText()), Integer.parseInt(jtffolio.getText()), Integer.parseInt(jtfasiento.getText()));
 					if(btitulo.insert()){
 						if(bpadron.valida(jtfid.getText(), listcarr.get(jcbcarreras.getSelectedIndex()).getCarrCod())){
-							bestudiante.setEstudiante(jtfid.getText(), jtfnombre.getText(), jtfapellido1.getText(), jtfapellido2.getText(), Integer.parseInt(jtfcelular.getText()),
-									Integer.parseInt(jtftelefono.getText()),jtfemail.getText(), jcbstatus.getSelectedIndex(), false, jtadireccion.getText(), 
-									jtfnacionalidad.getText(), jcbgenero.getSelectedIndex() == 0,jcbnacimiento.getTargetDate(), btitulo.getTitulo().getTitCodigo(), jtftrabajo.getText());
+							bestudiante.setEstudiante(jtfid.getText(), jtfnombre.getText(), jtfapellido1.getText(), jtfapellido2.getText(), jtfcelular.getText(),
+									jtftelefono.getText(),jtfemail.getText(), jcbstatus.getSelectedIndex(), false, jtadireccion.getText(), 
+									jtfnacionalidad.getText(), jcbgenero.getSelectedItem().toString(),jcbnacimiento.getTargetDate(), btitulo.getTitulo().getTitCodigo(), jtftrabajo.getText());
 							if(bestudiante.insert()){
 								bpadron.setPadron(jtfid.getText(), listcarr.get(jcbcarreras.getSelectedIndex()).getCarrCod());
 								jtfid.setText("");

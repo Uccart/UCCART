@@ -66,13 +66,13 @@ public class B_Arancel  {
 	}
 
 
-	public boolean update(String id, String desc, String tipo, float precio) {
+	public boolean update(String desc, String tipo, float precio) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		try{
 	
 			arancel = em.merge(arancel);
-			arancel.setArancelId(id);
+			//arancel.setArancelId(id);
 			arancel.setArancelDescripcion(desc);
 			arancel.setArancelTipo(tipo);
 			arancel.setArancelPrecio(precio);

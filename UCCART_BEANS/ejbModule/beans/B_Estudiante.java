@@ -56,7 +56,7 @@ public class B_Estudiante {
 		try{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			Query q =em.createNativeQuery("select * from Estudiante where est_id ilike '"+cod+"';", Estudiante.class);
+			Query q =em.createNativeQuery("select * from Estudiante where personas_id ilike '"+cod+"';", Estudiante.class);
 			if( q.getResultList().size() == 0)
 				return true;
 			else 
@@ -76,7 +76,7 @@ public class B_Estudiante {
 			List<Padron> resultsaux = q.getResultList();
 			if(!"Sin filtro".equals(rango)){
 				for(int i = 0; i< resultsaux.size(); i++){
-					q =em.createNativeQuery("select * from Estudiante where est_id = '"+resultsaux.get(i).getEstudiante().getEstId()+"'and est_apellido1 similar to '["+rango+"]%'", Estudiante.class);
+					q =em.createNativeQuery("select * from Estudiante where personas_id = '"+resultsaux.get(i).getEstudiante().getEstId()+"'and personas_apellido1 similar to '["+rango+"]%'", Estudiante.class);
 					if(!(q.getResultList().size() == 0))
 						results.add((Estudiante)q.getResultList().get(0));
 				}
@@ -99,7 +99,7 @@ public class B_Estudiante {
 		List<Estudiante> results = new ArrayList();
 		Query q; 
 		if(!"Sin filtro".equals(rango)){
-			q =em.createNativeQuery("select * from Estudiante where est_apellido1 similar to '["+rango+"]%'", Estudiante.class);
+			q =em.createNativeQuery("select * from Estudiante where personas_apellido1 similar to '["+rango+"]%'", Estudiante.class);
 		}else{
 			q =em.createNativeQuery("select * from Estudiante", Estudiante.class);
 		}
@@ -205,8 +205,8 @@ public class B_Estudiante {
 
 
 
-	public boolean update(String nombre, String apellido1,String apellido2,int celular,int telefono,
-			String correo,int status,boolean est_becado,String direccion, String nacionalidad,boolean est_genero,Date nacimiento,int codtitulo,String trabajo) {
+	public boolean update(String nombre, String apellido1,String apellido2,String celular,String telefono,
+			String correo,int status,boolean est_becado,String direccion, String nacionalidad,String est_genero,String trabajo) {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		try{
@@ -220,13 +220,13 @@ public class B_Estudiante {
 			estudiante.setEstCorreo(correo);
 			estudiante.setEstDireccion(direccion);
 			estudiante.setEstGenero(est_genero);
-			estudiante.setEstNacimiento(nacimiento);
+			//estudiante.setEstNacimiento(nacimiento);
 			estudiante.setEstNacionalidad(nacionalidad);
 			estudiante.setEstNombre(nombre);
 			estudiante.setEstStatus(status);
 			estudiante.setEstTelefono(telefono);
 			estudiante.setEstTrabajo(trabajo);
-			estudiante.setTitulo(em.find(Titulo.class, codtitulo));
+			//estudiante.setTitulo(em.find(Titulo.class, codtitulo));
 			em.getTransaction().commit();
 			em.refresh(estudiante);
 			em.close();
@@ -237,8 +237,8 @@ public class B_Estudiante {
 		}
 	}
 
-	public void setEstudiante(String id , String nombre, String apellido1,String apellido2,int celular,int telefono,
-			String correo,int status,boolean est_becado, String direccion, String nacionalidad,boolean est_genero,Date nacimiento,int codtitulo,String trabajo){
+	public void setEstudiante(String id , String nombre, String apellido1,String apellido2,String celular,String telefono,
+			String correo,int status,boolean est_becado, String direccion, String nacionalidad,String est_genero,Date nacimiento,int codtitulo,String trabajo){
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		//estudiante.setContrasena(e.getContrasena());

@@ -28,7 +28,7 @@ public class Nota implements Serializable {
 
 	//bi-directional many-to-one association to Estudiante
 	@ManyToOne
-	@JoinColumn(name="nota_codestudiante", referencedColumnName="est_id", insertable = false, updatable = false)
+	@JoinColumn(name="nota_codestudiante", referencedColumnName="personas_id", insertable = false, updatable = false)
 	private Estudiante estudiante;
 
 	public Nota() {

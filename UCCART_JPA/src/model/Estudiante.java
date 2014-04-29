@@ -16,45 +16,45 @@ public class Estudiante implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="est_id")
+	@Column(name="personas_id")
 	private String estId;
 
-	@Column(name="est_apellido1")
+	@Column(name="personas_apellido1")
 	private String estApellido1;
 
-	@Column(name="est_apellido2")
+	@Column(name="personas_apellido2")
 	private String estApellido2;
 
 	@Column(name="est_becado")
 	private Boolean estBecado;
 
-	@Column(name="est_celular")
-	private Integer estCelular;
+	@Column(name="personas_telefonocel")
+	private String estCelular;
 
-	@Column(name="est_correo")
+	@Column(name="personas_correo")
 	private String estCorreo;
 
-	@Column(name="est_direccion")
+	@Column(name="personas_direccion")
 	private String estDireccion;
 
-	@Column(name="est_genero")
-	private Boolean estGenero;
+	@Column(name="personas_genero")
+	private String estGenero;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="est_nacimiento")
+	@Column(name="personas_fecha_de_nacimiento")
 	private Date estNacimiento;
 
-	@Column(name="est_nacionalidad")
+	@Column(name="personas_nacionalidad")
 	private String estNacionalidad;
 
-	@Column(name="est_nombre")
+	@Column(name="personas_nombre")
 	private String estNombre;
 
 	@Column(name="est_status")
 	private Integer estStatus;
 
-	@Column(name="est_telefono")
-	private Integer estTelefono;
+	@Column(name="personas_telefonocasa")
+	private String estTelefono;
 
 	@Column(name="est_trabajo")
 	private String estTrabajo;
@@ -69,7 +69,7 @@ public class Estudiante implements Serializable {
 
 	//bi-directional one-to-one association to Titulo
 	@OneToOne
-	@JoinColumn(name="est_codtitulo", referencedColumnName="tit_codigo", insertable = false, updatable = false)
+	@JoinColumn(name="est_codtitulo", referencedColumnName="tit_codigo", insertable = true, updatable = false)
 	private Titulo titulo;
 
 	//bi-directional many-to-one association to Nota
@@ -119,11 +119,11 @@ public class Estudiante implements Serializable {
 		this.estBecado = estBecado;
 	}
 
-	public Integer getEstCelular() {
+	public String getEstCelular() {
 		return this.estCelular;
 	}
 
-	public void setEstCelular(Integer estCelular) {
+	public void setEstCelular(String estCelular) {
 		this.estCelular = estCelular;
 	}
 
@@ -143,11 +143,11 @@ public class Estudiante implements Serializable {
 		this.estDireccion = estDireccion;
 	}
 
-	public Boolean getEstGenero() {
+	public String getEstGenero() {
 		return this.estGenero;
 	}
 
-	public void setEstGenero(Boolean estGenero) {
+	public void setEstGenero(String estGenero) {
 		this.estGenero = estGenero;
 	}
 
@@ -183,11 +183,11 @@ public class Estudiante implements Serializable {
 		this.estStatus = estStatus;
 	}
 
-	public Integer getEstTelefono() {
+	public String getEstTelefono() {
 		return this.estTelefono;
 	}
 
-	public void setEstTelefono(Integer estTelefono) {
+	public void setEstTelefono(String estTelefono) {
 		this.estTelefono = estTelefono;
 	}
 

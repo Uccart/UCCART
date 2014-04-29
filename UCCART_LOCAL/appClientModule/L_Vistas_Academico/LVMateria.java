@@ -24,16 +24,16 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import model.Materia;
-
 import beans.B_Carrera;
 import beans.B_Curso;
 import beans.B_Materia;
-
 import L_Vistas.LVPanel;
+import L_Vistas_Financiero.LVAranModificar;
 
 @SuppressWarnings("all")
 public class LVMateria extends LVPanel implements MouseListener, ActionListener {
 	private LVMIngresar lvmi;
+	private LVMModificar lvmm;
 	private DefaultTableModel materias;
 	private B_Materia bmateria;
 	private JButton jbelimMa, jbrefreMa, jbmodifMa, jbinseMa;
@@ -43,6 +43,7 @@ public class LVMateria extends LVPanel implements MouseListener, ActionListener 
 	public LVMateria(JFrame padre){
 		super();
 		lvmi = new LVMIngresar(padre, true, fo);
+		lvmm = new LVMModificar(padre, true, fo);
 		materias = new DefaultTableModel();
 		bmateria = new B_Materia();
 		tableMat = new JTable(materias){public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -55,10 +56,10 @@ public class LVMateria extends LVPanel implements MouseListener, ActionListener 
 
 		JPanel panel = new JPanel();
 
-		materias.addColumn("CÛdigo");
+		materias.addColumn("C√≥digo");
 		materias.addColumn("Nombre");
-		materias.addColumn("¡rea");
-		materias.addColumn("CrÈditos");
+		materias.addColumn("√Årea");
+		materias.addColumn("Cr√©ditos");
 		List<Materia> listcarr = bmateria.selectAll();
 		for(int i=0;i<listcarr.size();i++){
 			String[] fila = {listcarr.get(i).getMateriaId(),listcarr.get(i).getMateriaNombre(), listcarr.get(i).getMateriaArea(), listcarr.get(i).getMateriaCreditos().toString()};
@@ -142,11 +143,14 @@ public class LVMateria extends LVPanel implements MouseListener, ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stubelse{
+		
+		////////ACCION BOTON DE AGREGAR///////
+		
 		if(e.getSource() == jbelimMa) {
 			if(tableMat.getSelectedRowCount() == 1){
 				if(bmateria.find((String)tableMat.getValueAt(tableMat.getSelectedRow(), 0))){
 					if(bmateria.delete()){
-						JOptionPane.showMessageDialog(null, "Materia eliminada con Èxito", "INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Materia eliminada con √©xito", "INFO", JOptionPane.INFORMATION_MESSAGE);
 					}else
 						JOptionPane.showMessageDialog(null, "No se pudo eliminar, refresque el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}else{
@@ -156,13 +160,39 @@ public class LVMateria extends LVPanel implements MouseListener, ActionListener 
 				JOptionPane.showMessageDialog(null, "Debe seleccionar 1 materia", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}else{
+			
+			////////ACCION BOTON DE ELIMINAR///////
+			
 			if(e.getSource() == jbinseMa) {
 				lvmi = new LVMIngresar((JFrame)lvmi.getParent(), true, fo);
 				lvmi.init();
 				lvmi.setLocationRelativeTo(lvmi.getParent());
 				lvmi.setVisible(true);
 			}
-		}
+			
+			////////BOTON MODIFICAR//////////
+			
+			else{
+				if(e.getSource() == jbmodifMa) {
+					if(tableMat.getSelectedRowCount() == 1){
+						if(bmateria.find((String)tableMat.getValueAt(tableMat.getSelectedRow(), 0))){
+							lvmm = new LVMModificar((JFrame)lvmm.getParent(), true, fo);
+							lvmm.init(bmateria);
+							lvmm.setLocationRelativeTo(lvmm.getParent());
+							lvmm.setVisible(true);
+						}else{
+							JOptionPane.showMessageDialog(null, "Materia no existe, refresque el programa", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, "Debe seleccionar 1 materia", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+			
+			
+			}
+			
+			
 		this.removeAll();
 		materias = new DefaultTableModel();
 		tableMat = new JTable(materias){public boolean isCellEditable(int rowIndex, int colIndex) {

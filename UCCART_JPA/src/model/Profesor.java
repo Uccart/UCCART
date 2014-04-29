@@ -15,26 +15,26 @@ public class Profesor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="prof_id")
+	@Column(name="personas_id")
 	private String profId;
 
-	@Column(name="prof_apellido1")
+	@Column(name="personas_apellido1")
 	private String profApellido1;
 
-	@Column(name="prof_apellido2")
+	@Column(name="personas_apellido2")
 	private String profApellido2;
 
-	@Column(name="prof_correo")
+	@Column(name="personas_correo")
 	private String profCorreo;
 
 	@Column(name="prof_gradoacademico")
 	private String profGradoacademico;
 
-	@Column(name="prof_nombre")
+	@Column(name="personas_nombre")
 	private String profNombre;
 
-	@Column(name="prof_telefono")
-	private Integer profTelefono;
+	@Column(name="personas_telefonocel")
+	private String profTelefono;
 
 	//bi-directional many-to-one association to Curso
 	@OneToMany(mappedBy="profesor", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
@@ -91,11 +91,11 @@ public class Profesor implements Serializable {
 		this.profNombre = profNombre;
 	}
 
-	public Integer getProfTelefono() {
+	public String getProfTelefono() {
 		return this.profTelefono;
 	}
 
-	public void setProfTelefono(Integer profTelefono) {
+	public void setProfTelefono(String profTelefono) {
 		this.profTelefono = profTelefono;
 	}
 

@@ -8,39 +8,38 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import L_Vistas.LVPanel;
+
 import javax.swing.*;
 
 import beans.B_Carrera;
 import beans.B_Materia;
 
-import model.Carrera;
 
 
 @SuppressWarnings("all")
 public class LVMModificar extends JDialog implements ActionListener {
-	private JButton jbagregar;
+	private JButton jbaModificar;
     private JRadioButton jrbsi, jrbno;
     private JTextField jtfcodigo, jtfnombre, jtfarea, jtfcreditos;
-    private B_Carrera bcarrera;
     private B_Materia bmateria;
     private Font fo;
-    private List<Carrera> listmat;
     
 	public LVMModificar(JFrame padre, boolean modal, Font f){
 		super(padre, modal);
 		fo = f;
+		bmateria = new B_Materia();
 		jtfcodigo = new JTextField(20);
 		jtfnombre = new JTextField(20);
         jtfarea = new JTextField(20);
         jtfcreditos = new JTextField(20);
         jrbsi = new JRadioButton();
         jrbno = new JRadioButton();
-        jbagregar = new JButton();
-        bcarrera = new B_Carrera();
+        jbaModificar = new JButton();
         bmateria = new B_Materia();
 	}
-	public void init(){
-		this.setTitle("Ingresar Materia");
+	public void init(B_Materia best){
+		bmateria = best;
+		this.setTitle("Modificar Materia");
 		
 		JPanel panel = new JPanel();
 		
@@ -58,9 +57,14 @@ public class LVMModificar extends JDialog implements ActionListener {
         jLabel7.setFont(fo);
         
         jtfcodigo.setFont(fo);
+        jtfcodigo.setText(bmateria.getMateria().getMateriaId().toString());
+        jtfcodigo.setEditable(false);
         jtfnombre.setFont(fo);
+        jtfnombre.setText(bmateria.getMateria().getMateriaNombre().toString());
         jtfarea.setFont(fo);
+        jtfarea.setText(bmateria.getMateria().getMateriaArea().toString());
         jtfcreditos.setFont(fo);
+        jtfcreditos.setText(bmateria.getMateria().getMateriaCreditos().toString());
         jtfcreditos.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
                 char caracter = e.getKeyChar();
@@ -82,9 +86,9 @@ public class LVMModificar extends JDialog implements ActionListener {
 		jrbno.setFont(fo);
 		jrbno.addActionListener(this);
 
-        jbagregar.setText("Agregar");
-        jbagregar.setFont(fo);
-        jbagregar.addActionListener(this);
+		jbaModificar.setText("Modificar");
+		jbaModificar.setFont(fo);
+		jbaModificar.addActionListener(this);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panel);
         panel.setLayout(jPanel1Layout);
@@ -117,7 +121,7 @@ public class LVMModificar extends JDialog implements ActionListener {
                                             .addComponent(jrbno))
                                         .addComponent(jtfcreditos, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jtfarea, javax.swing.GroupLayout.Alignment.LEADING))))
-                            .addComponent(jbagregar))))
+                            .addComponent(jbaModificar))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,7 +151,7 @@ public class LVMModificar extends JDialog implements ActionListener {
                     .addComponent(jrbsi)
                     .addComponent(jrbno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addComponent(jbagregar)
+                .addComponent(jbaModificar)
                 .addGap(28, 28, 28))
         );
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(this.getContentPane());
@@ -174,22 +178,33 @@ public class LVMModificar extends JDialog implements ActionListener {
 			else
 				jrbsi.setSelected(false);
 		}
-		if(e.getSource() == jbagregar){
+		
+		////////////////////
+		
+		if(e.getSource() == jbaModificar){
 			if(!("".equals(jtfcodigo.getText()) ) && !("".equals(jtfnombre.getText()))&& !("".equals(jtfarea.getText()))&& !("".equals(jtfcreditos.getText()))){
-				if(bmateria.validapk(jtfcodigo.getText())){
+				
+				System.out.println("Lo va a modificar");
+				
+				if(jtfcodigo.getText() != " "){
 					int lab = 1;
 					if(jrbsi.isSelected())
 						lab = 0;
 					bmateria.setMateria(jtfcodigo.getText(), jtfnombre.getText(),
 							lab, Integer.parseInt(jtfcreditos.getText()), jtfarea.getText());
-					if(bmateria.insert()){
-						JOptionPane.showMessageDialog(null, "Materia "+ jtfcodigo.getText()+ " ingresada con éxito", "INFO", JOptionPane.INFORMATION_MESSAGE);
+					
+					if(bmateria.update(jtfcodigo.getText(), jtfnombre.getText(),lab, Integer.parseInt(jtfcreditos.getText()), jtfarea.getText())){
+						
+						JOptionPane.showMessageDialog(null, "Materia "+ jtfcodigo.getText()+ " modificada con éxito", "INFO", JOptionPane.INFORMATION_MESSAGE);
+						
 						jtfcodigo.setText("");
 						jtfnombre.setText("");
 						jtfarea.setText("");
 						jtfcreditos.setText("");
 						this.dispose();
+						
 					}else{
+						
 						JOptionPane.showMessageDialog(null, "Error al agregar la materia, datos incorrectos ", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				}else{
@@ -198,6 +213,7 @@ public class LVMModificar extends JDialog implements ActionListener {
 			}else{
 				JOptionPane.showMessageDialog(null, "Datos faltantes ", "Error", JOptionPane.ERROR_MESSAGE);
 			}
+			
 		}
 	}
 }

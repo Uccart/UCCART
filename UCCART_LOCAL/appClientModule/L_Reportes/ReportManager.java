@@ -72,11 +72,11 @@ public class ReportManager {
 			  header.createCell(1).setCellValue(new HSSFRichTextString("I APELLIDO"));
 			  header.createCell(2).setCellValue(new HSSFRichTextString("II APELLIDO"));
 			  header.createCell(3).setCellValue(new HSSFRichTextString("NOMBRE"));
-			  header.createCell(4).setCellValue(new HSSFRichTextString("TELÃ‰FONO"));
+			  header.createCell(4).setCellValue(new HSSFRichTextString("TELEFONO"));
 			  header.createCell(5).setCellValue(new HSSFRichTextString("E-MAIL"));
 			  header.createCell(6).setCellValue(new HSSFRichTextString("MATERIA"));
 			  header.createCell(7).setCellValue(new HSSFRichTextString("PROFESOR"));
-			  header.createCell(8).setCellValue(new HSSFRichTextString("CRÃ‰DITOS"));
+			  header.createCell(8).setCellValue(new HSSFRichTextString("CREDITOS"));
 			  header.createCell(9).setCellValue(new HSSFRichTextString("BECA"));
 			  
 	        
@@ -146,7 +146,7 @@ public class ReportManager {
 	       paramsText0.put("jc", "center");
 	       
 
-	       docx.addText("UCCART", paramsText0);
+	       docx.addText("Universidad Continental de las Ciencias y las Artes", paramsText0);
 		
 	       docx.addBreak("line");
 	       
@@ -302,7 +302,7 @@ public class ReportManager {
 		       paramsText0.put("jc", "center");
 		       
 
-		       docx.addText("UCCART", paramsText0);
+		       docx.addText("Universidad Continental de las Ciencias y las Artes", paramsText0);
 			
 		       docx.addBreak("line");
 		       docx.addBreak("line");
@@ -492,7 +492,7 @@ public class ReportManager {
 		ReportManager rm = new ReportManager();
 	//	rm.ListaCurso(p, ruta)
 	   // rm.ListaCreditos(p);
-		rm.ListaCurso(p,"C:\\Users\\XaviCJ\\Desktop\\"+p.getCurso().getCursoId());
+		rm.ListaCurso(p,"C:\\Users\\Daniel\\Desktop\\"+p.getCurso().getCursoId());
  
 	}
 }

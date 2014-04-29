@@ -32,7 +32,7 @@ public class LVAranModificar extends JDialog implements ActionListener {
 		barancel = best;
 		JPanel panel = new JPanel();
 		JPanel panel2 = new JPanel();
-		panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo Arancel"));
+		panel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modificar Arancel"));
 		
 		JLabel jLabelId = new JLabel("ID:");
 		jLabelId.setFont(fo);
@@ -164,15 +164,18 @@ public class LVAranModificar extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource() == this.jbModificar){
 			if(!("".equals(jtfid.getText())) && !("".equals(jtfdescripcion.getText())) && !("".equals(jcbtipo.getSelectedItem())) && !("".equals(jtfprecio.getText()))){
 				if(jtfid.getText() != " "){
-					barancel.setArancel(jtfid.getText(), jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()));
+					
+					//barancel.setArancel(jtfid.getText(), jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()));
 				
-					if(barancel.update(jtfid.getText(), jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()))){
+					if(barancel.update(jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()))){
 						
-						jtfid.setText("");
+						//jtfid.setText("");
 						jtfdescripcion.setText("");
+						
 						jcbtipo.setSelectedItem("");
 						jtfprecio.setText("");
 						
@@ -197,10 +200,10 @@ public class LVAranModificar extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Error al modificar el arancel, datos incorrectos ", "Error", JOptionPane.ERROR_MESSAGE);
 					
 				}else{
-					barancel.setArancel(jtfid.getText(), jtfdescripcion.getText() , jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()));
+					//barancel.setArancel(jtfid.getText(), jtfdescripcion.getText() , jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()));
 					
-					if(barancel.update(jtfid.getText(), jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()))){
-						jtfid.setText("");
+					if(barancel.update(jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()))){
+						//jtfid.setText("");
 						jtfdescripcion.setText("");
 						jcbtipo.setSelectedItem("");
 						jtfprecio.setText("");

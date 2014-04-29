@@ -109,6 +109,7 @@ public class LVEmpModificar extends JDialog implements ActionListener {
 		});
 
 		jtffecnac.setFont(fo);
+		jtffecnac.setEditable(false);
 
 		JLabel jLabelId = new JLabel("Identificacion:");
 		jLabelId.setFont(fo);

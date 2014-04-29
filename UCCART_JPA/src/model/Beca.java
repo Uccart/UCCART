@@ -33,7 +33,7 @@ public class Beca implements Serializable {
 
 	//bi-directional one-to-one association to Estudiante
 	@OneToOne
-	@JoinColumn(name="beca_idestudiante", referencedColumnName="est_id", insertable = false, updatable = false)
+	@JoinColumn(name="beca_idestudiante", referencedColumnName="personas_id", insertable = false, updatable = false)
 	private Estudiante estudiante;
 
 	public Beca() {

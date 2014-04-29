@@ -22,7 +22,7 @@ public class Contrasena implements Serializable {
 
 	//bi-directional one-to-one association to Estudiante
 	@OneToOne
-	@JoinColumn(name="cont_idestudiante", referencedColumnName="est_id", insertable = false, updatable = false)
+	@JoinColumn(name="cont_idestudiante", referencedColumnName="personas_id", insertable = false, updatable = false)
 	private Estudiante estudiante;
 
 	public Contrasena() {

@@ -40,7 +40,7 @@ public class B_Contrasena  {
 	    return true;    
 	}catch(Exception e){
 				
-				System.out.println("No se puedo insertar contraseña");
+				System.out.println("No se puedo insertar contrasena");
 	         return false;		
 	}	
 	}

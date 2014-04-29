@@ -16,7 +16,6 @@ import beans.B_Carrera;
 import beans.B_Estudiante;
 import beans.B_Padron;
 import beans.B_Titulo;
-
 import L_Vistas.LVPanel;
 
 @SuppressWarnings("all")
@@ -24,7 +23,7 @@ public class LVEModificar extends JDialog implements ActionListener {
 	private Font fo;
     private JButton jbcambiar;
     private JComboBox jcbgenero, jcbstatus, jcbcarreras;
-    private JCalendarButton jcbnacimiento;
+   // private JCalendarButton jcbnacimiento;
     private JTextField jtfapellido1, jtfapellido2,jtfasiento, jtfcelular, jtfemail, jtffolio, jtfid, jtfnacionalidad,
     jtfnombre, jtftelefono, jtftomo, jtftrabajo, jtffecnac;
 	private B_Estudiante bestudiante;
@@ -70,9 +69,13 @@ public class LVEModificar extends JDialog implements ActionListener {
 		jtfid.setText(bestudiante.getEstudiante().getEstId());
 		jtfid.setEditable(false);
 		jtfnombre.setFont(fo);
+		jtfnombre.setText(bestudiante.getEstudiante().getEstNombre());
 		jtfapellido1.setFont(fo);
+		jtfapellido1.setText(bestudiante.getEstudiante().getEstApellido1());
 		jtfapellido2.setFont(fo);
+		jtfapellido2.setText(bestudiante.getEstudiante().getEstApellido2());
 		jtfcelular.setFont(fo);
+		jtfcelular.setText(bestudiante.getEstudiante().getEstCelular());
 		jtfcelular.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
                 char caracter = e.getKeyChar();
@@ -85,6 +88,7 @@ public class LVEModificar extends JDialog implements ActionListener {
             }
         });
 		jtftelefono.setFont(fo);
+		jtftelefono.setText(bestudiante.getEstudiante().getEstTelefono());
 		jtftelefono.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
                 char caracter = e.getKeyChar();
@@ -97,9 +101,13 @@ public class LVEModificar extends JDialog implements ActionListener {
             }
         });
 		jtfemail.setFont(fo);
+		jtfemail.setText(bestudiante.getEstudiante().getEstCorreo());
 		jtfnacionalidad.setFont(fo);
+		jtfnacionalidad.setText(bestudiante.getEstudiante().getEstNacionalidad());
 		jtftrabajo.setFont(fo);
+		jtftrabajo.setText(bestudiante.getEstudiante().getEstTrabajo());
 		jtftomo.setFont(fo);
+		jtftomo.setText(bestudiante.getEstudiante().getTitulo().getTitTomo().toString());
 		jtftomo.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
                 char caracter = e.getKeyChar();
@@ -112,6 +120,7 @@ public class LVEModificar extends JDialog implements ActionListener {
             }
         });
 		jtffolio.setFont(fo);
+		jtffolio.setText(bestudiante.getEstudiante().getTitulo().getTitFolio().toString());
 		jtffolio.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
                 char caracter = e.getKeyChar();
@@ -124,6 +133,7 @@ public class LVEModificar extends JDialog implements ActionListener {
             }
         });
 		jtfasiento.setFont(fo);
+		jtfasiento.setText(bestudiante.getEstudiante().getTitulo().getTitAsiento().toString());
 		jtfasiento.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
                 char caracter = e.getKeyChar();
@@ -135,7 +145,30 @@ public class LVEModificar extends JDialog implements ActionListener {
                     }
             }
         });
-		jtffecnac.setFont(fo);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//jtffecnac.setFont(fo);
+		//jtffecnac.setText(bestudiante.getEstudiante().getEstNacimiento().toString());
+		jtffecnac.setEditable(false);
+		//dateFormat.format((bestudiante.getEstudiante().getEstNacimiento().toString()));
+		//fechaEstudiante = dateFormat.format((bestudiante.getEstudiante().getEstNacimiento().toString()));
+		//jtffecnac.setText("1989-11-20");
+		
+		
+		
+		
+		
 		
 		JLabel jLabel1 = new JLabel("ID:");
 		jLabel1.setFont(fo);
@@ -147,7 +180,7 @@ public class LVEModificar extends JDialog implements ActionListener {
 		jLabel4.setFont(fo);
 		JLabel jLabel5 = new JLabel("Celular:");
 		jLabel5.setFont(fo);
-		JLabel jLabel6 = new JLabel("Tel�fono:");
+		JLabel jLabel6 = new JLabel("Telefono:");
 		jLabel6.setFont(fo);
 		JLabel jLabel7 = new JLabel("E-mail:");
 		jLabel7.setFont(fo);
@@ -169,25 +202,32 @@ public class LVEModificar extends JDialog implements ActionListener {
         jLabel15.setFont(fo);
         JLabel jLabel16 = new JLabel("Dirección:");
         jLabel16.setFont(fo);
-        JLabel jLabel17 = new JLabel("Carrera:");
-        jLabel17.setFont(fo);
+        //JLabel jLabel17 = new JLabel("Carrera:");
+        //jLabel17.setFont(fo);
         jcbstatus = new JComboBox();
         jcbstatus.setFont(fo);
         jcbcarreras = new JComboBox();
         jcbcarreras.setFont(fo);
         jcbgenero = new JComboBox();
         jcbgenero.setFont(fo);
-        jcbnacimiento = new JCalendarButton();
-        jcbnacimiento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        //jcbgenero.setSelectedIndex(Integer.parseInt(bestudiante.getEstudiante().getEstGenero().toString()));
+        jcbgenero.setSelectedItem(bestudiante.getEstudiante().getEstGenero());
+        
+        //jcbnacimiento = new JCalendarButton();
+        /*jcbnacimiento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
             	if (evt.getNewValue() instanceof Date){
             		jtffecnac.setText(dateFormat.format((Date)evt.getNewValue()));
             		/*dfin = ((Date)evt.getNewValue()).getDate();
             		mefin = ((Date)evt.getNewValue()).getMonth()+1;
-            		afin = ((Date)evt.getNewValue()).getYear()+1900;*/
+            		afin = ((Date)evt.getNewValue()).getYear()+1900;*//*
             	}
             }
         });
+        */
+        
+        
+        
         jbcambiar = new JButton("Cambiar");
         jbcambiar.setFont(fo);
         jbcambiar.setToolTipText("Modificar estudiante seleccionado!");
@@ -199,6 +239,7 @@ public class LVEModificar extends JDialog implements ActionListener {
         jtadireccion.setColumns(20);
         jtadireccion.setRows(5);
         jtadireccion.setFont(fo);
+        jtadireccion.setText(bestudiante.getEstudiante().getEstDireccion());
         jScrollPane1.setViewportView(jtadireccion);
 
         jPanel1.setBorder(BorderFactory.createTitledBorder("Datos de Estudiante"));
@@ -212,12 +253,18 @@ public class LVEModificar extends JDialog implements ActionListener {
 	        jcbcarreras.addItem(item);
 		}
 		jcbcarreras.setMaximumSize(jcbcarreras.getPreferredSize() );
+		
+		
 
         jcbstatus.setModel(new DefaultComboBoxModel(new String[] { "Primer Ingreso", "Regular", "Egresado"}));
         jcbstatus.setToolTipText("Estado actual del estudiante");
+        
+        
 
         jcbgenero.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
         jcbgenero.setToolTipText("Género del estudiante");
+       // jcbgenero.getSelectedIndex();
+       
 
         jPanel2.setBorder(BorderFactory.createTitledBorder("Título"));
         
@@ -267,7 +314,7 @@ public class LVEModificar extends JDialog implements ActionListener {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel17)
+                                    //.addComponent(jLabel17)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
@@ -282,7 +329,7 @@ public class LVEModificar extends JDialog implements ActionListener {
                                         .addComponent(jtfid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)//)
                                     .addComponent(jtfapellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtfapellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jcbcarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    //.addComponent(jcbcarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtfcelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtfemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtftelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,7 +340,7 @@ public class LVEModificar extends JDialog implements ActionListener {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
+                                   // .addComponent(jLabel11)
                                     .addComponent(jLabel13))
                                 .addGap(30, 30, 30)//.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +350,8 @@ public class LVEModificar extends JDialog implements ActionListener {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jtffecnac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jcbnacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        //.addComponent(jcbnacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        )))
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -340,9 +388,9 @@ public class LVEModificar extends JDialog implements ActionListener {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcbnacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            //.addComponent(jcbnacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel11)
+                                //.addComponent(jLabel11)
                                 .addComponent(jtffecnac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,8 +402,10 @@ public class LVEModificar extends JDialog implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel17)
-                        .addComponent(jcbcarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                       // .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        //.addComponent(jcbcarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        )
+                        )
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -428,24 +478,24 @@ public class LVEModificar extends JDialog implements ActionListener {
 			if(!("".equals(jtfid.getText()) ) && !("".equals(jtfnombre.getText())&&!("".equals(jtfapellido1.getText()))&&!("".equals(jtfnacionalidad.getText()))
 					&&!("".equals(jtffecnac.getText()))&&!("".equals(jtftomo.getText()))&&!("".equals(jtffolio.getText()))&&!("".equals(jtfasiento.getText())))){
 				
-				btitulo.setTitulo(Integer.parseInt(jtftomo.getText()), Integer.parseInt(jtffolio.getText()), Integer.parseInt(jtfasiento.getText()));
+				//btitulo.setTitulo(Integer.parseInt(jtftomo.getText()), Integer.parseInt(jtffolio.getText()), Integer.parseInt(jtfasiento.getText()));
 				
-				if(btitulo.insert()){
-					
-					if(bpadron.valida(jtfid.getText(), listcarr.get(jcbcarreras.getSelectedIndex()).getCarrCod())){
-						bestudiante.setEstudiante(jtfid.getText(), jtfnombre.getText(), jtfapellido1.getText(), jtfapellido2.getText(), Integer.parseInt(jtfcelular.getText()),
-								Integer.parseInt(jtftelefono.getText()),jtfemail.getText(), jcbstatus.getSelectedIndex(), false, jtadireccion.getText(), 
-								jtfnacionalidad.getText(), jcbgenero.getSelectedIndex() == 0,jcbnacimiento.getTargetDate(), btitulo.getTitulo().getTitCodigo(), jtftrabajo.getText());
+				//if(btitulo.insert()){
+					//if(jtfid.getText() != " "){
+					//if(bpadron.valida(jtfid.getText(), listcarr.get(jcbcarreras.getSelectedIndex()).getCarrCod())){
+						//bestudiante.setEstudiante(jtfid.getText(), jtfnombre.getText(), jtfapellido1.getText(), jtfapellido2.getText(), jtfcelular.getText(),
+							//	jtftelefono.getText(),jtfemail.getText(), jcbstatus.getSelectedIndex(), false, jtadireccion.getText(), 
+								//jtfnacionalidad.getText(), jcbgenero.getSelectedItem().toString(),jcbnacimiento.getTargetDate(), btitulo.getTitulo().getTitCodigo(), jtftrabajo.getText());
 						
-						if(bestudiante.update(jtfnombre.getText(), jtfapellido1.getText(), jtfapellido2.getText(), Integer.parseInt(jtfcelular.getText()),
-								Integer.parseInt(jtftelefono.getText()),jtfemail.getText(), jcbstatus.getSelectedIndex(), false, jtadireccion.getText(), 
-								jtfnacionalidad.getText(), jcbgenero.getSelectedIndex() == 0,jcbnacimiento.getTargetDate(), btitulo.getTitulo().getTitCodigo(), jtftrabajo.getText())){
-							bpadron.setPadron(jtfid.getText(), listcarr.get(jcbcarreras.getSelectedIndex()).getCarrCod());
-							jtfid.setText("");
+						if(bestudiante.update(jtfnombre.getText(), jtfapellido1.getText(), jtfapellido2.getText(), jtfcelular.getText(),
+								jtftelefono.getText(),jtfemail.getText(), jcbstatus.getSelectedIndex(), false, jtadireccion.getText(), 
+								jtfnacionalidad.getText(), jcbgenero.getSelectedItem().toString(), jtftrabajo.getText())){
+							//bpadron.setPadron(jtfid.getText(), listcarr.get(jcbcarreras.getSelectedIndex()).getCarrCod());
+							
 							jtfnombre.setText("");
 							jtfapellido1.setText("");
 							jtfnacionalidad.setText("");
-							jtffecnac.setText("");
+							//jtffecnac.setText("");
 							jtftomo.setText("");
 							jtffolio.setText("");
 							jtfasiento.setText("");
@@ -455,28 +505,30 @@ public class LVEModificar extends JDialog implements ActionListener {
 							jtfemail.setText("");
 							jtftrabajo.setText("");
 							jtadireccion.setText("");
+							jcbgenero.setSelectedItem("");
+							
 							this.dispose();
-							if(bpadron.insert())
-								JOptionPane.showMessageDialog(null, "Estudiante "+ jtfid.getText()+ " ingresado con éxito e incluido en el padron de " + jcbcarreras.getSelectedItem(), "INFO", JOptionPane.INFORMATION_MESSAGE);
-							else{
-								JOptionPane.showMessageDialog(null, "Estudiante "+ jtfid.getText()+ " ingresado con éxito, con error al ingresarlo al padrón de " + jcbcarreras.getSelectedItem(), "Error", JOptionPane.ERROR_MESSAGE);
+							//if(bpadron.insert())
+								//JOptionPane.showMessageDialog(null, "Estudiante "+ jtfid.getText()+ " Modificado con éxito e incluido en el padron de " + jcbcarreras.getSelectedItem(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+						}else{
+								JOptionPane.showMessageDialog(null, "Estudiante "+ jtfid.getText()+ " Modificado con éxito, con error al ingresarlo al padrón de " + jcbcarreras.getSelectedItem(), "Error", JOptionPane.ERROR_MESSAGE);
 							}
 							
 						}else{
-							JOptionPane.showMessageDialog(null, "Error al agregar el estudiante, datos incorrectos ", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Error al Modificar el estudiante, datos incorrectos ", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}else{
-						JOptionPane.showMessageDialog(null, "Error al agregar el padrón, estudiante ya está incluido en el padrón seleccionado ", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Error al Modificar el padrón, estudiante ya está incluido en el padrón seleccionado ", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-				}else{
-					JOptionPane.showMessageDialog(null, "Error al agregar el título, datos incorrectos ", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-			}else{
-				JOptionPane.showMessageDialog(null, "Datos faltantes ", "Error", JOptionPane.ERROR_MESSAGE);
-			}
+				//}else{
+					JOptionPane.showMessageDialog(null, "Estudiante "+ jtfid.getText()+ " Modificado con éxito, " + jcbcarreras.getSelectedItem(), "Error", JOptionPane.ERROR_MESSAGE);
+			//	}
+		//	}else{
+			//	JOptionPane.showMessageDialog(null, "Datos faltantes ", "Error", JOptionPane.ERROR_MESSAGE);
+			//}
 		}
-	}
+	
 	
 
 }

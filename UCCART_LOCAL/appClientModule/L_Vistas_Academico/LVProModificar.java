@@ -73,7 +73,7 @@ public class LVProModificar extends JDialog implements ActionListener  {
 		jtfApellido2.setFont(fo);
 		jtfApellido2.setText(bprofesor.getProfesor().getProfApellido2());
         jtfTel.setFont(fo);
-        jtfTel.setText(bprofesor.getProfesor().getProfNombre());
+        jtfTel.setText(bprofesor.getProfesor().getProfTelefono().toString());
         jtfTel.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
                 char caracter = e.getKeyChar();
@@ -244,7 +244,7 @@ public class LVProModificar extends JDialog implements ActionListener  {
 		if(e.getSource() == this.jbcambiar){
 			if(!("".equals(this.jtfID.getText())) && !("".equals(this.jtfNombre.getText())) && !("".equals(this.jtfApellidoI.getText()))  &&  !("".equals(this.jtfApellido2.getText())) && !("".equals(this.jtfEmail.getText()))&& !("".equals(this.jtaGradoAcad.getText())) && !("".equals(this.jtfTel.getText()))){
 				//bprofesor.setProfesor(jtfID.getText(), jtfNombre.getText(), this.jtfApellidoI.getText(), jtfApellido2.getText(), jtaGradoAcad.getText(), Integer.parseInt(jtfTel.getText()), jtfEmail.getText());
-				if(bprofesor.update(jtfNombre.getText(), this.jtfApellidoI.getText(), jtfApellido2.getText(), jtaGradoAcad.getText(), Integer.parseInt(jtfTel.getText()), jtfEmail.getText())){
+				if(bprofesor.update(jtfID.getText(), jtfNombre.getText(), this.jtfApellidoI.getText(), jtfApellido2.getText(), jtaGradoAcad.getText(), jtfTel.getText(), jtfEmail.getText())){
 					jtfID.setText("");
 					jtfNombre.setText("");
 					jtfApellidoI.setText("");

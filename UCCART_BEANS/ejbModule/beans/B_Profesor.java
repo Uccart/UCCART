@@ -88,16 +88,16 @@ public class B_Profesor  {
 	}
 
 
-	public boolean update(String nombre,String apellido1,String apellido2, String gradoacademico,int telefono, String  correo) {
+	public boolean update(String id, String nombre,String apellido1,String apellido2, String gradoacademico,String telefono, String  correo) {
 		try{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
 			profesor = em.merge(profesor);
+			profesor.setProfNombre(nombre);
 			profesor.setProfApellido1(apellido1);
 			profesor.setProfApellido2(apellido2);
 			profesor.setProfGradoacademico(gradoacademico);
 			profesor.setProfCorreo(correo);
-			profesor.setProfNombre(nombre);
 			profesor.setProfTelefono(telefono);
 			em.getTransaction().commit();
 			em.refresh(profesor);
@@ -110,7 +110,7 @@ public class B_Profesor  {
 
 	}
 
-	public void setProfesor(String id, String nombre,String apellido1,String apellido2, String gradoacademico,int telefono, String  correo){
+	public void setProfesor(String id, String nombre,String apellido1,String apellido2, String gradoacademico,String telefono, String  correo){
 
 		profesor.setProfApellido1(apellido1);
 		profesor.setProfApellido2(apellido2);
@@ -125,7 +125,7 @@ public class B_Profesor  {
 
 	public List<Profesor> selectAll(){
 		em = emf.createEntityManager();
-		Query q =em.createNativeQuery("SELECT * FROM Profesor ORDER BY prof_apellido1, prof_apellido2", Profesor.class);
+		Query q =em.createNativeQuery("SELECT * FROM Profesor ORDER BY personas_apellido1, personas_apellido2", Profesor.class);
 
 		List<Profesor> results = q.getResultList();
 
@@ -137,7 +137,7 @@ public class B_Profesor  {
 		try{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
-			Query q =em.createNativeQuery("select * from Profesor where prof_id ilike '"+cod+"';", Profesor.class);
+			Query q =em.createNativeQuery("select * from Profesor where personas_id ilike '"+cod+"';", Profesor.class);
 			if( q.getResultList().size() == 0)
 				return true;
 			else 
@@ -169,7 +169,7 @@ public class B_Profesor  {
 		List<Estudiante> results = new ArrayList();
 		Query q; 
 		if(!"Sin filtro".equals(rango)){
-			q =em.createNativeQuery("select * from Profesor where prof_apellido1 similar to '["+rango+"]%'", Profesor.class);
+			q =em.createNativeQuery("select * from Profesor where personas_apellido1 similar to '["+rango+"]%'", Profesor.class);
 		}else{
 			q =em.createNativeQuery("select * from Profesor", Profesor.class);
 		}

@@ -5,7 +5,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2014-04-07T15:25:31.783-0600")
+@Generated(value="Dali", date="2014-04-28T19:56:56.584-0600")
 @StaticMetamodel(Profesor.class)
 public class Profesor_ {
 	public static volatile SingularAttribute<Profesor, String> profId;
@@ -14,6 +14,6 @@ public class Profesor_ {
 	public static volatile SingularAttribute<Profesor, String> profCorreo;
 	public static volatile SingularAttribute<Profesor, String> profGradoacademico;
 	public static volatile SingularAttribute<Profesor, String> profNombre;
-	public static volatile SingularAttribute<Profesor, Integer> profTelefono;
+	public static volatile SingularAttribute<Profesor, String> profTelefono;
 	public static volatile ListAttribute<Profesor, Curso> cursos;
 }

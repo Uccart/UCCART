@@ -241,7 +241,7 @@ public class LVProfesorIngresar extends JDialog implements ActionListener  {
 			if(!("".equals(this.jtfID.getText())) && !("".equals(this.jtfNombre.getText())) && !("".equals(this.jtfApellidoI.getText()))  &&  !("".equals(this.jtfApellido2.getText())) && !("".equals(this.jtfEmail.getText()))&& !("".equals(this.jtaGradoAcad.getText())) && !("".equals(this.jtfTel.getText()))){
 				if(bprofesor.validapk(jtfID.getText())){
 					
-					bprofesor.setProfesor(jtfID.getText(), jtfNombre.getText(), this.jtfApellidoI.getText(), jtfApellido2.getText(), jtaGradoAcad.getText(), Integer.parseInt(jtfTel.getText()), jtfEmail.getText());
+					bprofesor.setProfesor(jtfID.getText(), jtfNombre.getText(), this.jtfApellidoI.getText(), jtfApellido2.getText(), jtaGradoAcad.getText(), jtfTel.getText(), jtfEmail.getText());
 				
 					if(bprofesor.insert()){
 						
@@ -273,7 +273,7 @@ public class LVProfesorIngresar extends JDialog implements ActionListener  {
 					JOptionPane.showMessageDialog(null, "Error al agregar el profesor, datos incorrectos ", "Error", JOptionPane.ERROR_MESSAGE);
 					
 				}else{
-					bprofesor.setProfesor(jtfID.getText(), jtfNombre.getText(), this.jtfApellidoI.getText(), jtfApellido2.getText(), jtaGradoAcad.getText(), Integer.parseInt(jtfTel.getText()),"");
+					bprofesor.setProfesor(jtfID.getText(), jtfNombre.getText(), this.jtfApellidoI.getText(), jtfApellido2.getText(), jtaGradoAcad.getText(), jtfTel.getText(),"");
 					
 					if(bprofesor.insert()){
 						jtfID.setText("");

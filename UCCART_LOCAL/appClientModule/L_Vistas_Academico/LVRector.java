@@ -71,7 +71,6 @@ public class LVRector extends JTabbedPane {
 		this.addTab("Estudiante", null, lve, "Ingresar, eliminar y modificar estudiantes");
 		this.addTab("Matrícula", null, lvma, "Matricular y desmatricular estudiantes");
 		this.addTab("Padrón", null, lvpa, "Agregar estudiantes al padrón de carreras");
-		this.addTab("Auditoría", null, null, "Registro de actividad del sistema SECAU");
 		this.addTab("Mi Cuenta", null, lvmc, "Modificar información personal");
 	}
 }

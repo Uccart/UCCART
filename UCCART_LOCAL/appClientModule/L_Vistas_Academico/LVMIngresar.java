@@ -163,6 +163,9 @@ public class LVMIngresar extends JDialog implements ActionListener {
         this.pack();
 		
 	}
+	
+
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -174,6 +177,7 @@ public class LVMIngresar extends JDialog implements ActionListener {
 			else
 				jrbsi.setSelected(false);
 		}
+		
 		if(e.getSource() == jbagregar){
 			if(!("".equals(jtfcodigo.getText()) ) && !("".equals(jtfnombre.getText()))&& !("".equals(jtfarea.getText()))&& !("".equals(jtfcreditos.getText()))){
 				if(bmateria.validapk(jtfcodigo.getText())){

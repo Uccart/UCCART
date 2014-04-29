@@ -39,7 +39,7 @@ public class LVProf extends LVPanel implements ActionListener, ItemListener {
 		
 		tableProf = new JTable(profesores){public boolean isCellEditable(int rowIndex, int colIndex) {
 			return false;}};
-		filterTextProf = new JTextField(20);
+		filterTextProf = new JTextField(20);                      
 		selectal = 0;
 		
 	}
@@ -55,8 +55,8 @@ public class LVProf extends LVPanel implements ActionListener, ItemListener {
 		jcbalfab = new JComboBox<String>();
 		jcbalfab.setFont(fo);
 		jcbalfab.setToolTipText("Lista de profesores por orden alfabético");
-		jcbalfab.setModel(new DefaultComboBoxModel(new String[] {  "A-d", "E-h", "I-k", "L-o",
-				"P-s", "T-z","Sin filtro" }));
+		jcbalfab.setModel(new DefaultComboBoxModel(new String[] { "Sin filtro", "A-d", "E-h", "I-k", "L-o",
+				"P-s", "T-z" }));
 		jcbalfab.setSelectedIndex(selectal);
 		jcbalfab.setMaximumSize(jcbalfab.getPreferredSize() );
 		panel2.add(jcbalfab);

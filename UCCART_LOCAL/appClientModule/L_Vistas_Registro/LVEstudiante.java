@@ -58,8 +58,8 @@ public class LVEstudiante extends LVPanel implements ActionListener, ItemListene
 		jcbalfab = new JComboBox<String>();
 		jcbalfab.setFont(fo);
 		jcbalfab.setToolTipText("Lista de estudiantes por orden alfabético");
-		jcbalfab.setModel(new DefaultComboBoxModel(new String[] {  "A-d", "E-h", "I-k", "L-o",
-				"P-s", "T-z","Sin filtro" }));
+		jcbalfab.setModel(new DefaultComboBoxModel(new String[] { "Sin filtro", "A-d", "E-h", "I-k", "L-o",
+				"P-s", "T-z" }));
 		jcbalfab.setSelectedIndex(selectal);
 		jcbalfab.setMaximumSize(jcbalfab.getPreferredSize() );
 		panel2.add(jcbalfab);
@@ -71,13 +71,15 @@ public class LVEstudiante extends LVPanel implements ActionListener, ItemListene
 		jcbcarreras.setFont(fo);
 		jcbcarreras.setToolTipText("Lista de estudiantes por orden de carrera");
         listcarr = bcarrera.selectAll();
+        //jcbcarreras.addItem("**Sin filtro**");
+        
 		for(int i=0;i<listcarr.size();i++){
 	        String item = listcarr.get(i).getCarrNombre();
 	        jcbcarreras.addItem(item);
 		}
 		jcbcarreras.addItem("**Sin filtro**");
 		if(listcarr.size() != 0)
-			jcbcarreras.setSelectedIndex(selectcarr);
+		jcbcarreras.setSelectedIndex(selectcarr);
 		jcbcarreras.setMaximumSize(jcbcarreras.getPreferredSize() );
 		panel2.add(jcbcarreras);
 		jcbcarreras.addItemListener(this);
@@ -104,7 +106,7 @@ public class LVEstudiante extends LVPanel implements ActionListener, ItemListene
 			
 			for(int i=0;i<listest.size();i++){
 				String[] fila = {listest.get(i).getEstId(),listest.get(i).getEstApellido1()+" "+listest.get(i).getEstApellido2()+", "+listest.get(i).getEstNombre(),
-						listest.get(i).getEstCelular().toString(),listest.get(i).getEstTelefono().toString(),listest.get(i).getEstCorreo(),
+						listest.get(i).getEstCelular(),listest.get(i).getEstTelefono(),listest.get(i).getEstCorreo(),
 						listest.get(i).getEstNacionalidad(),dateFormat.format(listest.get(i).getEstNacimiento())};
 				estudiantes.addRow(fila);
 			}
@@ -194,10 +196,10 @@ public class LVEstudiante extends LVPanel implements ActionListener, ItemListene
 							lvem.setLocationRelativeTo(lvem.getParent());
 							lvem.setVisible(true);
 						}else{
-							JOptionPane.showMessageDialog(null, "Período no existe, refresque el programa", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Estudiante no existe, refresque el programa", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}else{
-						JOptionPane.showMessageDialog(null, "Debe seleccionar 1 período", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Debe seleccionar un Estudiante", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
