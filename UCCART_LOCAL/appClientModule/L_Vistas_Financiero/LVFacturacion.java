@@ -10,7 +10,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import model.Arancel;
+import model.MetodoDePago;
 import beans.B_Arancel;
+import beans.B_MetodoDePago;
 import L_Vistas.FileChooser;
 import L_Vistas.LVPanel;
 import L_Vistas_Academico.LVMIngresar;
@@ -28,7 +30,7 @@ public class LVFacturacion extends LVPanel {
 	
 	private JPanel panelCliente;
 	private JSuggestField identificacionCliente;
-	private JSuggestField metodo_de_pago;
+	private JSuggestField metodoDePago;
 	private JLabel valorClienteId;
 	private JLabel valorClienteNombre;
 	private JLabel valorClienteTipo;
@@ -97,8 +99,10 @@ public class LVFacturacion extends LVPanel {
 			panelCliente.setBorder(BorderFactory.createTitledBorder("Información del Cliente"));
 			
 			Vector<String> clientes = getListaDeEstudiantes();
+			Vector<String> metodosDePago = getListaDeMetodosDePago();
 	    	
 			JLabel etiquetaCliente = new JLabel("Cliente:");
+			JLabel etiquetaMetodoDePago = new JLabel("Método de Pago:");
 			JLabel etiquetaClienteId = new JLabel("Identificación:");
 			JLabel etiquetaClienteNombre = new JLabel("Nombre:");
 			JLabel etiquetaClienteTipo = new JLabel("Tipo De Cliente:");
@@ -107,10 +111,12 @@ public class LVFacturacion extends LVPanel {
 			valorClienteNombre = new JLabel();
 			valorClienteTipo = new JLabel();
 			identificacionCliente = new JSuggestField (padre, clientes);
+			metodoDePago = new JSuggestField (padre, metodosDePago);
 			
 			identificacionCliente.setPreferredSize(new Dimension (350,50));
 			identificacionCliente.setPreferredSuggestSize(new Dimension (350,50));
 			identificacionCliente.setHint("Seleccione un cliente");
+			/*
 			identificacionCliente.addFocusListener(new FocusListener() {
 
 	            @Override
@@ -132,6 +138,10 @@ public class LVFacturacion extends LVPanel {
 	                identificacionCliente.setText("");
 	            }
 	        });
+			*/
+			metodoDePago.setPreferredSize(new Dimension (350,50));
+			metodoDePago.setPreferredSuggestSize(new Dimension (350,50));
+			metodoDePago.setHint("Seleccione un método de pago");
 			
 			//Layout
 			GroupLayout panelClienteLayout = new GroupLayout(panelCliente);
@@ -144,12 +154,14 @@ public class LVFacturacion extends LVPanel {
 				panelClienteLayout.createSequentialGroup()
 					.addGroup(panelClienteLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 					.addComponent(etiquetaCliente)
+					.addComponent(etiquetaMetodoDePago)
 					.addComponent(etiquetaClienteTipo)
 					.addComponent(etiquetaClienteId)
 					.addComponent(etiquetaClienteNombre)
 				)
 					.addGroup(panelClienteLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 					.addComponent(identificacionCliente)
+					.addComponent(metodoDePago)
 					.addComponent(valorClienteTipo)
 					.addComponent(valorClienteId)
 					.addComponent(valorClienteNombre)
@@ -161,6 +173,10 @@ public class LVFacturacion extends LVPanel {
 				.addGroup(panelClienteLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 					.addComponent(etiquetaCliente)
 					.addComponent(identificacionCliente)
+				)
+				.addGroup(panelClienteLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+					.addComponent(etiquetaMetodoDePago)
+					.addComponent(metodoDePago)
 				)
 				.addGroup(panelClienteLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 					.addComponent(etiquetaClienteTipo)
@@ -309,4 +325,19 @@ public class LVFacturacion extends LVPanel {
 	    	}
 	    	return t;
 	    }
+	    
+	    /*
+		  * Devuelve un Vector<String> con la informacion de los metodos de pago 
+		  */
+		    private Vector<String> getListaDeMetodosDePago(){
+		    	B_MetodoDePago bean= new B_MetodoDePago();
+		        List<MetodoDePago> lista = bean.selectAll();
+		        Vector<String> vector = new Vector<String>();
+		        
+			    for(int i=0;i<lista.size();i++){
+			    	vector.add(lista.get(i).getMetodo());
+				}
+			    
+			    return vector;
+		    }
 }

@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the estudiante database table.
+ * The persistent class for the facturas_entrada database table.
  * 
  */
 @Entity
