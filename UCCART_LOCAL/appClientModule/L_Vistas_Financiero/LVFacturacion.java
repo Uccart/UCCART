@@ -28,6 +28,7 @@ public class LVFacturacion extends LVPanel {
 	
 	private JPanel panelCliente;
 	private JSuggestField identificacionCliente;
+	private JSuggestField metodo_de_pago;
 	private JLabel valorClienteId;
 	private JLabel valorClienteNombre;
 	private JLabel valorClienteTipo;

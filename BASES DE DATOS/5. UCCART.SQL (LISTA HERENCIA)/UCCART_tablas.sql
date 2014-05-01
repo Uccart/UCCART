@@ -1,6 +1,17 @@
--- -----------------------------------------------------
--- Table `personas`
--- -----------------------------------------------------
+-------------------------------------------------------
+-- Table metodos_de_pago
+-------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS metodos_de_pago (
+  mdp_id VARCHAR(45) NOT NULL,
+  mdp_metodo VARCHAR(45) NOT NULL,
+  mdp_descripcion VARCHAR(200),
+  PRIMARY KEY (mdp_id)
+  );
+
+-------------------------------------------------------
+-- Table personas
+-------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS personas (
   personas_id VARCHAR(45) NOT NULL,
