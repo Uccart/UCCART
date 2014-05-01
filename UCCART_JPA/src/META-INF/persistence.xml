@@ -19,6 +19,7 @@
 		<class>model.Usuario</class>
 		<class>model.Inventario</class>
 		<class>model.Empleado</class>
+		<class>model.FacturaEntrada</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Uccart_DB"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>

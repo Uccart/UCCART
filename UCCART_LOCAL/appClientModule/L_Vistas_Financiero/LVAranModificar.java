@@ -179,7 +179,7 @@ public class LVAranModificar extends JDialog implements ActionListener {
 					
 					//barancel.setArancel(jtfid.getText(), jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()));
 				
-					if(barancel.update(jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Integer.parseInt(jtfprecio.getText()))){
+					if(barancel.update(jtfdescripcion.getText(), jcbtipo.getSelectedItem().toString(), Float.parseFloat(jtfprecio.getText()))){
 						
 						//jtfid.setText("");
 						jtfdescripcion.setText("");

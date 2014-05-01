@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS facturas_entrada (
   facturas_entrada_direccion VARCHAR(45) NOT NULL,
   facturas_entrada_telefono VARCHAR(45),
   facturas_entrada_metodo_de_pago VARCHAR(45) NOT NULL, 
-  facturas_entrada_total integer,
+  facturas_entrada_total decimal(20,3) NOT NULL,
   PRIMARY KEY (facturas_entrada_id),
   FOREIGN KEY (facturas_entrada_id_empleado) REFERENCES empleados(personas_id),
   FOREIGN KEY (facturas_entrada_id_cliente) REFERENCES clientes (personas_id)
