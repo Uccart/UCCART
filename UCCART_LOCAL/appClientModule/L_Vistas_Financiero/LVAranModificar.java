@@ -52,6 +52,7 @@ public class LVAranModificar extends JDialog implements ActionListener {
 		
 		jtfdescripcion = new JTextField(20);
 		jtfdescripcion.setFont(fo);
+		jtfdescripcion.setText(barancel.getArancel().getArancelDescripcion());
 		
 		jtfprecio = new JTextField(20);
 		jtfprecio.setFont(fo);
@@ -67,13 +68,20 @@ public class LVAranModificar extends JDialog implements ActionListener {
             }
         });
 		
+		
+		
+		jtfprecio.setText(String.valueOf(barancel.getArancel().getArancelPrecio()));
+		
+		
 		jcbtipo = new JComboBox();
 		jcbtipo.setModel(new DefaultComboBoxModel(new String[] { "ENTRADA", "SALIDA" }));
+		jcbtipo.setSelectedItem(barancel.getArancel().getArancelTipo());
 		
 		jbModificar = new JButton("Modificar");
 		jbModificar.addActionListener(this);
 		jbModificar.setFont(fo);
 		jbModificar.setToolTipText("Modificar Arancel Seleccionado!");
+		
 		
 		javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(panel2);
 		panel2.setLayout(jPanel7Layout);

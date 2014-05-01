@@ -46,7 +46,7 @@ INSERT INTO usuario (us_id, us_pw, us_nombre, us_tipo) VALUES
 
 
 INSERT INTO curso (curso_id, curso_aula, curso_sede, curso_codmateria, curso_codprofesor, curso_cantmax, curso_cantmin, curso_cantactual, curso_periodo, curso_inicio, curso_final, curso_dia1, curso_dia1inicio, curso_dia1final, curso_dia2, curso_dia2inicio, curso_dia2final) VALUES
-('1', '1', 'San Jose', '1', '12345', 15, 10, 12, 'IC- 2014', '2014-02-03', '2014-03-03' , 1, '08:00', '10:00', 1, '08:00', '10:00');
+('1', '1', 'San Jose', '1', '12345', 15, 10, 0, 'IC- 2014', '2014-02-03', '2014-03-03' , 1, '08:00', '10:00', 1, '08:00', '10:00');
 
 INSERT INTO nota (nota_codestudiante, nota_codcurso, nota_promedio, nota_condicion) VALUES
 ('114100510', '1', 100, 0);

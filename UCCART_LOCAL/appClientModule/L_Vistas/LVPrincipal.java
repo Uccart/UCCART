@@ -321,6 +321,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 			lva.setVisible(false);
 			lvt.setVisible(false);
 			lvre.setVisible(false);
+			contador.setVisible(false);
 			jpencabezado.setVisible(false);
 			logging.setVisible(true);
 			logging.getUsuario().requestFocus();
@@ -329,6 +330,25 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 		} 
 		
 	}
+	
+	/*
+	log = new JFrame();
+	fo = new Font("Helvetica", 1, 13);
+	lvr = new LVRegistro(this);
+	lvp = new LVProfTabs(this);
+	contador = new LVContador(this);
+	cajero = new LVCajero(this);
+	lva = new LVAcademico(this);
+	lvt = new LVTabs(this);
+	lvre = new LVRector(this);
+	ccolor = new Color(42, 42, 42);
+	logging = new LVLogging();
+	lvfondo = new LVFondo();
+	
+	*/
+	
+	
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub

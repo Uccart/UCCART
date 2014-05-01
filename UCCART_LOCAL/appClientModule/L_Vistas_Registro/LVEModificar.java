@@ -208,10 +208,12 @@ public class LVEModificar extends JDialog implements ActionListener {
         jcbstatus.setFont(fo);
         jcbcarreras = new JComboBox();
         jcbcarreras.setFont(fo);
+        
+        
         jcbgenero = new JComboBox();
-        jcbgenero.setFont(fo);
-        //jcbgenero.setSelectedIndex(Integer.parseInt(bestudiante.getEstudiante().getEstGenero().toString()));
+        //jcbgenero.setFont(fo);
         jcbgenero.setSelectedItem(bestudiante.getEstudiante().getEstGenero());
+        
         
         //jcbnacimiento = new JCalendarButton();
         /*jcbnacimiento.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -263,7 +265,7 @@ public class LVEModificar extends JDialog implements ActionListener {
 
         jcbgenero.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
         jcbgenero.setToolTipText("Género del estudiante");
-       // jcbgenero.getSelectedIndex();
+       
        
 
         jPanel2.setBorder(BorderFactory.createTitledBorder("Título"));

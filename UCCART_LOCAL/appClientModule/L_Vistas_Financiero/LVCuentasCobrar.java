@@ -15,25 +15,27 @@ import beans.B_Estudiante;
 import L_Vistas.LVPanel;
 import L_Vistas_Academico.LVMIngresar;
 import L_Vistas_Academico.LVPModificar;
+import L_Vistas_Registro.LVMatriculaC;
 
 @SuppressWarnings("all")
 public class LVCuentasCobrar extends LVPanel implements ActionListener, ItemListener {
 	private DefaultTableModel estudiantes;
 	private B_Estudiante bestudiante;
 	private B_Carrera bcarrera;
-	private JButton  jbrefreEs;
+	private JButton  jbrefreEs, jbFacturas;
 	private JTable tableEst;
 	private final JTextField filterTextEst;
 	private JComboBox jcbalfab, jcbcarreras;
 	private int selectal, selectcarr;
 	private boolean bandera;
 	private List<Carrera> listcarr;
+	private LVConsultarFacturasCobrar lvconsultarfacturas;
 	private DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
 	public LVCuentasCobrar(JFrame padre){
 		super();
-		
 		estudiantes = new DefaultTableModel();
 		bestudiante = new B_Estudiante();
+		lvconsultarfacturas =new  LVConsultarFacturasCobrar(padre,bestudiante.getEstudiante());
 		bcarrera = new B_Carrera();
 		tableEst = new JTable(estudiantes){public boolean isCellEditable(int rowIndex, int colIndex) {
 			return false;}};
@@ -129,11 +131,42 @@ public class LVCuentasCobrar extends LVPanel implements ActionListener, ItemList
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(panel2);
 		this.add(new JScrollPane(tableEst));
+	
+	
+		jbFacturas =  new JButton("Consultar Est");
+		jbFacturas.addActionListener(this);
+		jbFacturas.setFont(fo);
+		jbFacturas.setToolTipText("Consultar Estudiante!");
+		jbFacturas.setAlignmentX(CENTER_ALIGNMENT);
+		panel2.add(jbFacturas, BorderLayout.CENTER);
+	
+	
+	
 	}
 	
 	
+	
+	
+	
+	
+	
+	
 	@Override
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == jbFacturas) {
+			if(tableEst.getSelectedRowCount() == 1){
+			bestudiante.find((String)tableEst.getValueAt(tableEst.getSelectedRow(), 0));
+			lvconsultarfacturas = new LVConsultarFacturasCobrar((JFrame)lvconsultarfacturas.getParent(), bestudiante.getEstudiante());
+			lvconsultarfacturas.init(bandera);
+			lvconsultarfacturas.setLocationRelativeTo(lvconsultarfacturas.getParent());
+			if(lvconsultarfacturas.getEstado())
+				lvconsultarfacturas.setVisible(true);
+		}else{
+			JOptionPane.showMessageDialog(null, "Debe seleccionar 1 estudiante", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
