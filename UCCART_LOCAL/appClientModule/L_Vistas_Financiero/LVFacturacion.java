@@ -27,20 +27,20 @@ import beans.B_Profesor;
 
 @SuppressWarnings("all")
 public class LVFacturacion extends LVPanel {
-	
+
 	private JPanel panelCliente;
 	private JSuggestField identificacionCliente;
 	private JSuggestField metodoDePago;
 	private JLabel valorClienteId;
 	private JLabel valorClienteNombre;
 	private JLabel valorClienteTipo;
-	
+
 	private JPanel panelCuentasPorCobrar;
 	private JTable tablaCuentasPorCobrar;
-	
+
 	private JPanel panelDetalle;
 	private JTable tablaDetalle;
-	
+
 	public LVFacturacion(JFrame padre){
 		super();
 		panelCliente = getPanelCliente(padre);
@@ -49,7 +49,7 @@ public class LVFacturacion extends LVPanel {
 	}
 
 	public void init(boolean bandera){
-		
+
 		//Layout
 		GroupLayout groupLayout = new GroupLayout(this);
 		this.setLayout(groupLayout);
@@ -83,13 +83,13 @@ public class LVFacturacion extends LVPanel {
 		//this.add(panelCuentasPorCobrar, BorderLayout.CENTER);
 		//this.add(panelDetalle, BorderLayout.CENTER);
 	}
-	
+
 	public void reducir(){
 
 	}
-	
+
 	// :::::::::::::::: Metodos privados ::::::::::::::::
-	
+
 	/*
 	 * Construye y devuelve el panel del cliente
 	 */
@@ -97,22 +97,22 @@ public class LVFacturacion extends LVPanel {
 	    	JPanel panelCliente = new JPanel();
 			panelCliente.setFont(fo.deriveFont((float)16));
 			panelCliente.setBorder(BorderFactory.createTitledBorder("Información del Cliente"));
-			
+
 			Vector<String> clientes = getListaDeEstudiantes();
 			Vector<String> metodosDePago = getListaDeMetodosDePago();
-	    	
+
 			JLabel etiquetaCliente = new JLabel("Cliente:");
 			JLabel etiquetaMetodoDePago = new JLabel("Método de Pago:");
 			JLabel etiquetaClienteId = new JLabel("Identificación:");
 			JLabel etiquetaClienteNombre = new JLabel("Nombre:");
 			JLabel etiquetaClienteTipo = new JLabel("Tipo De Cliente:");
-			
+
 			valorClienteId = new JLabel();
 			valorClienteNombre = new JLabel();
 			valorClienteTipo = new JLabel();
 			identificacionCliente = new JSuggestField (padre, clientes);
 			metodoDePago = new JSuggestField (padre, metodosDePago);
-			
+
 			identificacionCliente.setPreferredSize(new Dimension (350,50));
 			identificacionCliente.setPreferredSuggestSize(new Dimension (350,50));
 			identificacionCliente.setHint("Seleccione un cliente");
@@ -142,7 +142,7 @@ public class LVFacturacion extends LVPanel {
 			metodoDePago.setPreferredSize(new Dimension (350,50));
 			metodoDePago.setPreferredSuggestSize(new Dimension (350,50));
 			metodoDePago.setHint("Seleccione un método de pago");
-			
+
 			//Layout
 			GroupLayout panelClienteLayout = new GroupLayout(panelCliente);
 			panelCliente.setLayout(panelClienteLayout);
@@ -202,16 +202,16 @@ public class LVFacturacion extends LVPanel {
 		 JPanel panelCuenta = new JPanel();
 		 panelCuenta.setFont(fo.deriveFont((float)16));
 		 panelCuenta.setBorder(BorderFactory.createTitledBorder("Cuentas por Cobrar"));
-		 
+
 		 JLabel contenido = new JLabel("contenido");
-		 
+
 		 String[] colHeadings = {"factura","monto", "vencimiento"};
 		 int numRows = 5 ;
 		 DefaultTableModel model = new DefaultTableModel(numRows, colHeadings.length) ;
 		 model.setColumnIdentifiers(colHeadings);
 		 tablaCuentasPorCobrar = new JTable(model);
-		 				
-		 
+
+
 		 //Layout
 		 GroupLayout panelCuentaLayout = new GroupLayout(panelCuenta);
 		 panelCuenta.setLayout(panelCuentaLayout);
@@ -239,7 +239,7 @@ public class LVFacturacion extends LVPanel {
 
 		 return panelCuenta;
 	 }
-	 
+
 	 /*
 	  * Construye y devuelve el panel de las cuentas por pagar
 	  */
@@ -247,13 +247,13 @@ public class LVFacturacion extends LVPanel {
 		 JPanel panel = new JPanel();
 		 panel.setFont(fo.deriveFont((float)16));
 		 panel.setBorder(BorderFactory.createTitledBorder("Detalle de la Factura"));
-		 
+
 		 String[] colHeadings = {"Codigo","Descripción", "Cantidad", "Total"};
 		 int numRows = 10 ;
 		 DefaultTableModel model = new DefaultTableModel(numRows, colHeadings.length) ;
 		 model.setColumnIdentifiers(colHeadings);
 		 tablaDetalle = new JTable(model);
-		 				
+
 		 panel.add(tablaDetalle);
 		 return panel;
 	 }
@@ -267,14 +267,14 @@ public class LVFacturacion extends LVPanel {
 	    	B_Estudiante bean= new B_Estudiante();
 	        List<Estudiante> lista = bean.selectAll();
 	        Vector<String> vector = new Vector<String>();
-	        
+
 		    for(int i=0;i<lista.size();i++){
 		    	vector.add("E | " + lista.get(i).getEstId() + "\t | " + lista.get(i).getEstNombre() + " " + lista.get(i).getEstApellido1());
 			}
-		    
+
 		    return vector;
 	    }
-	    
+
 		 /*
 		  * Devuelve un Vector<String> con la informacion de los profesores 
 		  * con el formato P | identificacion | nombre
@@ -283,16 +283,16 @@ public class LVFacturacion extends LVPanel {
 	    	B_Profesor bean= new B_Profesor();
 	        List<Profesor> lista = bean.selectAll();
 	        Vector<String> vector = new Vector<String>();
-	        
+
 		    for(int i=0;i<lista.size();i++){
 		    	vector.add("P | " + lista.get(i).getProfId() + "\t | " + lista.get(i).getProfNombre() + " " + lista.get(i).getProfApellido1());
 			}
-		    
+
 		    return vector;
 	    }
-	    
+
 	    private Component getStyling(){
-	    	
+
 	    	return (new DefaultListCellRenderer() {
 	    	    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 	    	    	String valueString = value.toString();
@@ -302,7 +302,7 @@ public class LVFacturacion extends LVPanel {
 	    	    }
 	    	});
 	    }
-	    
+
 	    /*
 	     * Devuleve el nombre del tipo de cliente
 	     * Ejemplo: recibe E devuleve Empleado, recibe P devuelve Profesor
@@ -325,7 +325,7 @@ public class LVFacturacion extends LVPanel {
 	    	}
 	    	return t;
 	    }
-	    
+
 	    /*
 		  * Devuelve un Vector<String> con la informacion de los metodos de pago 
 		  */
@@ -333,11 +333,11 @@ public class LVFacturacion extends LVPanel {
 		    	B_MetodoDePago bean= new B_MetodoDePago();
 		        List<MetodoDePago> lista = bean.selectAll();
 		        Vector<String> vector = new Vector<String>();
-		        
+
 			    for(int i=0;i<lista.size();i++){
 			    	vector.add(lista.get(i).getMetodo());
 				}
-			    
+
 			    return vector;
 		    }
 }
