@@ -19,12 +19,9 @@
 		<class>model.Usuario</class>
 		<class>model.Inventario</class>
 		<class>model.Empleado</class>
-<<<<<<< HEAD
 		<class>model.FacturaEntrada</class>
 		<class>model.DetalleFacturaEntrada</class>
-=======
-		<class>model.MetodoDePago</class>
->>>>>>> FETCH_HEAD
+
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Uccart_DB"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
