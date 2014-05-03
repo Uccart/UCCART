@@ -22,6 +22,7 @@
 		<class>model.FacturaEntrada</class>
 		<class>model.DetalleFacturaEntrada</class>
 		<class>model.MetodoDePago</class>
+		<class>model.ReciboEntrada</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Uccart_DB"/>
