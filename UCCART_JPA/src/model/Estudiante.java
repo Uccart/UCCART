@@ -83,6 +83,7 @@ public class Estudiante implements Serializable {
 	//bi-directional many-to-one association to Padron
 	@OneToMany(mappedBy="estudiante", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private List<Padron> padrons;
+	
 
 	public Estudiante() {
 	}

@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="DetalleFacturaEntrada")
+@Table(name="detalles_de_factura_entrada")
 public class DetalleFacturaEntrada implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

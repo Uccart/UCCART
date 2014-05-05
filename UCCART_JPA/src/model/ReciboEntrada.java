@@ -47,7 +47,7 @@ public class ReciboEntrada implements Serializable{
 	@Column(name="reciboEntrada_saldo_actual")
 	private Float saldoActual;
 	
-	
+
 	public String getIdReciboEntrada() {
 		return this.idReciboEntrada;
 	}
@@ -78,6 +78,10 @@ public class ReciboEntrada implements Serializable{
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 	
 	public Date getFecha() {

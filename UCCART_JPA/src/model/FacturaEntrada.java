@@ -23,8 +23,8 @@ public class FacturaEntrada implements Serializable {
 	@Column(name="facturas_entrada_id_empleado")
 	private String facturas_entrada_id_empleado;
 
-	@Column(name="facturas_entrada_id_cliente")
-	private String facturas_entrada_id_cliente;
+	@Column(name="facturas_entrada_id_estudiante")
+	private String facturas_entrada_id_estudiante;
 
 	@Column(name="facturas_entrada_nombre")
 	private String facturas_entrada_nombre;
@@ -41,8 +41,19 @@ public class FacturaEntrada implements Serializable {
 	@Column(name="facturas_entrada_total")
 	private Float facturas_entrada_total;
 
+/*
 
-
+	//bi-directional one-to-one association to Estudiante
+	@OneToOne
+	@JoinColumn(name="facturas_entrada_id_estudiante", referencedColumnName="personas_id", insertable = true, updatable = false)
+	private Estudiante estudiante;
+	
+	@OneToOne
+	@JoinColumn(name="facturas_entrada_id_empleado", referencedColumnName="personas_id", insertable = true, updatable = false)
+	private Empleado empleado;
+	*/
+	
+	
 	public FacturaEntrada() {
 	}
 
@@ -62,12 +73,12 @@ public class FacturaEntrada implements Serializable {
 		this.facturas_entrada_id_empleado = facturas_entrada_id_empleado;
 	}
 	
-	public String getFacturas_entrada_id_cliente() {
-		return this.facturas_entrada_id_cliente;
+	public String getFacturas_entrada_id_estudiante() {
+		return this.facturas_entrada_id_estudiante;
 	}
 
-	public void setFacturas_entrada_id_cliente(String facturas_entrada_id_cliente) {
-		this.facturas_entrada_id_cliente = facturas_entrada_id_cliente;
+	public void setFacturas_entrada_id_estudiante(String facturas_entrada_id_estudiante) {
+		this.facturas_entrada_id_estudiante = facturas_entrada_id_estudiante;
 	}
 	
 	public String getFacturas_entrada_nombre() {
@@ -109,7 +120,22 @@ public class FacturaEntrada implements Serializable {
 	public void setfacturas_entrada_total(Float facturas_entrada_total) {
 		this.facturas_entrada_total = facturas_entrada_total;
 	}
+/*	
+	public Estudiante getEstudiante() {
+		return this.estudiante;
+	}
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
+	}
 	
+	public Empleado getEmpleado() {
+		return this.empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}*/
 	
 
 }

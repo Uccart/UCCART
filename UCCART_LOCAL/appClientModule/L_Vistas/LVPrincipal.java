@@ -30,7 +30,6 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 	private LVRector lvre;
 	private LVContador contador;
 	private LVCajero cajero;
-	//private JComboBox<String> tipo;
 	private JFrame log;
 	private JPanel jpencabezado;
 	private LVLogging logging;
@@ -312,7 +311,9 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
+	
 		if(e.getSource() == sesion || e.getSource() == jmisesion && jmisesion.isEnabled()){
+			
 			sesion.setForeground(ccolor);
 			jmisesion.setEnabled(false);
 			lvr.setVisible(false);
@@ -321,6 +322,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 			lva.setVisible(false);
 			lvt.setVisible(false);
 			lvre.setVisible(false);
+			cajero.setVisible(false);
 			contador.setVisible(false);
 			jpencabezado.setVisible(false);
 			logging.setVisible(true);
