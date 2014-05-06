@@ -28,7 +28,10 @@ public class Arancel implements Serializable {
 	@Column(name="aranceles_tipo")
 	private String arancelTipo ;
 
-
+	@OneToOne(mappedBy="arancel")
+	private DetalleFacturaEntrada DetalleFacturaEntrada;
+	
+	
 
 	public Arancel() {
 	}
@@ -64,6 +67,8 @@ public class Arancel implements Serializable {
 	public void setArancelTipo(String arancelTipo) {
 		this.arancelTipo = arancelTipo;
 	}
+
+	
 
 
 }

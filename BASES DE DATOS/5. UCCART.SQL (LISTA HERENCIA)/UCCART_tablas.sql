@@ -186,22 +186,13 @@ CREATE TABLE IF NOT EXISTS empleados (
 
 
 -- -----------------------------------------------------
--- Table `clientes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS clientes ( 
-  clientes_tipo VARCHAR(45) NOT NULL,
-  PRIMARY KEY (personas_id)
-) INHERITS (personas);
-
-
--- -----------------------------------------------------
 -- Table `facturas_entrada`
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS facturas_entrada (
   facturas_entrada_id VARCHAR(45) NOT NULL,
   facturas_entrada_id_empleado VARCHAR(45) NOT NULL,
-  facturas_entrada_id_cliente VARCHAR(45) NOT NULL,
+  facturas_entrada_id_estudiante VARCHAR(45) NOT NULL,
   facturas_entrada_nombre VARCHAR(45) NOT NULL,
   facturas_entrada_direccion VARCHAR(45) NOT NULL,
   facturas_entrada_telefono VARCHAR(45),
@@ -209,7 +200,7 @@ CREATE TABLE IF NOT EXISTS facturas_entrada (
   facturas_entrada_total decimal(20,3) NOT NULL,
   PRIMARY KEY (facturas_entrada_id),
   FOREIGN KEY (facturas_entrada_id_empleado) REFERENCES empleados(personas_id),
-  FOREIGN KEY (facturas_entrada_id_cliente) REFERENCES clientes (personas_id)
+  FOREIGN KEY (facturas_entrada_id_estudiante) REFERENCES estudiante (personas_id)
 );
 
 -- -----------------------------------------------------
@@ -272,7 +263,7 @@ CREATE TABLE IF NOT EXISTS recibo_entrada (
 CREATE TABLE IF NOT EXISTS facturas_salida (
   facturas_salida_id VARCHAR(45) NOT NULL,
   facturas_salida_id_empleado VARCHAR(45) NOT NULL,
-  facturas_salida_id_cliente VARCHAR(45) NOT NULL,
+  facturas_salida_id_profesor VARCHAR(45) NOT NULL,
   facturas_salida_nombre VARCHAR(45) NOT NULL,
   facturas_salida_direccion VARCHAR(45) NOT NULL,
   facturas_salida_telefono VARCHAR(45),
@@ -280,7 +271,7 @@ CREATE TABLE IF NOT EXISTS facturas_salida (
   facturas_salida_total integer,
   PRIMARY KEY (facturas_salida_id),
   FOREIGN KEY (facturas_salida_id_empleado) REFERENCES empleados(personas_id),
-  FOREIGN KEY (facturas_salida_id_cliente) REFERENCES clientes (personas_id)
+  FOREIGN KEY (facturas_salida_id_profesor) REFERENCES profesor (personas_id)
 );
 
 -- -----------------------------------------------------
