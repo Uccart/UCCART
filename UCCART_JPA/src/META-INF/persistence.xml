@@ -23,6 +23,7 @@
 		<class>model.DetalleFacturaEntrada</class>
 		<class>model.MetodoDePago</class>
 		<class>model.ReciboEntrada</class>
+		<class>model.CuentasPorCobrar</class>
 
 		<properties>
 		

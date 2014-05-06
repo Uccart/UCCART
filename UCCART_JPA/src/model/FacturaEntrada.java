@@ -41,17 +41,26 @@ public class FacturaEntrada implements Serializable {
 	@Column(name="facturas_entrada_total")
 	private Float facturas_entrada_total;
 
-/*
+
 
 	//bi-directional one-to-one association to Estudiante
 	@OneToOne
-	@JoinColumn(name="facturas_entrada_id_estudiante", referencedColumnName="personas_id", insertable = true, updatable = false)
+	@JoinColumn(name="facturas_entrada_id_estudiante", referencedColumnName="personas_id", insertable = false, updatable = false)
 	private Estudiante estudiante;
 	
 	@OneToOne
-	@JoinColumn(name="facturas_entrada_id_empleado", referencedColumnName="personas_id", insertable = true, updatable = false)
-	private Empleado empleado;
-	*/
+	@JoinColumn(name="facturas_entrada_id_empleado", referencedColumnName="personas_id", insertable = false, updatable = false)
+	private Empleado empleados;
+
+	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
+	private DetalleFacturaEntrada detalleFacturaEntrada;
+	
+	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
+	private ReciboEntrada reciboEntrada;
+	
+	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
+	private CuentasPorCobrar cuentasPorCobrar;
+	
 	
 	
 	public FacturaEntrada() {
@@ -120,7 +129,7 @@ public class FacturaEntrada implements Serializable {
 	public void setfacturas_entrada_total(Float facturas_entrada_total) {
 		this.facturas_entrada_total = facturas_entrada_total;
 	}
-/*	
+	
 	public Estudiante getEstudiante() {
 		return this.estudiante;
 	}
@@ -128,14 +137,37 @@ public class FacturaEntrada implements Serializable {
 	public void setEstudiante(Estudiante estudiante) {
 		this.estudiante = estudiante;
 	}
-	
+
 	public Empleado getEmpleado() {
-		return this.empleado;
+		return this.empleados;
 	}
 
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
-	}*/
+	public void setEmpleado(Empleado empleados) {
+		this.empleados = empleados;
+	}
 	
+	public DetalleFacturaEntrada getDetalleFacturaEntrada() {
+		return this.detalleFacturaEntrada;
+	}
+
+	public void setDetalleFacturaEntrada(DetalleFacturaEntrada detalleFacturaEntrada) {
+		this.detalleFacturaEntrada = detalleFacturaEntrada;
+	}
+	
+	public ReciboEntrada getReciboEntrada() {
+		return this.reciboEntrada;
+	}
+
+	public void setReciboEntrada(ReciboEntrada reciboEntrada) {
+		this.reciboEntrada = reciboEntrada;
+	}
+	
+	public CuentasPorCobrar getCuentasPorCobrar() {
+		return this.cuentasPorCobrar;
+	}
+
+	public void setCuentasPorCobrar(CuentasPorCobrar cuentasPorCobrar) {
+		this.cuentasPorCobrar = cuentasPorCobrar;
+	}
 
 }

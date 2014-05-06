@@ -28,6 +28,7 @@ import model.Estudiante;
 import model.Nota;
 import beans.B_Estudiante;
 import L_Vistas.FileChooser;
+import model.FacturaEntrada;
 
 public class LVConsultarFacturasCobrar extends JDialog implements MouseListener, ActionListener, ItemListener{
 	    private JLabel jLabel1;
@@ -36,13 +37,13 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 	    private JPanel jPanel2;
 	    private JScrollPane jScrollPane1;
 	    private JTable jTable1;
-	    private JButton jbCerrar;
-	    private JButton jbHistorial;
+	   // private JButton jbCerrar;
+	   // private JButton jbHistorial;
 	    private JTextField jtfIDE;
 	    private JTextField jtfNombreE;
 	    private B_Estudiante bestudiante;
 	    private Estudiante estudiante;
-	    private DefaultTableModel cursos; 
+	    private DefaultTableModel factura; 
 	    private int columnValue = -1;   
 		private int columnNewValue = -1; 
 		protected Font fo;
@@ -56,7 +57,7 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 	    	estado = true;
 	    	fo = new Font("Helvetica", 1, 13);
 			ccolor = Color.BLACK;
-	    	cursos = new DefaultTableModel();
+	    	factura = new DefaultTableModel();
 	    	jLabel1 = new javax.swing.JLabel();
 	        jPanel2 = new javax.swing.JPanel();
 	        jLabel2 = new javax.swing.JLabel();
@@ -69,8 +70,8 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 	    
 	    public void init(boolean ban){
 	    	bandera = ban;
-	    	cursos = new DefaultTableModel();
-	    	cursos = new DefaultTableModel();
+	    	factura = new DefaultTableModel();
+	    	//cursos = new DefaultTableModel();
 	    	jLabel1 = new javax.swing.JLabel();
 	        jPanel2 = new javax.swing.JPanel();
 	        jLabel2 = new javax.swing.JLabel();
@@ -84,14 +85,14 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 	        jLabel3.setFont(fo);
 	        jtfIDE.setFont(fo);
 	        jScrollPane1.setFont(fo);
-	        jTable1 =  new JTable(cursos){public boolean isCellEditable(int rowIndex, int colIndex) {
+	        jTable1 =  new JTable(factura){public boolean isCellEditable(int rowIndex, int colIndex) {
 	        	return false;}};
 	        	if(bestudiante.find(estudiante.getEstId())){
 	                 jtfNombreE.setText(estudiante.getEstNombre()+" "+ estudiante.getEstApellido1()+" "+estudiante.getEstApellido2()); 
 	                 this.jtfIDE.setText(estudiante.getEstId());
 	        	}
-	        	jbHistorial = new javax.swing.JButton();
-	        jbCerrar = new javax.swing.JButton();
+	        //	jbHistorial = new javax.swing.JButton();
+	       // jbCerrar = new javax.swing.JButton();
 
 	        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Facturas del Estudiante"));
 
@@ -100,25 +101,43 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 	        jLabel3.setText("ID.:");
 
 	        jtfIDE.setEditable(false);
-            
+          /*  
 	        List<Nota> listNotas = bestudiante.getNotas(estudiante.getEstId()); 
-	    	cursos.addColumn("Código");
-			cursos.addColumn("Nombre");
-			cursos.addColumn("Aula");
+	    	factura.addColumn("Código");
+			factura.addColumn("Nombre");
+			factura.addColumn("Aula");
 			for(int i=0;i<listNotas.size();i++){
 			    	
 				
 				String[] fila = {listNotas.get(i).getCurso().getCursoId(),listNotas.get(i).getCurso().getMateria().getMateriaNombre(), listNotas.get(i).getCurso().getMateria().getMateriaCreditos().toString()};
-				cursos.addRow(fila);
+				factura.addRow(fila);
 			}
+			*/
+			
+			List<FacturaEntrada> listFacturas = bestudiante.getFacturaEntrada(estudiante.getEstId());
+			factura.addColumn("N.Factura");
+			factura.addColumn("Identificacion");
+			factura.addColumn("Nombre");
+			factura.addColumn("Detalle");
+			factura.addColumn("Monto");
+			
+           for(int i=0;i<listFacturas.size();i++){
+			    	
+				String[] fila = {listFacturas.get(i).getFacturas_entrada_id(), listFacturas.get(i).getFacturas_entrada_id_estudiante(), listFacturas.get(i).getFacturas_entrada_nombre(),
+						listFacturas.get(i).getDetalleFacturaEntrada().getDescripcion() ,listFacturas.get(i).getCuentasPorCobrar().getCuentascobrar_saldo().toString()};
+				factura.addRow(fila);
+			}
+			
+			
+			
 	        jScrollPane1.setViewportView(jTable1);
 
 	        jtfNombreE.setEditable(false);
 	        jtfNombreE.addActionListener(this);
 
-	        jbHistorial.setText("Historial de Matrícula");
-	        jbHistorial.addActionListener(this);
-	        jbCerrar.setText("Cerrar");
+	        //jbHistorial.setText("Historial de Matrícula");
+	       // jbHistorial.addActionListener(this);
+	       // jbCerrar.setText("Cerrar");
 
 	        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 	        jPanel2.setLayout(jPanel2Layout);
@@ -142,9 +161,9 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 	                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
 	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                .addComponent(jbHistorial)
+	                //.addComponent(jbHistorial)
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                .addComponent(jbCerrar)
+	                //.addComponent(jbCerrar)
 	                .addContainerGap())
 	        );
 	        jPanel2Layout.setVerticalGroup(
@@ -165,8 +184,9 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 	                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                .addGap(18, 18, 18)
 	                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                    .addComponent(jbHistorial)
-	                    .addComponent(jbCerrar))
+	                    //.addComponent(jbHistorial)
+	                    //.addComponent(jbCerrar)
+	                		)
 	                .addContainerGap(14, Short.MAX_VALUE))
 	        );
 	        JPanel panel = new JPanel();
@@ -208,12 +228,7 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()== jbHistorial){
-				if(jTable1.getSelectedColumnCount() == 1){
-				FileChooser fc = new FileChooser();
-				fc.HistorialNotas(bestudiante);
-				}
-			}
+			
 		}
 
 		@Override

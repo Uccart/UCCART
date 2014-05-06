@@ -84,6 +84,11 @@ public class Estudiante implements Serializable {
 	@OneToMany(mappedBy="estudiante", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private List<Padron> padrons;
 	
+	
+	//bi-directional many-to-one association to FacturaEntrada
+	@OneToMany(mappedBy="estudiante", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
+	private List<FacturaEntrada> facturaEntrada;
+	
 
 	public Estudiante() {
 	}
@@ -247,5 +252,21 @@ public class Estudiante implements Serializable {
 	public void setPadrons(List<Padron> padrons) {
 		this.padrons = padrons;
 	}
+	
+	
+	//////////Factura Entrada///////
+	
+	public List<FacturaEntrada> getFacturaEntrada() {
+		return this.facturaEntrada;
+	}
+
+	public void setFacturaEntrada(List<FacturaEntrada> facturaEntrada) {
+		this.facturaEntrada = facturaEntrada;
+	}
+	
+	
+	
+	
+	
 
 }
