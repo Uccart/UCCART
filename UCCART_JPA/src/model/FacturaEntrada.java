@@ -23,8 +23,8 @@ public class FacturaEntrada implements Serializable {
 	@Column(name="facturas_entrada_id_empleado")
 	private String facturas_entrada_id_empleado;
 
-	@Column(name="facturas_entrada_id_estudiante")
-	private String facturas_entrada_id_estudiante;
+	@Column(name="facturas_entrada_id_cliente")
+	private String facturas_entrada_id_cliente;
 
 	@Column(name="facturas_entrada_nombre")
 	private String facturas_entrada_nombre;
@@ -43,26 +43,6 @@ public class FacturaEntrada implements Serializable {
 
 
 
-	//bi-directional one-to-one association to Estudiante
-	@OneToOne
-	@JoinColumn(name="facturas_entrada_id_estudiante", referencedColumnName="personas_id", insertable = false, updatable = false)
-	private Estudiante estudiante;
-	
-	@OneToOne
-	@JoinColumn(name="facturas_entrada_id_empleado", referencedColumnName="personas_id", insertable = false, updatable = false)
-	private Empleado empleados;
-
-	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private DetalleFacturaEntrada detalleFacturaEntrada;
-	
-	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private ReciboEntrada reciboEntrada;
-	
-	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private CuentasPorCobrar cuentasPorCobrar;
-	
-	
-	
 	public FacturaEntrada() {
 	}
 
@@ -82,12 +62,12 @@ public class FacturaEntrada implements Serializable {
 		this.facturas_entrada_id_empleado = facturas_entrada_id_empleado;
 	}
 	
-	public String getFacturas_entrada_id_estudiante() {
-		return this.facturas_entrada_id_estudiante;
+	public String getFacturas_entrada_id_cliente() {
+		return this.facturas_entrada_id_cliente;
 	}
 
-	public void setFacturas_entrada_id_estudiante(String facturas_entrada_id_estudiante) {
-		this.facturas_entrada_id_estudiante = facturas_entrada_id_estudiante;
+	public void setFacturas_entrada_id_cliente(String facturas_entrada_id_cliente) {
+		this.facturas_entrada_id_cliente = facturas_entrada_id_cliente;
 	}
 	
 	public String getFacturas_entrada_nombre() {
@@ -130,44 +110,6 @@ public class FacturaEntrada implements Serializable {
 		this.facturas_entrada_total = facturas_entrada_total;
 	}
 	
-	public Estudiante getEstudiante() {
-		return this.estudiante;
-	}
-
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
-	}
-
-	public Empleado getEmpleado() {
-		return this.empleados;
-	}
-
-	public void setEmpleado(Empleado empleados) {
-		this.empleados = empleados;
-	}
 	
-	public DetalleFacturaEntrada getDetalleFacturaEntrada() {
-		return this.detalleFacturaEntrada;
-	}
-
-	public void setDetalleFacturaEntrada(DetalleFacturaEntrada detalleFacturaEntrada) {
-		this.detalleFacturaEntrada = detalleFacturaEntrada;
-	}
-	
-	public ReciboEntrada getReciboEntrada() {
-		return this.reciboEntrada;
-	}
-
-	public void setReciboEntrada(ReciboEntrada reciboEntrada) {
-		this.reciboEntrada = reciboEntrada;
-	}
-	
-	public CuentasPorCobrar getCuentasPorCobrar() {
-		return this.cuentasPorCobrar;
-	}
-
-	public void setCuentasPorCobrar(CuentasPorCobrar cuentasPorCobrar) {
-		this.cuentasPorCobrar = cuentasPorCobrar;
-	}
 
 }

@@ -17,7 +17,6 @@ import model.Nota;
 import model.Padron;
 import model.Titulo;
 import model.Usuario;
-import model.FacturaEntrada;
 
 /**
  * Session Bean implementation class B_Estudiante
@@ -269,23 +268,5 @@ public class B_Estudiante {
 	}
 
 
-	public List<FacturaEntrada> getFacturaEntrada(String id) {
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
-		estudiante = em.find(Estudiante.class,id);
-		em.refresh(estudiante);
-		/*for(int i = 0; i < estudiante.getNotas().size(); i++){
-			em.refresh(estudiante.getNotas().get(i).getCurso());
-		}*/
-		em.getTransaction().commit();
-		em.close();
-		if(estudiante.getFacturaEntrada()==null)
-			System.out.println("nulo notas");
-		return estudiante.getFacturaEntrada();
-	}
-	
-	
-	
-	
 
 }

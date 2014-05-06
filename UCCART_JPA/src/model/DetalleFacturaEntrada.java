@@ -4,15 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.List;
-
 /**
  * The persistent class for the facturas_entrada database table.
  * 
  */
 
 @Entity
-@Table(name="detalles_de_factura_entrada")
+@Table(name="DetalleFacturaEntrada")
 public class DetalleFacturaEntrada implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -46,18 +44,6 @@ public class DetalleFacturaEntrada implements Serializable{
 	
 	@Column(name="detfac_entrada_cantidad")
 	private Integer cantidad;
-	
-	
-
-	//bi-directional one-to-one association to Estudiante
-	@OneToOne
-	@JoinColumn(name="detfac_entrada_id_factura", referencedColumnName="facturas_entrada_id", insertable = false, updatable = false)
-	private FacturaEntrada facturaEntrada;
-	
-	@OneToOne
-	@JoinColumn(name="detfac_entrada_id_arancel", referencedColumnName="aranceles_id", insertable = false, updatable = false)
-	private Arancel arancel;
-	
 	
 	
 	public String getId_detalle_factura() {
@@ -139,22 +125,5 @@ public class DetalleFacturaEntrada implements Serializable{
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	
-	public FacturaEntrada getFacturaEntrada() {
-		return this.facturaEntrada;
-	}
-
-	public void setFacturaEntrada(FacturaEntrada facturaEntrada) {
-		this.facturaEntrada = facturaEntrada;
-	}
-	
-	public Arancel getArancel() {
-		return this.arancel;
-	}
-
-	public void setArancel(Arancel arancel) {
-		this.arancel = arancel;
-	}
-	
 
 }

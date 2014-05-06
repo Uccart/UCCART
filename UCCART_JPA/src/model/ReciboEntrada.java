@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="recibo_entrada")
+@Table(name="ReciboEntrada")
 public class ReciboEntrada implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -48,12 +48,6 @@ public class ReciboEntrada implements Serializable{
 	private Float saldoActual;
 	
 	
-	
-	@OneToOne
-	@JoinColumn(name="reciboEntrada_id_factura_entrada", referencedColumnName="facturas_entrada_id", insertable = false, updatable = false)
-	private FacturaEntrada facturaEntrada;
-	
-
 	public String getIdReciboEntrada() {
 		return this.idReciboEntrada;
 	}
@@ -84,10 +78,6 @@ public class ReciboEntrada implements Serializable{
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-	
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
 	}
 	
 	public Date getFecha() {
@@ -130,12 +120,5 @@ public class ReciboEntrada implements Serializable{
 		this.saldoActual = saldoActual;
 	}
 	
-	public FacturaEntrada getFacturaEntrada() {
-		return this.facturaEntrada;
-	}
-
-	public void setFacturaEntrada(FacturaEntrada facturaEntrada) {
-		this.facturaEntrada = facturaEntrada;
-	}
 
 }

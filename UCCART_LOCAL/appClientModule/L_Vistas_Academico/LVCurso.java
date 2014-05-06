@@ -185,7 +185,7 @@ public class LVCurso extends LVPanel implements MouseListener, ActionListener, I
 			if(tableCur.getSelectedRowCount() == 1){
 				if(bcurso.find((String)tableCur.getValueAt(tableCur.getSelectedRow(), 0))){
 					if(bcurso.delete()){
-						JOptionPane.showMessageDialog(null, "Curso eliminada con Exito", "INFO", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Curso eliminada con �xito", "INFO", JOptionPane.INFORMATION_MESSAGE);
 					}else
 						JOptionPane.showMessageDialog(null, "No se pudo eliminar, refresque el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}else{
@@ -231,7 +231,6 @@ public class LVCurso extends LVPanel implements MouseListener, ActionListener, I
 				}
 			}
 		}
-		
 		this.removeAll();
 		cursos = new DefaultTableModel();
         tableCur = new JTable(cursos){public boolean isCellEditable(int rowIndex, int colIndex) {

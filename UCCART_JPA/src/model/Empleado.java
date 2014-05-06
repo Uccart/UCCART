@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 /**
  * The persistent class for the Empleado database table.
  * 
@@ -56,9 +55,6 @@ public class Empleado implements Serializable {
 	
 	@Column(name="empleados_puesto")
 	private String empleadosPuesto;
-	
-	@OneToMany(mappedBy="empleados", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private List<FacturaEntrada> facturaEntrada;
 	
 	
 	public Empleado() {
@@ -167,15 +163,6 @@ public class Empleado implements Serializable {
 
 	public void setEmpleadosPuesto(String empleadosPuesto) {
 		this.empleadosPuesto = empleadosPuesto;
-	}
-	
-	
-	public List<FacturaEntrada> getFacturaEntrada() {
-		return this.facturaEntrada;
-	}
-
-	public void setFacturaEntrada(List<FacturaEntrada> facturaEntrada) {
-		this.facturaEntrada = facturaEntrada;
 	}
 	
 
