@@ -140,7 +140,7 @@ public class LVFacturacionSalida extends LVPanel {
 
 	private JSuggestField getClienteSuggestField(JFrame padre){
 		Vector<String> clientes = getListaDeProfesores();
-		Vector<String> empleados = getListaDeEmpleados();
+		clientes.addAll(getListaDeEmpleados());
 		JSuggestField suggestField = new JSuggestField (padre, clientes);
 		//JSuggestField suggestField1 = new JSuggestField (padre, empleados);
 		suggestField.setHint("Seleccione un cliente");
@@ -170,7 +170,7 @@ public class LVFacturacionSalida extends LVPanel {
 						clienteNombreLabel.setText(profesor.getProfNombre() + " " + profesor.getProfApellido1() + " " + profesor.getProfApellido2());
 						clienteTipoLabel.setText("Profesor");
 						break;
-					case "F":
+					case "E":
 						Empleado empleado = getEmpleado(id);
 						//Estudiante estudiante = getEstudiante(id);
 						clienteIdLabel.setText(empleado.getEmpleadoId());
@@ -455,7 +455,7 @@ public class LVFacturacionSalida extends LVPanel {
 		Vector<String> vector = new Vector<String>();
 
 		for(int i=0;i<lista.size();i++){
-			vector.add("P | " + lista.get(i).getEmpleadoNombre() + "\t | " + lista.get(i).getEmpleadosApellido1() + " " + lista.get(i).getEmpleadosApellido2());
+			vector.add("E | " + lista.get(i).getEmpleadoNombre() + "\t | " + lista.get(i).getEmpleadosApellido1() + " " + lista.get(i).getEmpleadosApellido2());
 		}
 
 		return vector;
