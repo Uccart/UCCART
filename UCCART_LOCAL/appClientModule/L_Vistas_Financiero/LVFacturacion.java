@@ -14,11 +14,13 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.JTextComponent;
 
 import model.Arancel;
+import model.CuentasPorCobrar;
 import model.DetalleFacturaEntrada;
 import model.FacturaEntrada;
 import model.MetodoDePago;
 import model.Usuario;
 import beans.B_Arancel;
+import beans.B_CuentasPorCobrar;
 import beans.B_DetalleFacturaEntrada;
 import beans.B_FacturaEntrada;
 import beans.B_MetodoDePago;
@@ -546,10 +548,8 @@ public class LVFacturacion extends LVPanel {
 			
 			if (metodoDePagoComboBox.getSelectedIndex() == 0)
 				factura.setFacturas_entrada_metodo_de_pago("1"); //  Método de pago de contado
-			if (metodoDePagoComboBox.getSelectedIndex() == 1){
+			if (metodoDePagoComboBox.getSelectedIndex() == 1)
 				factura.setFacturas_entrada_metodo_de_pago("2"); //  Método de pago de credito
-				// generar las cuentas por pagar
-			}
 			
 			factura.setfacturas_entrada_total(Float.parseFloat(granTotalLabel.getText().replace("₡", "").trim()));
 			
@@ -586,6 +586,23 @@ public class LVFacturacion extends LVPanel {
 				
 			}
 			
+			if (metodoDePagoComboBox.getSelectedIndex() == 1){
+				factura.setFacturas_entrada_metodo_de_pago("2"); //  Método de pago de credito
+				int c = getConsecutivoCuentasPorCobrar();
+				for (int i = 0; i<3; i++){
+					CuentasPorCobrar cuenta = new CuentasPorCobrar();
+					cuenta.setCuentascobrar_id(String.valueOf(c++));
+					cuenta.setCuentascobrar_id_factura_entrada(factura.getFacturas_entrada_id());
+					cuenta.setCuentascobrar_saldo(Float.parseFloat(granTotalLabel.getText().replace("₡", "").trim()) / 3);
+					
+					B_CuentasPorCobrar b = new B_CuentasPorCobrar();
+					b.setCuentasPorCobrar(cuenta);
+					b.insert();
+				}
+				
+				// generar las cuentas por pagar
+			}
+			
 			
 			System.out.println("Factura insertada :");
 	
@@ -613,6 +630,18 @@ public class LVFacturacion extends LVPanel {
 		int mayor = 0;
 		for (int i = 0; i< lista.size(); i++){
 			int consecutivo = Integer.parseInt(lista.get(i).getId_detalle_factura());
+			if (consecutivo > mayor)
+				mayor = consecutivo;
+		}
+		return mayor + 1;
+	}
+	
+	private int getConsecutivoCuentasPorCobrar(){
+		B_CuentasPorCobrar bean= new B_CuentasPorCobrar();
+		List<CuentasPorCobrar> lista = bean.selectAll();
+		int mayor = 0;
+		for (int i = 0; i< lista.size(); i++){
+			int consecutivo = Integer.parseInt(lista.get(i).getCuentascobrar_id());
 			if (consecutivo > mayor)
 				mayor = consecutivo;
 		}

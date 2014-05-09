@@ -23,10 +23,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import model.CuentasPorCobrar;
 import model.Curso;
 import model.Estudiante;
 import model.Nota;
+import beans.B_CuentasPorCobrar;
 import beans.B_Estudiante;
+import beans.B_FacturaEntrada;
 import L_Vistas.FileChooser;
 import model.FacturaEntrada;
 
@@ -115,16 +118,23 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
 			*/
 			
 			List<FacturaEntrada> listFacturas = bestudiante.getFacturaEntrada(estudiante.getEstId());
-			factura.addColumn("N.Factura");
+			factura.addColumn("Cuenta por Cobrar");
+			factura.addColumn("Factura correspondiente");
 			factura.addColumn("Identificacion");
 			factura.addColumn("Nombre");
-			factura.addColumn("Detalle");
 			factura.addColumn("Monto");
 			
-           for(int i=0;i<listFacturas.size();i++){
-			    	
-				String[] fila = {listFacturas.get(i).getFacturas_entrada_id(), listFacturas.get(i).getFacturas_entrada_id_estudiante(), listFacturas.get(i).getFacturas_entrada_nombre(),
-						listFacturas.get(i).getDetalleFacturaEntrada().getDescripcion() ,listFacturas.get(i).getCuentasPorCobrar().getCuentascobrar_saldo().toString()};
+			B_CuentasPorCobrar bean= new B_CuentasPorCobrar();
+       		List<CuentasPorCobrar> lista = bean.cuentasPorEstudiante(estudiante.getEstId());
+			
+           for(int i=0;i<lista.size();i++){        	   
+				String[] fila = {
+						lista.get(i).getCuentascobrar_id(),
+						lista.get(i).getCuentascobrar_id_factura_entrada(),
+						estudiante.getEstId(),
+						estudiante.getEstNombre() + " " + estudiante.getEstApellido1(),
+						String.valueOf(lista.get(i).getCuentascobrar_saldo())};
+						
 				factura.addRow(fila);
 			}
 			
