@@ -124,7 +124,7 @@ public class LVConsultarFacturasCobrar extends JDialog implements MouseListener,
            for(int i=0;i<listFacturas.size();i++){
 			    	
 				String[] fila = {listFacturas.get(i).getFacturas_entrada_id(), listFacturas.get(i).getFacturas_entrada_id_estudiante(), listFacturas.get(i).getFacturas_entrada_nombre(),
-						listFacturas.get(i).getDetalleFacturaEntrada().getDescripcion() ,listFacturas.get(i).getCuentasPorCobrar().getCuentascobrar_saldo().toString()};
+						listFacturas.get(i).getDetalleFacturaEntrada().getDescripcion() ,listFacturas.get(i).getFacturas_entrada_total().toString()};
 				factura.addRow(fila);
 			}
 			
