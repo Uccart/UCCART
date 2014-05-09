@@ -156,5 +156,21 @@ public class DetalleFacturaEntrada implements Serializable{
 		this.arancel = arancel;
 	}
 	
+	public String toString(){
+		String detalle;
+		detalle  = "id detalle -> " + id_detalle_factura + "\n";
+		detalle += "id factura -> " + id_facturaEntrada + "\n";
+		detalle += "id arancel -> " + id_Arancel + "\n";
+		detalle += "descripcion -> " + descripcion + "\n";
+		detalle += "linea -> " + numero_linea + "\n";
+		detalle += "precio -> " + precio_unitario + "\n";
+		detalle += "descripcion del descuento -> " + descripcion_descuento + "\n";
+		detalle += "total bruto-> " + total_bruto + "\n";
+		detalle += "sub total-> " + subtotal + "\n";
+		detalle += "cantidad-> " + cantidad + "\n";
+		return detalle;
+		
+	}
+	
 
 }

@@ -2,6 +2,7 @@ package L_Vistas;
 
 import javax.swing.*;
 
+import model.Usuario;
 import L_Vistas_Academico.LVAcademico;
 import L_Vistas_Academico.LVProfTabs;
 import L_Vistas_Academico.LVProfesor;
@@ -12,6 +13,7 @@ import L_Vistas_Registro.LVRegistro;
 import L_Vistas_Usuario.LVTabs;
 import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -38,6 +40,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 	private Font fo;
 	private Color ccolor;
 	private B_Usuario usuarioBean;
+	private Usuario usuarioActual;
 	private LVFondo lvfondo;
 	private JMenuBar Jmb;
 	private JMenuItem jmisesion;
@@ -65,6 +68,11 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 		this.Ventana();
 		this.JMenuBarInit();
 	}
+	
+	public B_Usuario getUsuarioActual(){
+		return usuarioBean;
+	}
+	
 	private void logging(){
 		this.setLayout(new BorderLayout());
 		lvfondo.setLayout(new BorderLayout());
@@ -128,6 +136,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
         case 4:{
         	setTitle("CONTADOR");
         	contador = new LVContador(this);
+        	contador.setUsuarioActual(usuarioBean.getUsuario());
         	contador.init(logging.getUsuario().getText(), JLusuario);
         	lvfondo.add(contador);
 			lvre.setVisible(true);
@@ -225,6 +234,7 @@ public class LVPrincipal extends JFrame implements ActionListener, MouseListener
 	private int comfirmaUsuario(){
 		int tipo;
 		if((usuarioBean.find(this.logging.getUsuario().getText())== true) && this.logging.getContrasena().getText().equals(usuarioBean.getUsuario().getUsPw())== true){
+			usuarioActual = usuarioBean.getUsuario();
 			return tipo = usuarioBean.getUsuario().getUsTipo();
 			
 		}else{

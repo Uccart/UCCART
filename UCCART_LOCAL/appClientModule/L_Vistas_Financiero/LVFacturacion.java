@@ -14,9 +14,15 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.JTextComponent;
 
 import model.Arancel;
+import model.DetalleFacturaEntrada;
+import model.FacturaEntrada;
 import model.MetodoDePago;
+import model.Usuario;
 import beans.B_Arancel;
+import beans.B_DetalleFacturaEntrada;
+import beans.B_FacturaEntrada;
 import beans.B_MetodoDePago;
+import beans.B_Usuario;
 import L_Vistas.FileChooser;
 import L_Vistas.LVPanel;
 import L_Vistas_Academico.LVMIngresar;
@@ -42,7 +48,7 @@ public class LVFacturacion extends LVPanel {
 
 	private JPanel cuentasPorCobrarPanel;
 	private JLabel cuentasPorCobrarLabel;
-	private JTable cuentasPorCobrarTable;
+	private DefaultTableModel cuentasPorCobrarTableModel;
 
 	private JPanel arancelPanel;
 	private JSuggestField arancelSuggestField;
@@ -51,11 +57,13 @@ public class LVFacturacion extends LVPanel {
 	private JButton arancelAgregarButton;
 
 	private JPanel detallePanel;
-	private JTable detalleTable;
+	private DefaultTableModel detalleTableModel;
 	private JLabel granTotalLabel;
 
 	private JButton limpiarButton;
 	private JButton facturarButton;
+	
+	private Usuario usuarioActual;
 
 	public LVFacturacion(JFrame padre){
 		super();
@@ -80,8 +88,24 @@ public class LVFacturacion extends LVPanel {
 		detallePanel = getPanelDetalle(padre);
 
 		limpiarButton = new JButton("limpiar");
+		limpiarButton.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e){
+            	LimpiarFormulario();
+            	arancelSuggestField.setSuggestData(getListaDeAranceles());
+            	
+            }
+            });
 
 		facturarButton = new JButton("Facturar");
+		facturarButton.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e){
+            	facturar();
+            	LimpiarFormulario();
+            	
+            }
+            });
 
 	}
 
@@ -129,6 +153,14 @@ public class LVFacturacion extends LVPanel {
 				);
 
 	}
+	
+	public void setUsuarioActual(Usuario usuario){
+		usuarioActual = usuario;
+	}
+	
+	public Usuario getUsuarioActual(){
+		return usuarioActual;
+	}
 
 	public void reducir(){
 
@@ -171,11 +203,37 @@ public class LVFacturacion extends LVPanel {
 						clienteTipoLabel.setText("Sin tipo para [" + id + "]");
 						break;
 					}
+					
+					cargarCuentasPorCobrar(id);
 				}
 			}
 		});
 
 		return suggestField;
+	}
+	
+	/* 
+	 * Actualiza la vista de cuentas por cobrar con las cuentas por cobrar del estudiante cuyo id se recibe como parametro
+	 */
+	private void cargarCuentasPorCobrar(String id){
+		Estudiante e = getEstudiante(id);
+		B_Estudiante bean = new B_Estudiante();
+		List<FacturaEntrada> listFacturas = bean.getFacturaEntrada(e.getEstId());
+		
+		limpiarTableModel(cuentasPorCobrarTableModel);
+		
+		for(int i=0;i<listFacturas.size();i++){
+	    	
+			String[] fila = {listFacturas.get(i).getFacturas_entrada_id(), listFacturas.get(i).getFacturas_entrada_id_estudiante(), listFacturas.get(i).getFacturas_entrada_nombre(),
+					listFacturas.get(i).getDetalleFacturaEntrada().getDescripcion() ,listFacturas.get(i).getCuentasPorCobrar().getCuentascobrar_saldo().toString()};
+			cuentasPorCobrarTableModel.addRow(fila);
+		}
+		
+	}
+	
+	private void limpiarTableModel(DefaultTableModel tableModel){
+		while(tableModel.getRowCount() > 0)
+			tableModel.removeRow(0);
 	}
 
 
@@ -242,9 +300,14 @@ public class LVFacturacion extends LVPanel {
 
 		cuentasPorCobrarLabel = new JLabel("");
 
-		String[] encabezados = {"factura","monto", "vencimiento"};
-		DefaultTableModel model = new DefaultTableModel(encabezados, 5);
-		cuentasPorCobrarTable = new JTable(model);
+		String[] encabezados = {"N.Factura","Identificación", "Nombre", "Detalle", "Monto"};
+		cuentasPorCobrarTableModel = new DefaultTableModel(encabezados, 0);
+		JTable cuentasPorCobrarTable = new JTable(cuentasPorCobrarTableModel){
+									public boolean isCellEditable(int rowIndex, int colIndex) {
+											return false;
+											}
+									};
+		
 		JScrollPane scrollPane = new JScrollPane(cuentasPorCobrarTable);
 
 		//Layout
@@ -315,6 +378,49 @@ public class LVFacturacion extends LVPanel {
 		arancelTotalLabel.setPreferredSize(new Dimension (100,50));
 
 		arancelAgregarButton = new JButton("Agregar linea");
+		arancelAgregarButton.addActionListener(new ActionListener() {
+ 
+            public void actionPerformed(ActionEvent e){
+
+				try{
+					String[] info = arancelSuggestField.getLastChosenExistingVariable().split("\\|");
+					String id = info[0].trim(); // id del arancel
+					String precio = info[2].trim().replace("₡", "").trim(); // precio unitario del arancel
+					
+					double precioUnitario = Double.parseDouble(precio);
+					int cantidad = Integer.parseInt(arancelCantidadTextField.getText());
+					double total = precioUnitario * cantidad;
+					System.out.println(id + " " + info[1].trim() + " " + precioUnitario + " " + cantidad + " " + total);
+					String[] fila = {id, info[1].trim(), String.valueOf(precioUnitario), String.valueOf(cantidad), String.valueOf(total) };
+					
+					if (cantidad > 0 ) detalleTableModel.addRow(fila);
+					
+					double granTotal = 0;
+					for (int i = 0; i < detalleTableModel.getRowCount(); i++){
+						granTotal += Double.parseDouble(String.valueOf(detalleTableModel.getValueAt(i, detalleTableModel.getColumnCount() - 1)));
+					}
+					
+					granTotalLabel.setText("₡ " + String.valueOf(granTotal));
+					arancelSuggestField.clearLastChosenExistingVariable();
+					arancelSuggestField.setText(arancelSuggestField.getHint());
+					
+				
+					
+				}catch(NullPointerException exception){
+					System.out.println("Error!! -> " + exception + " | Seleccione un arancél");
+				}
+				catch(NumberFormatException exception){
+					System.out.println("Error!! -> " + exception + " | Digite una cantidad valida");
+				}
+				catch(Exception exception){
+					System.out.println("Error!! -> " + exception);
+					//System.out.println("Error!! [" + precio + "] no es un valor valido para el precio unitario");
+				}
+				
+				
+				System.out.println("You clicked the button");
+            }
+        }); 
 
 		//Layout
 		GroupLayout panelLayout = new GroupLayout(panel);
@@ -355,7 +461,7 @@ public class LVFacturacion extends LVPanel {
 
 	}
 
-	/*
+	/**
 	 * Construye y devuelve el panel de las lineas de detalle
 	 */
 	private JPanel getPanelDetalle(JFrame padre){
@@ -364,16 +470,13 @@ public class LVFacturacion extends LVPanel {
 		panel.setBorder(BorderFactory.createTitledBorder("Detalle de la Factura"));
 
 		String [] encabezado = {"Codigo","Descripción","Precio Unitario", "Cantidad", "Total"};
-		DefaultTableModel model = new DefaultTableModel(encabezado, 8) ;
-		detalleTable = new JTable(model);
+		detalleTableModel = new DefaultTableModel(encabezado, 0) ;
+		JTable detalleTable = new JTable(detalleTableModel);
 		JScrollPane scrollpane = new JScrollPane(detalleTable);
 
 		granTotalLabel = new JLabel("₡ 0");
-
-		//Install the custom editor on the first column
-		//TableColumn columna = tablaDetalle.getColumnModel().getColumn(0);
-		//columna.setCellEditor(new DetalleCellEditor(padre));
-		//columna.setPreferredWidth(300);
+		Font newLabelFont=new Font(granTotalLabel.getFont().getName(),granTotalLabel.getFont().getStyle(),22);
+		granTotalLabel.setFont(newLabelFont);
 
 		//Layout
 		GroupLayout panelLayout = new GroupLayout(panel);
@@ -402,9 +505,121 @@ public class LVFacturacion extends LVPanel {
 
 		return panel;
 	}
+	
+	/**
+	 * Limpia el formulario
+	 */
+	private void LimpiarFormulario(){
+    	clienteSuggestField.clearLastChosenExistingVariable();
+    	clienteSuggestField.setText(clienteSuggestField.getHint());
+    	metodoDePagoComboBox.setSelectedIndex(0);
+    	
+    	clienteIdLabel.setText("");
+    	clienteNombreLabel.setText("");
+    	clienteTipoLabel.setText("");
+    	
+    	limpiarTableModel(cuentasPorCobrarTableModel);
+    	
+    	arancelSuggestField.clearLastChosenExistingVariable();
+    	arancelSuggestField.setText(arancelSuggestField.getHint());
+    	arancelCantidadTextField.setText("Digite la cantidad");
+    	arancelTotalLabel.setText("₡ 0");
+    	
+    	limpiarTableModel(detalleTableModel);
+    	granTotalLabel.setText("₡ 0");
+	}
+	
+	private void facturar(){
+		try{
+			FacturaEntrada factura = new FacturaEntrada(); // nueva factura
+			
+			String[] info = clienteSuggestField.getLastChosenExistingVariable().split("\\|");
+			String id = info[1].trim();
+			Estudiante estudiante = getEstudiante(id);
 
+			factura.setFacturas_entrada_id(getConsecutivo());
+			factura.setFacturas_entrada_id_empleado(usuarioActual.getUsId());
+			factura.setFacturas_entrada_id_estudiante(estudiante.getEstId());
+			factura.setFacturas_entrada_nombre(estudiante.getEstNombre() + " " + estudiante.getEstApellido1() + " " + estudiante.getEstApellido2());
+			factura.setFacturas_entrada_direccion(estudiante.getEstDireccion());
+			factura.setFacturas_entrada_telefono(estudiante.getEstTelefono());
+			
+			if (metodoDePagoComboBox.getSelectedIndex() == 0)
+				factura.setFacturas_entrada_metodo_de_pago("1"); //  Método de pago de contado
+			if (metodoDePagoComboBox.getSelectedIndex() == 1){
+				factura.setFacturas_entrada_metodo_de_pago("2"); //  Método de pago de credito
+				// generar las cuentas por pagar
+			}
+			
+			factura.setfacturas_entrada_total(Float.parseFloat(granTotalLabel.getText().replace("₡", "").trim()));
+			
+			System.out.println(factura);
+			B_FacturaEntrada bean = new B_FacturaEntrada();
+			bean.setFactura(factura);
+			bean.insert();
+			
+			// insertar lineas de detalle
+			
+			B_DetalleFacturaEntrada beanDetalle= new B_DetalleFacturaEntrada();
+			List<DetalleFacturaEntrada> lista = beanDetalle.selectAll();
+			int consecutivo = getConsecutivoDetalle();
+			
+			for (int i = 0; i < detalleTableModel.getRowCount(); i++){
+				DetalleFacturaEntrada linea = new DetalleFacturaEntrada();
+				
+				linea.setId_detalle_factura(String.valueOf(consecutivo++));
+				linea.setId_facturaEntrada(factura.getFacturas_entrada_id());
+				linea.setIdArancel(String.valueOf(detalleTableModel.getValueAt(i, 0)));
+				linea.setDescripcion(String.valueOf(detalleTableModel.getValueAt(i, 1)));
+				linea.setNumeroLinea(i+1);
+				linea.setPrecioUnitario(Float.parseFloat(String.valueOf(detalleTableModel.getValueAt(i, 2)).replace("₡", "").trim()));
+				linea.setDescripcionDescuento("Sin descuento");
+				linea.setTotalBruto(Float.parseFloat(String.valueOf(detalleTableModel.getValueAt(i, 4)).replace("₡", "").trim()));
+				linea.setSubTotal(Float.parseFloat(String.valueOf(detalleTableModel.getValueAt(i, 4)).replace("₡", "").trim()));
+				linea.setCantidad(Integer.parseInt(String.valueOf(detalleTableModel.getValueAt(i, 3))));
+				
+				System.out.println(linea);
+				
+				B_DetalleFacturaEntrada b = new B_DetalleFacturaEntrada();
+				b.setDetalleFacturaEntrada(linea);
+				b.insert();
+				
+			}
+			
+			
+			System.out.println("Factura insertada :");
+	
+		}catch(Exception exception){
+			System.out.println("Error!! -> " + exception);
+		}
+		
+	}
+	
+	private String getConsecutivo(){
+		B_FacturaEntrada bean= new B_FacturaEntrada();
+		List<FacturaEntrada> lista = bean.selectAll();
+		int mayor = 0;
+		for (int i = 0; i< lista.size(); i++){
+			int consecutivo = Integer.parseInt(lista.get(i).getFacturas_entrada_id());
+			if (consecutivo > mayor)
+				mayor = consecutivo;
+		}
+		return String.valueOf(mayor + 1);
+	}
+	
+	private int getConsecutivoDetalle(){
+		B_DetalleFacturaEntrada bean= new B_DetalleFacturaEntrada();
+		List<DetalleFacturaEntrada> lista = bean.selectAll();
+		int mayor = 0;
+		for (int i = 0; i< lista.size(); i++){
+			int consecutivo = Integer.parseInt(lista.get(i).getId_detalle_factura());
+			if (consecutivo > mayor)
+				mayor = consecutivo;
+		}
+		return mayor + 1;
+	}
 
-	/*
+	/**
 	 * Devuelve un Vector<String> con la informacion de los estudiantes 
 	 * con el formato E | identificacion | nombre
 	 */
@@ -420,7 +635,7 @@ public class LVFacturacion extends LVPanel {
 		return vector;
 	}
 
-	/*
+	/**
 	 * Devuelve un Vector<String> con la informacion de los profesores 
 	 * con el formato P | identificacion | nombre
 	 */
@@ -471,7 +686,7 @@ public class LVFacturacion extends LVPanel {
 		return t;
 	}
 
-	/*
+	/**
 	 * Devuelve un Vector<String> con la informacion de los metodos de pago 
 	 */
 	private Vector<String> getListaDeMetodosDePago(){
@@ -486,7 +701,7 @@ public class LVFacturacion extends LVPanel {
 		return vector;
 	}
 
-	/*
+	/**
 	 * Devuelve un Vector<String> con la informacion de los aranceles 
 	 * con el formato id | descripcion | precio
 	 */
@@ -502,12 +717,12 @@ public class LVFacturacion extends LVPanel {
 		return vector;
 	}
 
-	private void cargarCuentasPorCobrar(Estudiante e){
-		if (e != null){
-			System.out.println("Cargando cxc de " + e.getEstNombre() + " " + e.getEstApellido1());
-		}
-	}
 
+	/**
+	 * Devuelve el estudiante cuyo id se recibe como parametro
+	 * @param id La identificación del estudiante a carga
+	 * @return El estudiante correspodiente al id
+	 */
 	private Estudiante getEstudiante(String id){
 		B_Estudiante bean = new B_Estudiante();
 		bean.find(id);

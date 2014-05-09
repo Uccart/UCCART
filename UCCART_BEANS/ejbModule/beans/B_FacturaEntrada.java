@@ -129,7 +129,7 @@ public class B_FacturaEntrada  {
 	}
 
 
-	public void setArancel(String id, String empleado, String estudiante, String nombre, String direccion, String telefono, String metodopago,
+	public void setFactura(String id, String empleado, String estudiante, String nombre, String direccion, String telefono, String metodopago,
 			Float total) {
 		facturaEntrada.setFacturas_entrada_id(id);
 		facturaEntrada.setFacturas_entrada_id_empleado(empleado);
@@ -139,6 +139,10 @@ public class B_FacturaEntrada  {
 		facturaEntrada.setFacturas_entrada_telefono(telefono);
 		facturaEntrada.setFacturas_entrada_metodo_de_pago(metodopago);
 		facturaEntrada.setfacturas_entrada_total(total);
+	}
+	
+	public void setFactura(FacturaEntrada factura){
+		facturaEntrada = factura;
 	}
 
 

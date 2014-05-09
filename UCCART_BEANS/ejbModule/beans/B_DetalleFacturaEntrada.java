@@ -164,6 +164,10 @@ public class B_DetalleFacturaEntrada {
 		em.close();
 
 	}
+	
+	public void setDetalleFacturaEntrada(DetalleFacturaEntrada detalle){
+		detalleFacturaEntrada = detalle;
+	}
 
 	public DetalleFacturaEntrada getDetalleFacturaEntrada(){
 		return detalleFacturaEntrada;

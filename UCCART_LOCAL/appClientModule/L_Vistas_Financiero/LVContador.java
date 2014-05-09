@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
+import model.Usuario;
+import beans.B_Usuario;
 import L_Vistas.LVMiCuenta;
 import L_Vistas_Financiero.LVAranceles;
 import L_Vistas_Registro.LVBeca;
@@ -45,6 +47,7 @@ public class LVContador extends JTabbedPane {
 	private LVEmpleados lvemp;
 	private LVCuentasCobrar lvcuentasCobrar;
 	private LVCuentasPagar lvcuentasPagar;
+	private Usuario usuarioActual;
 	
 	
 	public LVContador(JFrame padre){
@@ -71,6 +74,7 @@ public class LVContador extends JTabbedPane {
 	}
 	public void init(String usuario,JLabel jlnu){
 		lva.init(false);
+		facturacion.setUsuarioActual(usuarioActual);
 		facturacion.init(false); // Facturacion
 		fsalida.init(false);
 		lvc.init(false);
@@ -101,5 +105,13 @@ public class LVContador extends JTabbedPane {
 		this.addTab("Inventario", null, lvinv, "Ingresa, modifica y busca Articulos a un Inventario");
 		this.addTab("Mi Cuenta", null, lvmc, "Modificar información personal");
 		
+	}
+	
+	public void setUsuarioActual(Usuario usuario){
+		usuarioActual = usuario;
+	}
+	
+	public Usuario getUsuarioActual(){
+		return usuarioActual;
 	}
 }

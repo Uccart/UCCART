@@ -102,8 +102,8 @@ public class FacturaEntrada implements Serializable {
 		return this.facturas_entrada_direccion;
 	}
 
-	public void setFacturas_entrada_direccion(String facturas_entrada_nombre) {
-		this.facturas_entrada_nombre = facturas_entrada_nombre;
+	public void setFacturas_entrada_direccion(String facturas_entrada_direccion) {
+		this.facturas_entrada_direccion = facturas_entrada_direccion;
 	}
 	
 	public String getFacturas_entrada_telefono() {
@@ -168,6 +168,20 @@ public class FacturaEntrada implements Serializable {
 
 	public void setCuentasPorCobrar(CuentasPorCobrar cuentasPorCobrar) {
 		this.cuentasPorCobrar = cuentasPorCobrar;
+	}
+	
+	public String toString(){
+		String factura;
+		factura  = "id factura -> " + facturas_entrada_id + "\n";
+		factura += "id empleado -> " + facturas_entrada_id_empleado + "\n";
+		factura += "id estudiante -> " + facturas_entrada_id_estudiante + "\n";
+		factura += "nombre -> " + facturas_entrada_nombre + "\n";
+		factura += "direccion -> " + facturas_entrada_direccion + "\n";
+		factura += "telefono -> " + facturas_entrada_telefono + "\n";
+		factura += "metodo de pago -> " + facturas_entrada_metodo_de_pago + "\n";
+		factura += "total -> " + facturas_entrada_total + "\n";
+		return factura;
+		
 	}
 
 }

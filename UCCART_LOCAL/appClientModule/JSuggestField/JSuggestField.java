@@ -499,5 +499,12 @@ public class JSuggestField extends JTextField {
 	public void setCaseSensitive(boolean caseSensitive) {
 		this.caseSensitive = caseSensitive;
 	}
+	
+	/**
+	 * Clears the selected value in the drop down list
+	 */
+	public void clearLastChosenExistingVariable(){
+		lastChosenExistingVariable = "";
+	}
 }
 
