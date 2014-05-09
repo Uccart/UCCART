@@ -130,6 +130,10 @@ public class B_CuentasPorCobrar  {
 		cuentasPorCobrar.setCuentascobrar_id_factura_entrada(idFacturaEntrada);
 		cuentasPorCobrar.setCuentascobrar_saldo(saldo);
 	}
+	
+	public void setCuentasPorCobrar(CuentasPorCobrar cuenta) {
+		cuentasPorCobrar = cuenta;
+	}
 
 
 	public CuentasPorCobrar getCuentasPorCobrar() {
@@ -158,6 +162,15 @@ public class B_CuentasPorCobrar  {
 			q =em.createNativeQuery("select * from cuentas_por_cobrar", CuentasPorCobrar.class);
 		}
 		return q.getResultList();
+	}
+	
+	public List<CuentasPorCobrar> cuentasPorEstudiante(String id){
+		String query = "select cuentascobrar_id, cuentascobrar_id_factura_entrada, cuentascobrar_saldo from cuentas_por_cobrar join facturas_entrada on cuentascobrar_id_factura_entrada = facturas_entrada_id where facturas_entrada_id_estudiante = '"+id+"';";
+		em = emf.createEntityManager();
+		Query q =em.createNativeQuery(query, CuentasPorCobrar.class);
+		List<CuentasPorCobrar> results = q.getResultList();
+		
+		return results;
 	}
 	
 	
