@@ -7,58 +7,58 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * The persistent class for the facturas_entrada database table.
+ * The persistent class for the facturas_salida database table.
  * 
  */
 
 @Entity
-@Table(name="detalles_de_factura_entrada")
-public class DetalleFacturaEntrada implements Serializable{
+@Table(name="detalles_de_factura_salida")
+public class DetalleFacturaSalida implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="detfac_entrada_id_detalle_factura")
+	@Column(name="detfac_salida_id_detalle_factura")
 	private String id_detalle_factura;
 	
-	@Column(name="detfac_entrada_id_factura")
-	private String id_facturaEntrada;
+	@Column(name="detfac_salida_id_factura")
+	private String id_facturaSalida;
 
-	@Column(name="detfac_entrada_id_arancel")
+	@Column(name="detfac_salida_id_arancel")
 	private String id_Arancel;
 
-	@Column(name="detfac_entrada_descripcion")
+	@Column(name="detfac_salida_descripcion")
 	private String descripcion;
 
-	@Column(name="detfac_entrada_numero_linea")
+	@Column(name="detfac_salida_numero_linea")
 	private Integer numero_linea;
 
-	@Column(name="detfac_entrada_precio_unitario")
+	@Column(name="detfac_salida_precio_unitario")
 	private Float precio_unitario;
-	
-	@Column(name="detfac_entrada_descuento")
-	private Float descuento;
 
-	@Column(name="detfac_entrada_descripcion_descuento")
+	@Column(name="detfac_salida_descuento")
+	private Float descuento;
+	
+	@Column(name="detfac_salida_descripcion_descuento")
 	private String descripcion_descuento;
 	
-	@Column(name="detfac_entrada_total_bruto")
+	@Column(name="detfac_salida_total_bruto")
 	private Float total_bruto;
 	
-	@Column(name="detfac_entrada_subtotal")
+	@Column(name="detfac_salida_subtotal")
 	private Float subtotal;
 	
-	@Column(name="detfac_entrada_cantidad")
+	@Column(name="detfac_salida_cantidad")
 	private Integer cantidad;
 	
 	
 
 	//bi-directional one-to-one association to Estudiante
 	@OneToOne
-	@JoinColumn(name="detfac_entrada_id_factura", referencedColumnName="facturas_entrada_id", insertable = false, updatable = false)
-	private FacturaEntrada facturaEntrada;
+	@JoinColumn(name="detfac_salida_id_factura", referencedColumnName="facturas_salida_id", insertable = false, updatable = false)
+	private FacturaSalida facturaSalida;
 	
 	@OneToOne
-	@JoinColumn(name="detfac_entrada_id_arancel", referencedColumnName="aranceles_id", insertable = false, updatable = false)
+	@JoinColumn(name="detfac_salida_id_arancel", referencedColumnName="aranceles_id", insertable = false, updatable = false)
 	private Arancel arancel;
 	
 	
@@ -71,12 +71,12 @@ public class DetalleFacturaEntrada implements Serializable{
 		this.id_detalle_factura = id_detalle_factura;
 	}
 	
-	public String getId_facturaEntrada() {
-		return this.id_facturaEntrada;
+	public String getId_facturaSalida() {
+		return this.id_facturaSalida;
 	}
 
-	public void setId_facturaEntrada(String id_facturaEntrada) {
-		this.id_facturaEntrada = id_facturaEntrada;
+	public void setId_facturaSalida(String id_facturaSalida) {
+		this.id_facturaSalida = id_facturaSalida;
 	}
 	
 	public String getIdArancel() {
@@ -115,10 +115,9 @@ public class DetalleFacturaEntrada implements Serializable{
 		return this.descuento;
 	}
 
-	public void setDescuento(Float descripcion_descuento) {
-		this.descuento = descripcion_descuento;
+	public void setDescuento(Float descuento) {
+		this.descuento = descuento;
 	}
-	
 	
 	public String getDescripcionDescuento() {
 		return this.descripcion_descuento;
@@ -152,12 +151,12 @@ public class DetalleFacturaEntrada implements Serializable{
 		this.cantidad = cantidad;
 	}
 	
-	public FacturaEntrada getFacturaEntrada() {
-		return this.facturaEntrada;
+	public FacturaSalida getFacturaSalida() {
+		return this.facturaSalida;
 	}
 
-	public void setFacturaEntrada(FacturaEntrada facturaEntrada) {
-		this.facturaEntrada = facturaEntrada;
+	public void setFacturaSalida(FacturaSalida facturaSalida) {
+		this.facturaSalida = facturaSalida;
 	}
 	
 	public Arancel getArancel() {
@@ -171,7 +170,7 @@ public class DetalleFacturaEntrada implements Serializable{
 	public String toString(){
 		String detalle;
 		detalle  = "id detalle -> " + id_detalle_factura + "\n";
-		detalle += "id factura -> " + id_facturaEntrada + "\n";
+		detalle += "id factura -> " + id_facturaSalida + "\n";
 		detalle += "id arancel -> " + id_Arancel + "\n";
 		detalle += "descripcion -> " + descripcion + "\n";
 		detalle += "linea -> " + numero_linea + "\n";

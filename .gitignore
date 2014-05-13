@@ -74,3 +74,17 @@ UCCART_JPA/src/model/FacturaEntrada_.java
 UCCART_JPA/src/model/Empleado_.java
 
 UCCART_JPA/src/model/FacturaEntrada_.java
+
+UCCART_JPA/src/model/CuentasPorPagar_.java
+
+UCCART_JPA/src/model/DetalleFacturaSalida_.java
+
+UCCART_JPA/src/model/DetalleFacturaEntrada_.java
+
+UCCART_JPA/src/model/DetalleFacturaEntrada_.java
+
+UCCART_JPA/src/model/ReciboSalida_.java
+
+UCCART_JPA/src/model/ReciboEntrada_.java
+
+UCCART_JPA/src/model/DetalleFacturaEntrada_.java

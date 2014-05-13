@@ -1,3 +1,9 @@
+INSERT INTO empleados (personas_id, personas_nombre, personas_apellido1, personas_apellido2,  personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_genero, personas_nacionalidad, personas_correo, empleados_salario_bruto, empleados_puesto) VALUES
+(114100510, 'Daniel', 'Herrera', 'Villegas', '1989-11-20', '22408089', '88892122', 'Tibas','masculino','Costa Rica', 'daniel@correo.com', 30000, 'computin' ),
+(12, 'Ronald', 'Melendez', 'Castro', '1956-11-20', '2222222', '88888888', 'Ipis','masculino','Costa Rica', 'ronald@correo.com', 30000, 'contador' ),
+(1234, 'Leo', 'Villegas', 'Gomez', '1956-11-20', '2222222', '88888888', 'Coronado','masculino','Costa Rica', 'leo@correo.com', 30000, 'rector' );
+
+
 INSERT INTO metodos_de_pago (mdp_id, mdp_metodo, mdp_descripcion) VALUES
 ('1','Contado','Pagos de Contado'),
 ('2','Credito','Pagos de Credito');
@@ -47,7 +53,6 @@ INSERT INTO requisito (req_cod, req_requisito, req_materia, req_carrera, req_tip
 (1, '1', '1', 'BBA', false);
 
 INSERT INTO usuario (us_id, us_pw, us_nombre, us_tipo) VALUES
-('1', '1234', 'daniel', 1),
 ('1234', '1234', 'rector', 8),
 ('12', '12', 'Ronald Melendez', 4);
 
@@ -65,9 +70,6 @@ INSERT INTO nota (nota_codestudiante, nota_codcurso, nota_promedio, nota_condici
 ------ EMPIEZA NUEVA PARTE DE LA BASE------
 -------------------------------------------
 
-INSERT INTO empleados (personas_id, personas_nombre, personas_apellido1, personas_apellido2,  personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_genero, personas_nacionalidad, personas_correo, empleados_salario_bruto, empleados_puesto) VALUES
-(114100510, 'Daniel', 'Herrera', 'Villegas', '1989-11-20', '22408089', '88892122', 'Tibas','masculino','Costa Rica', 'daniel@correo.com', 30000, 'computin' );
-
 INSERT INTO aranceles (aranceles_id, aranceles_descripcion, aranceles_precio, aranceles_tipo) VALUES
 (1, 'Examen de Reposición', 15000, 'entrada'),
 (2, 'Titulo', 15000, 'entrada'),
@@ -81,20 +83,20 @@ INSERT INTO aranceles (aranceles_id, aranceles_descripcion, aranceles_precio, ar
 (17,'Enginnering Bay', 125, 'entrada');
 
 
-INSERT INTO facturas_entrada (facturas_entrada_id, facturas_entrada_id_empleado, facturas_entrada_id_estudiante, facturas_entrada_nombre, facturas_entrada_direccion, facturas_entrada_telefono, facturas_entrada_metodo_de_pago, facturas_entrada_total) VALUES
-(1, '114100510', '112120468', 'Nehemias', 'Tibas', '88892122', 'contado', 1000000);
+INSERT INTO facturas_entrada (facturas_entrada_id, facturas_entrada_id_empleado, facturas_entrada_id_estudiante, facturas_entrada_fecha, facturas_entrada_nombre, facturas_entrada_direccion, facturas_entrada_telefono, facturas_entrada_metodo_de_pago, facturas_entrada_total,facturas_entrada_saldo) VALUES
+(1, '114100510', '112120468', '1956-11-20', 'Nehemias', 'Tibas', '88892122', 'contado', 1000000, 0);
+
+INSERT INTO facturas_salida (facturas_salida_id, facturas_salida_id_empleado, facturas_salida_id_profesor, facturas_salida_fecha, facturas_salida_nombre, facturas_salida_direccion, facturas_salida_telefono, facturas_salida_metodo_de_pago, facturas_salida_total) VALUES
+(1, '114100510', '12345','2014-05-13', 'Armando', 'Tibas', '88892122', 'contado', 1000000);
 
 INSERT INTO detalles_de_factura_entrada (detfac_entrada_id_detalle_factura, detfac_entrada_id_factura, detfac_entrada_id_arancel, detfac_entrada_descripcion, detfac_entrada_numero_linea, detfac_entrada_precio_unitario, detfac_entrada_descuento, detfac_entrada_descripcion_descuento, detfac_entrada_total_bruto, detfac_entrada_subtotal, detfac_entrada_cantidad) VALUES
 (1, 1, 1, 'Titulo', 1, 15000, 00, 'nada', 15000, 15000, 1);
 
 INSERT INTO recibo_entrada (reciboEntrada_id, reciboEntrada_id_factura_entrada, reciboEntrada_id_empleado, reciboEntrada_fecha, reciboEntrada_descripcion, reciboEntrada_saldo_anterior, reciboEntrada_recargo_por_mora, reciboEntrada_este_abono, reciboEntrada_saldo_actual) VALUES
-(1, 1, 1, '2014-01-20', 'titulo', 15000, 0, 15000, 0);
+(1, 1, 114100510, '2014-01-20', 'titulo', 15000, 0, 15000, 0);
 
-INSERT INTO recibo_Salida (recibosalida_id, recibosalida_id_empleado, recibosalida_id_aranceles, recibosalida_fecha, recibosalida_descripcion, recibosalida_monto) VALUES
+INSERT INTO recibo_Salida (recibosalida_id, recibosalida_id_empleado, recibosalida_id_factura_salida, recibosalida_fecha, recibosalida_descripcion, recibosalida_monto) VALUES
 (1, '114100510', '1','2014-11-20', 'Salario', 2000);
-
-INSERT INTO facturas_salida (facturas_salida_id, facturas_salida_id_empleado, facturas_salida_id_profesor, facturas_salida_nombre, facturas_salida_direccion, facturas_salida_telefono, facturas_salida_metodo_de_pago, facturas_salida_total) VALUES
-(1, '114100510', '12345', 'Armando', 'Tibas', '88892122', 'contado', 1000000);
 
 INSERT INTO detalles_de_factura_salida (detfac_salida_id_detalle_factura, detfac_salida_id_factura, detfac_salida_id_arancel, detfac_salida_descripcion, detfac_salida_numero_linea, detfac_salida_precio_unitario, detfac_salida_descuento, detfac_salida_descripcion_descuento, detfac_salida_total_bruto, detfac_salida_subtotal, detfac_salida_cantidad) VALUES
 (1, 1, 1, 'Titulo', 1, 15000, 00, 'nada', 15000, 15000, 1);
@@ -107,13 +109,5 @@ INSERT INTO cuentas_por_pagar (cuentaspagar_id, cuentaspagar_id_factura_salida, 
 
 INSERT INTO inventario (inventario_id, inventario_nombre, inventario_marca, inventario_modelo, inventario_valor, inventario_cantidad, inventario_proveedor) VALUES
 (1, 'Computadora', 'DEll', 'Inspiration', 20000, 1, 'COMPUFAX.SA');
-
-
-
-
-
-
-
-
 
 

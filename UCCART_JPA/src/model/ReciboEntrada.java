@@ -53,6 +53,9 @@ public class ReciboEntrada implements Serializable{
 	@JoinColumn(name="reciboEntrada_id_factura_entrada", referencedColumnName="facturas_entrada_id", insertable = false, updatable = false)
 	private FacturaEntrada facturaEntrada;
 	
+	@OneToOne
+	@JoinColumn(name="reciboEntrada_id_empleado", referencedColumnName="personas_id", insertable = false, updatable = false)
+	private Empleado empleado;
 
 	public String getIdReciboEntrada() {
 		return this.idReciboEntrada;
@@ -136,6 +139,14 @@ public class ReciboEntrada implements Serializable{
 
 	public void setFacturaEntrada(FacturaEntrada facturaEntrada) {
 		this.facturaEntrada = facturaEntrada;
+	}
+	
+	public Empleado getEmpleado() {
+		return this.empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 
 }

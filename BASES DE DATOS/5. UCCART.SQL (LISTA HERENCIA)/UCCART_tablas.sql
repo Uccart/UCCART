@@ -28,6 +28,18 @@ CREATE TABLE IF NOT EXISTS personas (
   PRIMARY KEY (personas_id)
   );
 
+-- -----------------------------------------------------
+-- Table `empleados`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS empleados (
+  empleados_salario_bruto VARCHAR(45) NOT NULL,
+  empleados_puesto VARCHAR (45) NOT NULL,
+  PRIMARY KEY (personas_id)
+)INHERITS (personas);
+
+
+
 
 CREATE TABLE IF NOT EXISTS carrera (
     carr_cod character varying(30) NOT NULL,
@@ -131,7 +143,8 @@ CREATE TABLE IF NOT EXISTS usuario (
     us_pw character varying(30),
     us_nombre character varying(50),
     us_tipo integer,
-    PRIMARY KEY (us_id)
+    PRIMARY KEY (us_id),
+    FOREIGN KEY (us_id) REFERENCES empleados(personas_id)
 );
 
 CREATE TABLE IF NOT EXISTS curso (
@@ -173,18 +186,6 @@ CREATE TABLE IF NOT EXISTS nota (
 ---------------FACTURACION-----------------
 
 
-
--- -----------------------------------------------------
--- Table `empleados`
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS empleados (
-  empleados_salario_bruto VARCHAR(45) NOT NULL,
-  empleados_puesto VARCHAR (45) NOT NULL,
-  PRIMARY KEY (personas_id)
-)INHERITS (personas);
-
-
 -- -----------------------------------------------------
 -- Table `facturas_entrada`
 -- -----------------------------------------------------
@@ -193,11 +194,13 @@ CREATE TABLE IF NOT EXISTS facturas_entrada (
   facturas_entrada_id VARCHAR(45) NOT NULL,
   facturas_entrada_id_empleado VARCHAR(45) NOT NULL,
   facturas_entrada_id_estudiante VARCHAR(45) NOT NULL,
+  facturas_entrada_fecha date DEFAULT date(now()),
   facturas_entrada_nombre VARCHAR(45) NOT NULL,
   facturas_entrada_direccion VARCHAR(45) NOT NULL,
   facturas_entrada_telefono VARCHAR(45),
   facturas_entrada_metodo_de_pago VARCHAR(45) NOT NULL, 
   facturas_entrada_total decimal(20,3) NOT NULL,
+  facturas_entrada_saldo decimal(20,3) DEFAULT 0 NOT NULL,
   PRIMARY KEY (facturas_entrada_id),
   FOREIGN KEY (facturas_entrada_id_empleado) REFERENCES empleados(personas_id),
   FOREIGN KEY (facturas_entrada_id_estudiante) REFERENCES estudiante (personas_id)
@@ -254,6 +257,7 @@ CREATE TABLE IF NOT EXISTS recibo_entrada (
   reciboEntrada_este_abono decimal (20,3) NOT NULL,
   reciboEntrada_saldo_actual decimal (20,3) NOT NULL,
   PRIMARY KEY (reciboEntrada_id),
+  FOREIGN KEY (reciboEntrada_id_empleado) REFERENCES empleados(personas_id),
   FOREIGN KEY (reciboEntrada_id_factura_entrada) REFERENCES facturas_entrada(facturas_entrada_id)
 );
 -- -----------------------------------------------------
@@ -264,6 +268,7 @@ CREATE TABLE IF NOT EXISTS facturas_salida (
   facturas_salida_id VARCHAR(45) NOT NULL,
   facturas_salida_id_empleado VARCHAR(45) NOT NULL,
   facturas_salida_id_profesor VARCHAR(45) NOT NULL,
+  facturas_salida_fecha date DEFAULT date(now()),
   facturas_salida_nombre VARCHAR(45) NOT NULL,
   facturas_salida_direccion VARCHAR(45) NOT NULL,
   facturas_salida_telefono VARCHAR(45),
@@ -303,13 +308,13 @@ CREATE TABLE IF NOT EXISTS detalles_de_factura_salida (
 CREATE TABLE IF NOT EXISTS recibo_Salida (
   recibosalida_id VARCHAR(45) NOT NULL,
   recibosalida_id_empleado VARCHAR(45) NOT NULL,
-  recibosalida_id_aranceles VARCHAR(45) NOT NULL,
+  recibosalida_id_factura_salida VARCHAR(45) NOT NULL,
   recibosalida_fecha date NOT NULL,
   recibosalida_descripcion VARCHAR(45) NOT NULL,
   recibosalida_monto decimal (20,3) NOT NULL,
   PRIMARY KEY (recibosalida_id),
   FOREIGN KEY (recibosalida_id_empleado) REFERENCES empleados(personas_id),
-  FOREIGN KEY (recibosalida_id_aranceles) REFERENCES aranceles (aranceles_id)
+  FOREIGN KEY (recibosalida_id_factura_salida) REFERENCES facturas_salida(facturas_salida_id)
 );
 
 

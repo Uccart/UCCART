@@ -57,8 +57,13 @@ public class Empleado implements Serializable {
 	@Column(name="empleados_puesto")
 	private String empleadosPuesto;
 	
-	@OneToMany(mappedBy="empleados", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
+	
+	//// mappedBy no es el nombre de la tabla, ni de la clase, es el objeto creado en la clase de referencia
+	@OneToMany(mappedBy="empleado", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private List<FacturaEntrada> facturaEntrada;
+	
+    @OneToOne(mappedBy="empleado", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
+	private ReciboEntrada reciboEntrada;
 	
 	
 	public Empleado() {

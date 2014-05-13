@@ -24,6 +24,10 @@
 		<class>model.MetodoDePago</class>
 		<class>model.ReciboEntrada</class>
 		<class>model.CuentasPorCobrar</class>
+		<class>model.CuentasPorPagar</class>
+		<class>model.DetalleFacturaSalida</class>
+		<class>model.FacturaSalida</class>
+		<class>model.ReciboSalida</class>
 
 		<properties>
 		

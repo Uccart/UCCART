@@ -50,7 +50,7 @@ public class FacturaEntrada implements Serializable {
 	
 	@OneToOne
 	@JoinColumn(name="facturas_entrada_id_empleado", referencedColumnName="personas_id", insertable = false, updatable = false)
-	private Empleado empleados;
+	private Empleado empleado;
 
 	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private DetalleFacturaEntrada detalleFacturaEntrada;
@@ -60,6 +60,7 @@ public class FacturaEntrada implements Serializable {
 	
 	@OneToOne(mappedBy="facturaEntrada", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private CuentasPorCobrar cuentasPorCobrar;
+	
 	
 	
 	
@@ -139,11 +140,11 @@ public class FacturaEntrada implements Serializable {
 	}
 
 	public Empleado getEmpleado() {
-		return this.empleados;
+		return this.empleado;
 	}
 
-	public void setEmpleado(Empleado empleados) {
-		this.empleados = empleados;
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 	
 	public DetalleFacturaEntrada getDetalleFacturaEntrada() {

@@ -22,19 +22,21 @@ import L_Vistas_Academico.LVMIngresar;
 public class LVCuentasPagar extends LVPanel implements ActionListener, ItemListener {
 	private DefaultTableModel profesores;
 	private B_Profesor bprofesor;
-	private JButton jbrefreProf;
+	private JButton jbrefreProf, jbFacturas;
 	private JTable tableProf;
 	private final JTextField filterTextProf;
-
 	private JComboBox jcbalfab;
 	private int selectal;
 	private boolean bandera;
+	private LVConsultarFacturasPagar lvconsultarfacturas;
+	
+	
 	public LVCuentasPagar(JFrame padre){
 		super();
 
 		profesores = new DefaultTableModel();
 		bprofesor = new B_Profesor();
-		
+		lvconsultarfacturas =new  LVConsultarFacturasPagar(padre,bprofesor.getProfesor());
 		tableProf = new JTable(profesores){public boolean isCellEditable(int rowIndex, int colIndex) {
 			return false;}};
 		filterTextProf = new JTextField(20);
@@ -113,12 +115,33 @@ public class LVCuentasPagar extends LVPanel implements ActionListener, ItemListe
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(panel2);
 		this.add(new JScrollPane(tableProf));
+		
+		jbFacturas =  new JButton("Consultar");
+		jbFacturas.addActionListener(this);
+		jbFacturas.setFont(fo);
+		jbFacturas.setToolTipText("Consultar Cuenta!");
+		jbFacturas.setAlignmentX(CENTER_ALIGNMENT);
+		panel2.add(jbFacturas, BorderLayout.CENTER);
 	}
 
+	
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource() == jbFacturas) {
+			if(tableProf.getSelectedRowCount() == 1){
+			bprofesor.find((String)tableProf.getValueAt(tableProf.getSelectedRow(), 0));
+			lvconsultarfacturas = new LVConsultarFacturasPagar((JFrame)lvconsultarfacturas.getParent(), bprofesor.getProfesor());
+			lvconsultarfacturas.init(bandera);
+			lvconsultarfacturas.setLocationRelativeTo(lvconsultarfacturas.getParent());
+			if(lvconsultarfacturas.getEstado())
+				lvconsultarfacturas.setVisible(true);
+		}else{
+			JOptionPane.showMessageDialog(null, "Debe seleccionar 1 estudiante", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
 
 	@Override
