@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS personas (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS empleados (
-  empleados_salario_bruto VARCHAR(45) NOT NULL,
+  empleados_salario_bruto  decimal(20,3) NOT NULL,
   empleados_puesto VARCHAR (45) NOT NULL,
   PRIMARY KEY (personas_id)
 )INHERITS (personas);
@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS plan (
 
 CREATE TABLE IF NOT EXISTS profesor (
     prof_gradoacademico character varying(255),
+    prof_salario  decimal(20,3) DEFAULT 0, 
     PRIMARY KEY (personas_id)
 )INHERITS (personas);
 
@@ -143,8 +144,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     us_pw character varying(30),
     us_nombre character varying(50),
     us_tipo integer,
-    PRIMARY KEY (us_id),
-    FOREIGN KEY (us_id) REFERENCES empleados(personas_id)
+    PRIMARY KEY (us_id)
 );
 
 CREATE TABLE IF NOT EXISTS curso (

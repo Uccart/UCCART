@@ -1,7 +1,10 @@
 INSERT INTO empleados (personas_id, personas_nombre, personas_apellido1, personas_apellido2,  personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_genero, personas_nacionalidad, personas_correo, empleados_salario_bruto, empleados_puesto) VALUES
-(114100510, 'Daniel', 'Herrera', 'Villegas', '1989-11-20', '22408089', '88892122', 'Tibas','masculino','Costa Rica', 'daniel@correo.com', 30000, 'computin' ),
-(12, 'Ronald', 'Melendez', 'Castro', '1956-11-20', '2222222', '88888888', 'Ipis','masculino','Costa Rica', 'ronald@correo.com', 30000, 'contador' ),
-(1234, 'Leo', 'Villegas', 'Gomez', '1956-11-20', '2222222', '88888888', 'Coronado','masculino','Costa Rica', 'leo@correo.com', 30000, 'rector' );
+('114100510', 'Daniel', 'Herrera', 'Villegas', '1989-11-20', '22408089', '88892122', 'Tibas','masculino','Costa Rica', 'daniel@correo.com', 30000, 'computin' ),
+('12', 'Ronald', 'Melendez', 'Castro', '1956-11-20', '2222222', '88888888', 'Ipis','masculino','Costa Rica', 'ronald@correo.com', 30000, 'contador' ),
+('1234', 'Leo', 'Villegas', 'Gomez', '1956-11-20', '2222222', '88888888', 'Coronado','masculino','Costa Rica', 'leo@correo.com', 30000, 'rector' );
+
+INSERT INTO profesor (personas_id, personas_nombre, personas_apellido1, personas_apellido2, prof_gradoacademico, personas_telefonocel, personas_correo, prof_salario) VALUES
+('12345','Armando', 'Madrigal', 'Gomez', 'Maestria', '88891234', 'armando@gmail.com', 30000);
 
 
 INSERT INTO metodos_de_pago (mdp_id, mdp_metodo, mdp_descripcion) VALUES
@@ -45,9 +48,6 @@ INSERT INTO periodo (per_periodo, per_web, per_local) VALUES
 INSERT INTO plan (plan_cod, plan_carrera, plan_materia, plan_ciclo) VALUES
 (1,'BBA','1', 1);
 
-
-INSERT INTO profesor (personas_id, personas_nombre, personas_apellido1, personas_apellido2, prof_gradoacademico, personas_telefonocel, personas_correo) VALUES
-('12345','Armando', 'Madrigal', 'Gomez', 'Maestria', '88891234', 'armando@gmail.com');
 
 INSERT INTO requisito (req_cod, req_requisito, req_materia, req_carrera, req_tipo) VALUES
 (1, '1', '1', 'BBA', false);
