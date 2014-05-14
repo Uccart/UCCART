@@ -48,9 +48,9 @@ public class LVFacturacion extends LVPanel {
 	private JLabel clienteNombreLabel;
 	private JLabel clienteTipoLabel;
 
-	private JPanel cuentasPorCobrarPanel;
-	private JLabel cuentasPorCobrarLabel;
-	private DefaultTableModel cuentasPorCobrarTableModel;
+	private JPanel abonoPanel;
+	private JLabel abonoLabel;
+	private JFormattedTextField abonoTextField;
 
 	private JPanel arancelPanel;
 	private JSuggestField arancelSuggestField;
@@ -69,19 +69,12 @@ public class LVFacturacion extends LVPanel {
 
 	public LVFacturacion(JFrame padre){
 		super();
-		// SuggestField con clientes
-		clienteSuggestField = getClienteSuggestField(padre);
-
-		//JComboBox con metodos de pago
-		Vector<String> metodosDePago = getListaDeMetodosDePago();
-		metodoDePagoComboBox = new JComboBox(metodosDePago);
-		metodoDePagoComboBox.setSelectedIndex(0); // seleccionar contado por defecto.
 
 		//JPanel con los datos del cliente seleccionado en clienteSuggestField 
 		clientePanel = getPanelCliente(padre);
 
-		//JPanel con las cuentas por cobrar del cliente seleccionado
-		cuentasPorCobrarPanel = getPanelCuenta(padre);
+		//JPanel con el monto a pagar de la factura actual
+		abonoPanel = getPanelAbono(padre);
 
 		//JPanel con las opciones insercion de lineas de detalle a la factura
 		arancelPanel = getArancelPanel(padre);
@@ -110,7 +103,7 @@ public class LVFacturacion extends LVPanel {
             });
 
 	}
-
+	// :::::::::::::::::::::::::::::::::::::: init ::::::::::::::::::::::::::::::::::::::
 	public void init(boolean bandera){
 
 		//Layout
@@ -122,29 +115,27 @@ public class LVFacturacion extends LVPanel {
 		
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(clienteSuggestField)
 						.addComponent(metodoDePagoComboBox))
 				.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(clientePanel)
-								.addComponent(cuentasPorCobrarPanel))
+						.addComponent(clientePanel)
+						.addComponent(abonoPanel))
 				.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(arancelPanel))
+						.addComponent(arancelPanel))
 				.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(detallePanel))
+						.addComponent(detallePanel))
 				.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(limpiarButton)
-								.addComponent(facturarButton))
+						.addComponent(limpiarButton)
+						.addComponent(facturarButton))
 
 				);
 
 		groupLayout.setVerticalGroup(
 				groupLayout.createSequentialGroup()
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-						.addComponent(clienteSuggestField)
 						.addComponent(metodoDePagoComboBox))
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(clientePanel)
-						.addComponent(cuentasPorCobrarPanel))
+						.addComponent(abonoPanel))
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(arancelPanel))
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -155,6 +146,7 @@ public class LVFacturacion extends LVPanel {
 				);
 
 	}
+	// :::::::::::::::::::::::::::::::::::: fin init ::::::::::::::::::::::::::::::::::::
 	
 	public void setUsuarioActual(Usuario usuario){
 		usuarioActual = usuario;
@@ -168,7 +160,7 @@ public class LVFacturacion extends LVPanel {
 
 	}
 
-	// :::::::::::::::: Metodos privados ::::::::::::::::
+	// :::::::::::::::::::::::::::::::: Metodos privados ::::::::::::::::::::::::::::::::
 
 	private JSuggestField getClienteSuggestField(JFrame padre){
 		Vector<String> clientes = getListaDeEstudiantes();
@@ -206,31 +198,12 @@ public class LVFacturacion extends LVPanel {
 						break;
 					}
 					
-					cargarCuentasPorCobrar(id);
+					//cargarCuentasPorCobrar(id);
 				}
 			}
 		});
 
 		return suggestField;
-	}
-	
-	/* 
-	 * Actualiza la vista de cuentas por cobrar con las cuentas por cobrar del estudiante cuyo id se recibe como parametro
-	 */
-	private void cargarCuentasPorCobrar(String id){
-		Estudiante e = getEstudiante(id);
-		B_Estudiante bean = new B_Estudiante();
-		List<FacturaEntrada> listFacturas = bean.getFacturaEntrada(e.getEstId());
-		
-		limpiarTableModel(cuentasPorCobrarTableModel);
-		
-		for(int i=0;i<listFacturas.size();i++){
-	    	
-			String[] fila = {listFacturas.get(i).getFacturas_entrada_id(), listFacturas.get(i).getFacturas_entrada_id_estudiante(), listFacturas.get(i).getFacturas_entrada_nombre(),
-					listFacturas.get(i).getDetalleFacturaEntrada().getDescripcion() ,listFacturas.get(i).getCuentasPorCobrar().getCuentascobrar_saldo().toString()};
-			cuentasPorCobrarTableModel.addRow(fila);
-		}
-		
 	}
 	
 	private void limpiarTableModel(DefaultTableModel tableModel){
@@ -243,6 +216,9 @@ public class LVFacturacion extends LVPanel {
 	 * Construye y devuelve el panel del cliente
 	 */
 	private JPanel getPanelCliente(JFrame padre){
+		
+		clienteSuggestField = getClienteSuggestField(padre);
+		
 		JPanel panel = new JPanel();
 		panel.setFont(fo.deriveFont((float)16));
 		panel.setBorder(BorderFactory.createTitledBorder("Información del Cliente"));
@@ -264,19 +240,22 @@ public class LVFacturacion extends LVPanel {
 		panelLayout.setAutoCreateContainerGaps(true);
 
 		panelLayout.setHorizontalGroup(
-				panelLayout.createSequentialGroup()
-				.addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(nombreLabel)
-						.addComponent(idLabel)
-						.addComponent(tipoLabel))
-				.addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(clienteNombreLabel)
-						.addComponent(clienteIdLabel)
-						.addComponent(clienteTipoLabel))
-				);
-
+				panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addComponent(clienteSuggestField)
+					.addGroup(panelLayout.createSequentialGroup()
+						.addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(nombreLabel)
+							.addComponent(idLabel)
+							.addComponent(tipoLabel))
+						.addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(clienteNombreLabel)
+							.addComponent(clienteIdLabel)
+							.addComponent(clienteTipoLabel)))
+		);
+				
 		panelLayout.setVerticalGroup(
 				panelLayout.createSequentialGroup()
+				.addComponent(clienteSuggestField)
 				.addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(nombreLabel)
 						.addComponent(clienteNombreLabel))
@@ -290,29 +269,55 @@ public class LVFacturacion extends LVPanel {
 
 		return panel;
 	}
-
-	/*
-	 * Construye y devuelve el panel del detalle de las cuentas por cobrar
-	 */
-	private JPanel getPanelCuenta(JFrame padre){
+	
+	private JPanel getPanelAbono(JFrame padre){
+		
 		JPanel panel = new JPanel();
 		panel.setFont(fo.deriveFont((float)16));
-		panel.setBorder(BorderFactory.createTitledBorder("Cuentas por Cobrar"));
-		panel.setPreferredSize(new Dimension(300,300));
-
-		cuentasPorCobrarLabel = new JLabel("");
-
-		String[] encabezados = {"N.Factura","Identificación", "Nombre", "Detalle", "Monto"};
-		cuentasPorCobrarTableModel = new DefaultTableModel(encabezados, 0);
-		JTable cuentasPorCobrarTable = new JTable(cuentasPorCobrarTableModel){
-									public boolean isCellEditable(int rowIndex, int colIndex) {
-											return false;
-											}
-									};
+		panel.setBorder(BorderFactory.createTitledBorder("Método de Pago"));
+		panel.setPreferredSize(new Dimension(200,300));
 		
-		JScrollPane scrollPane = new JScrollPane(cuentasPorCobrarTable);
+		//JComboBox con metodos de pago
+		Vector<String> metodosDePago = getListaDeMetodosDePago();
+		metodoDePagoComboBox = new JComboBox(metodosDePago);
+		metodoDePagoComboBox.setPreferredSize(new Dimension (300,50));
+		metodoDePagoComboBox.setSelectedIndex(0); // seleccionar contado por defecto.
+		metodoDePagoComboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent itemEvent) {
+				if(metodoDePagoComboBox.getSelectedIndex() == 0){
+					abonoLabel.setVisible(false);
+					abonoTextField.setVisible(false);
+				}else{
+					abonoLabel.setVisible(true);
+					abonoTextField.setVisible(true);
+				}
 
+	      }
+	    });
+		
+		abonoLabel = new JLabel("Abono a esta factura");
+		NumberFormat integerFieldFormatter;
+		integerFieldFormatter = NumberFormat.getIntegerInstance();
+		integerFieldFormatter.setMinimumFractionDigits(0);
+		integerFieldFormatter.setMaximumFractionDigits(0);
+
+		abonoTextField = new JFormattedTextField(integerFieldFormatter );
+		abonoTextField.setPreferredSize(new Dimension (100,50));
+		abonoTextField.setText("Digíte la cantidad a abonar");
+		abonoTextField.addFocusListener(new FocusListener() {
+		    public void focusGained(FocusEvent e) {
+		    	abonoTextField.setText("");
+		    }
+
+		    public void focusLost(FocusEvent e) {
+		    	if (abonoTextField.getText() == "")
+		    		abonoTextField.setText("Digíte la cantidad a abonar");
+		    }
+		});
+		abonoTextField.setPreferredSize(new Dimension (300,50));
+		
 		//Layout
+		
 		GroupLayout panelLayout = new GroupLayout(panel);
 		panel.setLayout(panelLayout);
 
@@ -321,18 +326,24 @@ public class LVFacturacion extends LVPanel {
 
 		panelLayout.setHorizontalGroup(
 				panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(cuentasPorCobrarLabel)
-						.addComponent(scrollPane)
+						.addComponent(metodoDePagoComboBox)
+						.addComponent(abonoLabel)
+						.addComponent(abonoTextField)
 				);
 
 		panelLayout.setVerticalGroup(
 				panelLayout.createSequentialGroup()
-						.addComponent(cuentasPorCobrarLabel)
-						.addComponent(scrollPane)
+						.addComponent(metodoDePagoComboBox)
+						.addComponent(abonoLabel)
+						.addComponent(abonoTextField)
 				);
-
+		
+		abonoLabel.setVisible(false);
+		abonoTextField.setVisible(false);
+		
 		return panel;
 	}
+
 
 	private JSuggestField getArancelSuggestField(JFrame padre){
 		Vector<String> clientes = getListaDeAranceles();
@@ -375,6 +386,18 @@ public class LVFacturacion extends LVPanel {
 		//arancelCantidadTextField.setColumns(5);
 		arancelCantidadTextField.setPreferredSize(new Dimension (100,50));
 		arancelCantidadTextField.setText("Digíte la cantidad");
+		arancelCantidadTextField.addFocusListener(new FocusListener() {
+		    public void focusGained(FocusEvent e) {
+		    	//if (arancelCantidadTextField.getText() == "Digíte la cantidad")
+		    		arancelCantidadTextField.setText("");
+		    }
+
+		    public void focusLost(FocusEvent e) {
+		    	if (arancelCantidadTextField.getText() == "")
+		    		arancelCantidadTextField.setText("Digíte la cantidad");
+		        // nothing
+		    }
+		});
 
 		arancelTotalLabel = new JLabel("₡ 0");
 		arancelTotalLabel.setPreferredSize(new Dimension (100,50));
@@ -515,12 +538,11 @@ public class LVFacturacion extends LVPanel {
     	clienteSuggestField.clearLastChosenExistingVariable();
     	clienteSuggestField.setText(clienteSuggestField.getHint());
     	metodoDePagoComboBox.setSelectedIndex(0);
+    	abonoTextField.setText("Digíte la cantidad a abonar");
     	
     	clienteIdLabel.setText("");
     	clienteNombreLabel.setText("");
     	clienteTipoLabel.setText("");
-    	
-    	limpiarTableModel(cuentasPorCobrarTableModel);
     	
     	arancelSuggestField.clearLastChosenExistingVariable();
     	arancelSuggestField.setText(arancelSuggestField.getHint());
@@ -536,8 +558,7 @@ public class LVFacturacion extends LVPanel {
 			FacturaEntrada factura = new FacturaEntrada(); // nueva factura
 			
 			String[] info = clienteSuggestField.getLastChosenExistingVariable().split("\\|");
-			String id = info[1].trim();
-			Estudiante estudiante = getEstudiante(id);
+			Estudiante estudiante = getEstudiante(info[1].trim());
 
 			factura.setFacturas_entrada_id(getConsecutivo());
 			factura.setFacturas_entrada_id_empleado(usuarioActual.getUsId());
@@ -548,8 +569,9 @@ public class LVFacturacion extends LVPanel {
 			
 			if (metodoDePagoComboBox.getSelectedIndex() == 0)
 				factura.setFacturas_entrada_metodo_de_pago("1"); //  Método de pago de contado
-			if (metodoDePagoComboBox.getSelectedIndex() == 1)
+			if (metodoDePagoComboBox.getSelectedIndex() == 1){
 				factura.setFacturas_entrada_metodo_de_pago("2"); //  Método de pago de credito
+			}
 			
 			factura.setfacturas_entrada_total(Float.parseFloat(granTotalLabel.getText().replace("₡", "").trim()));
 			
@@ -588,21 +610,18 @@ public class LVFacturacion extends LVPanel {
 			
 			if (metodoDePagoComboBox.getSelectedIndex() == 1){
 				factura.setFacturas_entrada_metodo_de_pago("2"); //  Método de pago de credito
-				int c = getConsecutivoCuentasPorCobrar();
-				for (int i = 0; i<3; i++){
-					CuentasPorCobrar cuenta = new CuentasPorCobrar();
-					cuenta.setCuentascobrar_id(String.valueOf(c++));
-					cuenta.setCuentascobrar_id_factura_entrada(factura.getFacturas_entrada_id());
-					cuenta.setCuentascobrar_saldo(Float.parseFloat(granTotalLabel.getText().replace("₡", "").trim()) / 3);
-					
-					B_CuentasPorCobrar b = new B_CuentasPorCobrar();
-					b.setCuentasPorCobrar(cuenta);
-					b.insert();
-				}
+				float abono = Float.parseFloat(abonoTextField.getText().replace(",", ""));
+				float total = Float.parseFloat(granTotalLabel.getText().replace("₡", "").trim());
+				//factura.setFacturas_entrada_saldo(new Float(total-abono));
+				CuentasPorCobrar cuenta = new CuentasPorCobrar();
+				cuenta.setCuentascobrar_id(String.valueOf(getConsecutivoCuentasPorCobrar() + 1));
+				cuenta.setCuentascobrar_id_factura_entrada(factura.getFacturas_entrada_id());
+				cuenta.setCuentascobrar_saldo(new Float(total-abono));
 				
-				// generar las cuentas por pagar
+				B_CuentasPorCobrar b = new B_CuentasPorCobrar();
+				b.setCuentasPorCobrar(cuenta);
+				b.insert();
 			}
-			
 			
 			System.out.println("Factura insertada :");
 	
