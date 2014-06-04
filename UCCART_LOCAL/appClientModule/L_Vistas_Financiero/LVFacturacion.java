@@ -92,7 +92,7 @@ public class LVFacturacion extends LVPanel {
             }
             });
 
-		facturarButton = new JButton("Facturar");
+		facturarButton = new JButton("Facturar e Imprimir");
 		facturarButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e){
@@ -433,6 +433,7 @@ public class LVFacturacion extends LVPanel {
 					
 				}catch(NullPointerException exception){
 					System.out.println("Error!! -> " + exception + " | Seleccione un arancél");
+					JOptionPane.showMessageDialog(null, "Error!! -> " + exception + " | Seleccione un arancél", "INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 				catch(NumberFormatException exception){
 					System.out.println("Error!! -> " + exception + " | Digite una cantidad valida");
@@ -555,6 +556,7 @@ public class LVFacturacion extends LVPanel {
 	
 	private void facturar(){
 		try{
+			JOptionPane.showMessageDialog(null, "SEGURO QUE DESEA FACTURAR E IMPRIMIR LA FACTURA?", "INFO", JOptionPane.INFORMATION_MESSAGE);
 			FacturaEntrada factura = new FacturaEntrada(); // nueva factura
 			
 			String[] info = clienteSuggestField.getLastChosenExistingVariable().split("\\|");
@@ -759,9 +761,11 @@ public class LVFacturacion extends LVPanel {
 		Vector<String> vector = new Vector<String>();
 
 		for(int i=0;i<lista.size();i++){
+			if (lista.get(i).getArancelTipo().equals("ENTRADA")){
 			vector.add(lista.get(i).getArancelId() + "\t | " +lista.get(i).getArancelDescripcion() + "\t | ₡ " + lista.get(i).getArancelPrecio());
+		
+			}
 		}
-
 		return vector;
 	}
 

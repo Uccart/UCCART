@@ -181,18 +181,16 @@ CREATE TABLE IF NOT EXISTS nota (
 
 ------ EMPIEZA NUEVA PARTE DE LA BASE------
 ---------------FACTURACION-----------------
+-------------------------------------------------------
+-- Table metodos_de_pago
+-------------------------------------------------------
 
-
-
--- -----------------------------------------------------
--- Table `empleados`
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS empleados (
-  empleados_salario_bruto VARCHAR(45) NOT NULL,
-  empleados_puesto VARCHAR (45) NOT NULL,
-  PRIMARY KEY (personas_id)
-)INHERITS (personas);
+CREATE TABLE IF NOT EXISTS metodos_de_pago (
+  mdp_id VARCHAR(45) NOT NULL,
+  mdp_metodo VARCHAR(45) NOT NULL,
+  mdp_descripcion VARCHAR(200),
+  PRIMARY KEY (mdp_id)
+  );
 
 
 -- -----------------------------------------------------

@@ -31,8 +31,8 @@
 
 		<properties>
 		
-			 <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Uccart_DB"/>
-			<!--<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.1.9:2089/Uccart_DB"/>-->
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Uccart_DB"/>
+			<!--<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.1.75:5432/Uccart_DB"/>-->
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 			<property name="eclipselink.allow-zero-id" value="true"/>

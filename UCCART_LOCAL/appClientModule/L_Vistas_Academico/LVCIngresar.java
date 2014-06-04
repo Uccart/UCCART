@@ -24,11 +24,11 @@ import L_Vistas.LVPanel;
 
 @SuppressWarnings("all")
 public final class LVCIngresar extends JDialog implements ActionListener {
-    private JTextField jtfsigla, jtfmaximo, jtfsede, jtfaula, jtfinicio, jtfminimo, jtffinal, jtffinicio, jtfffinal;
+    private JTextField jtfsigla, jtfmaximo, jtfaula, jtfinicio, jtfminimo, jtffinal, jtffinicio, jtfffinal;
     private int hini, hfin, mini, mfin, dini, dfin, meini, mefin, aini, afin;
     private JTimeButton jtbinicio, jtbfinal;
     private JCalendarButton jcbinicio, jcbfinal;
-	private JComboBox<String> materias, profesores, periodos, dias;
+	private JComboBox<String> materias, profesores, periodos, dias, sedes;
 	private JButton enviar;
 	private DateFormat timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
 	private DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -42,7 +42,7 @@ public final class LVCIngresar extends JDialog implements ActionListener {
 	private List<Periodo> listper;
 	
 	
-	public LVCIngresar(JFrame padre, boolean modal, Font f){
+public LVCIngresar(JFrame padre, boolean modal, Font f){
 		super(padre, modal);
 		fo = f;
 		bcurso = new B_Curso();
@@ -101,7 +101,7 @@ public final class LVCIngresar extends JDialog implements ActionListener {
         
         periodos = new JComboBox<String>();
         periodos.setFont(fo);
-        periodos.setToolTipText("Per�odos activos");
+        periodos.setToolTipText("Períodos activos");
         listper = bperiodo.selectAll();
 		for(int i=0;i<listper.size();i++){
 	        String item = listper.get(i).getPerPeriodo();
@@ -120,7 +120,7 @@ public final class LVCIngresar extends JDialog implements ActionListener {
       //<editor-fold defaultstate="collapsed" desc=" Layout ">
         JLabel jLabel1 = new JLabel("Datos:");
         jLabel1.setFont(fo.deriveFont((float)16));
-        JLabel jLabel2 = new JLabel("Capacidad M�xima:");
+        JLabel jLabel2 = new JLabel("Capacidad Máxima:");
         jLabel2.setFont(fo);
         JLabel jLabel3 = new JLabel("Materia:");
         jLabel3.setFont(fo);
@@ -150,8 +150,8 @@ public final class LVCIngresar extends JDialog implements ActionListener {
         jLabel15.setFont(fo);
         jtfsigla = new JTextField(20);
         jtfsigla.setFont(fo);
-        jtfsede = new JTextField(20);
-        jtfsede.setFont(fo);
+        sedes = new JComboBox();
+        sedes.setFont(fo);
         jtfaula = new JTextField(8);
         jtfaula.setFont(fo);
         jtffinal = new JTextField(3);
@@ -219,7 +219,8 @@ public final class LVCIngresar extends JDialog implements ActionListener {
             }
         });
 
-        dias.setModel(new DefaultComboBoxModel(new String[] { "Lunes", "Martes", "Mi�rcoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
+        dias.setModel(new DefaultComboBoxModel(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
+        sedes.setModel(new DefaultComboBoxModel(new String[] { "San José", "Pérez Zeledón", "San Ramón", "San Pedro", "Cañas"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(panel);
         panel.setLayout(layout);
@@ -253,7 +254,7 @@ public final class LVCIngresar extends JDialog implements ActionListener {
                                         .addComponent(jtfaula, javax.swing.GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(materias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jtfsigla, javax.swing.GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtfsede))
+                                        .addComponent(sedes))
                                     .addGap(46, 46, 46)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel9)
@@ -314,7 +315,7 @@ public final class LVCIngresar extends JDialog implements ActionListener {
                             .addComponent(jtfmaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfsede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -419,7 +420,7 @@ public final class LVCIngresar extends JDialog implements ActionListener {
 				if(!("".equals(jtfsigla.getText()) ) && !("".equals(jtfmaximo.getText()))&& !("".equals(jtfminimo.getText()))){
 					if(bcurso.validapk(jtfsigla.getText())){
 						if(Integer.parseInt(jtfminimo.getText())<=Integer.parseInt(jtfmaximo.getText())&& hini<hfin&& this.validarFecha()){
-							bcurso.setCurso(jtfsigla.getText(), jtfaula.getText(), jtfsede.getText(), listmat.get(materias.getSelectedIndex()).getMateriaId(), 
+							bcurso.setCurso(jtfsigla.getText(), jtfaula.getText(), sedes.getSelectedItem().toString(), listmat.get(materias.getSelectedIndex()).getMateriaId(), 
 									listper.get(periodos.getSelectedIndex()).getPerPeriodo(), listpro.get(profesores.getSelectedIndex()).getProfId(),
 									Integer.parseInt(jtfmaximo.getText()), Integer.parseInt(jtfminimo.getText()),new Date(), new Date(), dias.getSelectedIndex(), new Time(hini, mini, 00), 
 									new Time(hfin, mfin, 00), 0, new Time(0,0,0), new Time(0,0,0));
@@ -427,7 +428,7 @@ public final class LVCIngresar extends JDialog implements ActionListener {
 								JOptionPane.showMessageDialog(null, "Curso "+ jtfsigla.getText()+ " ingresada con éxito", "INFO", JOptionPane.INFORMATION_MESSAGE);
 								jtfsigla.setText("");
 								jtfaula.setText("");
-								jtfsede.setText("");
+								//jtfsede.setText("");
 								jtfminimo.setText("");
 								jtfminimo.setText("");
 								hini = 0;

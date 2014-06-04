@@ -12,6 +12,9 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import model.Empleado;
+import model.Estudiante;
+import model.Profesor;
+
 import java.util.Date;
 /**
  * Session Bean implementation class B_Empleado
@@ -100,7 +103,7 @@ public class B_Empleado  {
 	}
 
 
-	public boolean find(String cod){
+	/*public boolean find(String cod){
 		try{
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
@@ -114,8 +117,28 @@ public class B_Empleado  {
 		}catch(Exception e){System.out.println("No se pudo borrar");
 		return false;
 		}
-	}	
+	}*/	
 
+	public boolean find(String cod){
+		try{
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			empleado = em.find(Empleado.class, cod);
+			if(empleado == null){
+
+				System.out.println("No se pudo encontrar empleado");
+				return false;
+
+			}else{
+				return true;
+			}
+
+		}catch(Exception e){
+			System.out.println("No se pudo encontrar");
+			return false;
+		}	
+	}
+	
 	
 	
 	public boolean validapk(String cod){
@@ -158,7 +181,7 @@ public class B_Empleado  {
 
 	public Empleado getEmpleado() {
 
-		return  this.empleado;
+		return empleado;
 	}
 	
 	public List<Empleado> selectAll(){

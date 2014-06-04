@@ -25,9 +25,9 @@ INSERT INTO titulo (tit_tomo, tit_folio, tit_asiento,tit_codigo) VALUES
 INSERT INTO estudiante (personas_id, personas_nombre, personas_apellido1, personas_apellido2, personas_telefonocel, personas_telefonocasa, personas_correo, est_status, est_becado, personas_direccion, personas_nacionalidad, personas_genero, personas_fecha_de_nacimiento, est_codtitulo, est_trabajo) VALUES
 ('114100510','Daniel','Herrera','Villegas', '88892122','22408089','danielhv89@gmail.com',1,true,'Tibas','Costa Rica',true,'1989-11-20',12,'informatica'),
 ('112120468','Nehemias','Herrera','Sancho', '88394315','24384982','yo@nehemiascr.com',1,true,'La Guacima','Costa Rica',true,'1984-07-17',12,'informatica'),
-('1000','Jim','Raynor','N/A', '88994400','22334455','jim@raynor.com',1,true,'Hyperion','Costa Rica',true,'1980-02-05',12,'Capitan'),
-('2000','Matt', 'Horner','N/A','82334455','23456789','matt@horner.com',1,true,'Hyperion','Costa Rica',true,'1990-05-05',12,'Capitan'),
-('3000','Tychus','Findlay','N/A','82668795','26778843','marcus@findlay.com',1,true,'Moebius','Costa Rica',true,'1985-04-10',12,'Moebius Foundation');
+('1000','Rebeca','Herrera','N/A', '88994400','22334455','jim@raynor.com',1,true,'Hyperion','Costa Rica',true,'1980-02-05',12,'Capitan'),
+('2000','Catalina', 'Alpizar','N/A','82334455','23456789','matt@horner.com',1,true,'Hyperion','Costa Rica',true,'1990-05-05',12,'Capitan'),
+('3000','Alberto','Herrera','N/A','82668795','26778843','marcus@findlay.com',1,true,'Moebius','Costa Rica',true,'1985-04-10',12,'Moebius Foundation');
 
 
 
@@ -70,20 +70,17 @@ INSERT INTO nota (nota_codestudiante, nota_codcurso, nota_promedio, nota_condici
 ------ EMPIEZA NUEVA PARTE DE LA BASE------
 -------------------------------------------
 
-INSERT INTO empleados (personas_id, personas_nombre, personas_apellido1, personas_apellido2,  personas_fecha_de_nacimiento, personas_telefonocasa, personas_telefonocel, personas_direccion, personas_genero, personas_nacionalidad, personas_correo, empleados_salario_bruto, empleados_puesto) VALUES
-(114100510, 'Daniel', 'Herrera', 'Villegas', '1989-11-20', '22408089', '88892122', 'Tibas','masculino','Costa Rica', 'daniel@correo.com', 30000, 'computin' );
-
 INSERT INTO aranceles (aranceles_id, aranceles_descripcion, aranceles_precio, aranceles_tipo) VALUES
-(1, 'Examen de Reposición', 15000, 'entrada'),
-(2, 'Titulo', 15000, 'entrada'),
-(10,'Bunker', 100, 'entrada'),
-(11, 'Command Center', 400, 'entrada'),
-(12, 'Missile Turret', 75, 'entrada'),
-(13,'Supply Depot', 100, 'entrada'),
-(14,'Barracks', 150, 'entrada'),
-(15,'Starport', 150, 'entrada'),
-(16,'Nuclear Silo', 100, 'entrada'),
-(17,'Enginnering Bay', 125, 'entrada');
+(1, 'Examen de Reposición', 15000, 'ENTRADA'),
+(2, 'Titulo', 15000, 'ENTRADA'),
+(10,'Certificacion', 15000, 'ENTRADA'),
+(11, 'Matricula', 50000, 'ENTRADA'),
+(12, 'Matricula Extraordinaria', 60000, 'ENTRADA'),
+(13,'Credito', 20000, 'ENTRADA'),
+(14,'CCSS', 14000000, 'SALIDA'),
+(15,'Prestamo Banco Nacional', 750000, 'SALIDA'),
+(16,'Pago a Profesores', 400000, 'SALIDA'),
+(17,'Pago a Empleado', 0.0, 'SALIDA');
 
 
 INSERT INTO facturas_entrada (facturas_entrada_id, facturas_entrada_id_empleado, facturas_entrada_id_estudiante, facturas_entrada_nombre, facturas_entrada_direccion, facturas_entrada_telefono, facturas_entrada_metodo_de_pago, facturas_entrada_total) VALUES

@@ -74,7 +74,12 @@ public class LVAranceles extends LVPanel implements ActionListener, ItemListener
 		listAra = barancel.selectXalfa(jcbalfab.getSelectedItem().toString());
 		
 		for(int i=0;i<listAra.size();i++){
-			String[] fila = {listAra.get(i).getArancelId().toString(), listAra.get(i).getArancelDescripcion(), listAra.get(i).getArancelTipo(), String.valueOf(listAra.get(i).getArancelPrecio())};
+			String[] fila = {
+					listAra.get(i).getArancelId().toString(), 
+					listAra.get(i).getArancelDescripcion(), 
+					listAra.get(i).getArancelTipo(), 
+					String.valueOf(listAra.get(i).getArancelPrecio())
+					};
 			aranceles.addRow(fila);
 		}
 	}

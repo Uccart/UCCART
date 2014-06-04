@@ -133,7 +133,7 @@ public class LVEIngresar extends JDialog implements ActionListener {
             }
         });
 		jtffecnac.setFont(fo);
-		jtffecnac.setEditable(false);
+		jtffecnac.setEditable(true);
 		
 		JLabel jLabel1 = new JLabel("ID:");
 		jLabel1.setFont(fo);
@@ -180,6 +180,7 @@ public class LVEIngresar extends JDialog implements ActionListener {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
             	if (evt.getNewValue() instanceof Date){
             		jtffecnac.setText(dateFormat.format((Date)evt.getNewValue()));
+            		
             		/*dfin = ((Date)evt.getNewValue()).getDate();
             		mefin = ((Date)evt.getNewValue()).getMonth()+1;
             		afin = ((Date)evt.getNewValue()).getYear()+1900;*/

@@ -52,7 +52,7 @@ public class Empleado implements Serializable {
 	private String empleadosCorreo;
 	
 	@Column(name="empleados_salario_bruto")
-	private float empleadosSalario;
+	private Float empleadosSalario;
 	
 	@Column(name="empleados_puesto")
 	private String empleadosPuesto;
@@ -158,11 +158,11 @@ public class Empleado implements Serializable {
 		this.empleadosCorreo = empleadosCorreo;
 	}
 
-	public float getEmpleadosSalario() {
+	public Float getEmpleadosSalario() {
 		return this.empleadosSalario;
 	}
 
-	public void setEmpleadosSalario(float empleadosSalario) {
+	public void setEmpleadosSalario(Float empleadosSalario) {
 		this.empleadosSalario = empleadosSalario;
 	}
 	

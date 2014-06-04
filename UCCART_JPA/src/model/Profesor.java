@@ -35,6 +35,9 @@ public class Profesor implements Serializable {
 
 	@Column(name="personas_telefonocel")
 	private String profTelefono;
+	
+	@Column(name="prof_salario")
+	private Float profSalario;
 
 	//bi-directional many-to-one association to Curso
 	@OneToMany(mappedBy="profesor", fetch=FetchType.EAGER, cascade = CascadeType.REFRESH)
@@ -94,9 +97,18 @@ public class Profesor implements Serializable {
 	public String getProfTelefono() {
 		return this.profTelefono;
 	}
+	
 
 	public void setProfTelefono(String profTelefono) {
 		this.profTelefono = profTelefono;
+	}
+	
+	public void setProfSalario(Float profSalario) {
+		this.profSalario = profSalario;
+	}
+
+	public Float getProfSalario() {
+		return this.profSalario;
 	}
 
 	public List<Curso> getCursos() {

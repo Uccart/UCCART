@@ -72,7 +72,7 @@ public class LVCuentasPagar extends LVPanel implements ActionListener, ItemListe
 		profesores.addColumn("Grado academico");
 		profesores.addColumn("Teléfono");
 		profesores.addColumn("Email");
-		
+		profesores.addColumn("Salario");
 		
 		List<Profesor> listProf = new ArrayList<Profesor>();
 		
@@ -81,7 +81,7 @@ public class LVCuentasPagar extends LVPanel implements ActionListener, ItemListe
 		for(Profesor p : listProf){
 			
 			String[] fila = {p.getProfId(),p.getProfApellido1()+" "+p.getProfApellido2()+", "+p.getProfNombre(),
-					p.getProfGradoacademico(),p.getProfTelefono().toString(),p.getProfCorreo()};
+					p.getProfGradoacademico(),p.getProfTelefono().toString(),p.getProfCorreo(), p.getProfSalario().toString()};
 			profesores.addRow(fila);
 		}
 		

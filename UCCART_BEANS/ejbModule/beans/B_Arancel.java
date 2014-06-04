@@ -160,6 +160,15 @@ public class B_Arancel  {
 		return q.getResultList();
 	}
 	
-	
-
+	public List<Arancel> selectTipo(String rango){
+		em = emf.createEntityManager();
+		List<Arancel> results = new ArrayList();
+		Query q; 
+		if(!"Sin filtro".equals(rango)){
+			q =em.createNativeQuery("select * from aranceles where aranceles_tipo similar to '["+rango+"]%'", Arancel.class);
+		}else{
+			q =em.createNativeQuery("select * from aranceles", Arancel.class);
+		}
+		return q.getResultList();
+	}
 }
